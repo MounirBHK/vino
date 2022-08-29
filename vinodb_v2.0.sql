@@ -3,20 +3,20 @@
 /* Realisé par Jaouad. A                    */
 /*==============================================================*/
 
-drop table if exists vino_achat;
-drop table if exists vino_bouteille;
-drop table if exists vino_cellier;
-drop table if exists vino_cellier_bout;
-drop table if exists vino_consommation;
-drop table if exists vino_type;
-drop table if exists vino_utilisateur;
+drop table if exists achats;
+drop table if exists bouteilles;
+drop table if exists celliers;
+drop table if exists cellier_bouts;
+drop table if exists consommations;
+drop table if exists types;
+drop table if exists utilisateurs;
 SET sql_mode = '';
 SET GLOBAL sql_mode = '';
 
 /*==============================================================*/
-/* Table : vino_utilisateur                                     */
+/* Table : utilisateurs                                     */
 /*==============================================================*/
-create table vino_utilisateur
+create table utilisateurs
 (
    id_utilisateur       smallint unsigned not null AUTO_INCREMENT,
    courriel             varchar(50) not null,
@@ -30,9 +30,9 @@ create table vino_utilisateur
 );
 
 /*==============================================================*/
-/* Table : vino_cellier                                         */
+/* Table : celliers                                         */
 /*==============================================================*/
-create table vino_cellier
+create table celliers
 (
    id_cellier           smallint unsigned not null AUTO_INCREMENT,
    id_utilisateur       smallint unsigned not null,
@@ -44,9 +44,9 @@ create table vino_cellier
 );
 
 /*==============================================================*/
-/* Table : vino_bouteille                                       */
+/* Table : bouteilles                                       */
 /*==============================================================*/
-create table vino_bouteille
+create table bouteilles
 (
    id_bouteille         smallint unsigned not null AUTO_INCREMENT,
    id_type              smallint unsigned not null,
@@ -68,9 +68,9 @@ create table vino_bouteille
 
 
 /*==============================================================*/
-/* Table : vino_type                                            */
+/* Table : types                                            */
 /*==============================================================*/
-create table vino_type
+create table types
 (
    id_type              smallint unsigned not null AUTO_INCREMENT,
    type                 varchar(20) not null,
@@ -78,9 +78,9 @@ create table vino_type
 );
 
 /*==============================================================*/
-/* Table : vino_cellier_bout                                    */
+/* Table : cellier_bouts                                    */
 /*==============================================================*/
-create table vino_cellier_bout
+create table cellier_bouts
 (
    id_cellier           smallint unsigned not null,
    id_bouteille         smallint unsigned not null,
@@ -90,9 +90,9 @@ create table vino_cellier_bout
 );
 
 /*==============================================================*/
-/* Table : vino_achat                                           */
+/* Table : achats                                           */
 /*==============================================================*/
-create table vino_achat
+create table achats
 (
    id_utilisateur       smallint unsigned not null,
    id_bouteille         smallint unsigned not null,
@@ -104,9 +104,9 @@ create table vino_achat
 
 
 /*==============================================================*/
-/* Table : vino_consommation                                    */
+/* Table : consommations                                    */
 /*==============================================================*/
-create table vino_consommation
+create table consommations
 (
    id_utilisateur       smallint unsigned not null,
    id_bouteille         smallint unsigned not null,
@@ -115,43 +115,43 @@ create table vino_consommation
    primary key (id_utilisateur, id_bouteille, date_consommation)
 );
 
-alter table vino_achat 
-add constraint fk_vino_achat 
+alter table achats 
+add constraint fk_achat 
 foreign key (id_bouteille)
-references vino_bouteille (id_bouteille) on delete restrict on update restrict;
+references bouteilles (id_bouteille) on delete restrict on update restrict;
 
-alter table vino_achat 
-add constraint fk_vino_achat2 
+alter table achats 
+add constraint fk_achat2 
 foreign key (id_utilisateur)
-references vino_utilisateur (id_utilisateur) on delete restrict on update restrict;
+references utilisateurs (id_utilisateur) on delete restrict on update restrict;
 
-alter table vino_bouteille 
+alter table bouteilles 
 add constraint fk_appartenir 
 foreign key (id_type)
-references vino_type (id_type) on delete restrict on update restrict;
+references types (id_type) on delete restrict on update restrict;
 
-alter table vino_cellier 
+alter table celliers 
 add constraint fk_avoir 
 foreign key (id_utilisateur)
-references vino_utilisateur (id_utilisateur) on delete restrict on update restrict;
+references utilisateurs (id_utilisateur) on delete restrict on update restrict;
 
-alter table vino_cellier_bout 
-add constraint fk_vino_cellier_bout 
+alter table cellier_bouts 
+add constraint fk_cellier_bout 
 foreign key (id_bouteille)
-references vino_bouteille (id_bouteille) on delete restrict on update restrict;
+references bouteilles (id_bouteille) on delete restrict on update restrict;
 
-alter table vino_cellier_bout 
-add constraint fk_vino_cellier_bout2 
+alter table cellier_bouts 
+add constraint fk_cellier_bout2 
 foreign key (id_cellier)
-references vino_cellier (id_cellier) on delete restrict on update restrict;
+references celliers (id_cellier) on delete restrict on update restrict;
 
-alter table vino_consommation 
-add constraint fk_vino_consommation 
+alter table consommations 
+add constraint fk_consommation 
 foreign key (id_bouteille)
-references vino_bouteille (id_bouteille) on delete restrict on update restrict;
+references bouteilles (id_bouteille) on delete restrict on update restrict;
 
-alter table vino_consommation 
-add constraint fk_vino_consommation2 
+alter table consommations 
+add constraint fk_consommation2 
 foreign key (id_utilisateur)
-references vino_utilisateur (id_utilisateur) on delete restrict on update restrict;
+references utilisateurs (id_utilisateur) on delete restrict on update restrict;
 
