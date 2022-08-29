@@ -10,6 +10,8 @@ drop table if exists vino_cellier_bout;
 drop table if exists vino_consommation;
 drop table if exists vino_type;
 drop table if exists vino_utilisateur;
+SET sql_mode = '';
+SET GLOBAL sql_mode = '';
 
 /*==============================================================*/
 /* Table : vino_utilisateur                                     */
