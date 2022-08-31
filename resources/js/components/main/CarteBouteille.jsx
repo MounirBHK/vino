@@ -14,6 +14,7 @@ function CarteBouteille({
     prixBouteille,
     idCellier,
     idBouteille,
+    gereQuantite,
 }) {
     return (
         <Card className="Carte-bouteille">
@@ -31,19 +32,27 @@ function CarteBouteille({
             <ButtonGroup className="options">
                 <Button>Modifier</Button>
                 <Button
-                    onClick={() =>
-                        incrementeQuantite(
+                    value={1}
+                    onClick={(e) =>
+                        gereQuantite(
                             idCellier,
                             idBouteille,
-                            quantiteBouteille
+                            quantiteBouteille,
+                            e.target.value
                         )
                     }
                 >
                     Ajouter
                 </Button>
                 <Button
-                    onClick={() =>
-                        decrementeQuantite(idCellier, quantiteBouteille)
+                    value={-1}
+                    onClick={(e) =>
+                        gereQuantite(
+                            idCellier,
+                            idBouteille,
+                            quantiteBouteille,
+                            e.target.value
+                        )
                     }
                 >
                     Boire

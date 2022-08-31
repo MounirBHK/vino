@@ -19,9 +19,23 @@ function App() {
         return await axios.get(hostOriginURL + "/api/cellier/" + idCellier);
     };
 
-    // const getBouteilles = async () => {
-    //     return await axios.get(hostOriginURL + "/api/bouteilles");
-    // };
+    const changeQuantite = async (
+        idCellier,
+        idBouteille,
+        quantite,
+        operation
+    ) => {
+        const bouteille = {
+            idCellier: idCellier,
+            idBouteille: idBouteille,
+            quantite: quantite,
+            operation: operation,
+        };
+        return await axios.put(
+            hostOriginURL + "/api/changeQuantiteBouteille",
+            bouteille
+        );
+    };
 
     useEffect(() => {
         const userId = user;
@@ -29,10 +43,6 @@ function App() {
             console.log(celliersData);
             setCelliers(celliersData.data);
         });
-        // getBouteilles().then((bouteillesData) => {
-        //     setBouteilles(bouteillesData.data);
-        //     console.log(bouteillesData);
-        // });
     }, []);
 
     function gereSelectCellier(idCellier) {
@@ -42,12 +52,33 @@ function App() {
         });
     }
 
+    function gereQuantite(idCellier, idBouteille, quantite, operation) {
+        changeQuantite(idCellier, idBouteille, quantite, operation).then(
+            (response) => {
+                console.log(response);
+                const idCellier = response.data[0].id_cellier;
+                const idBouteille = response.data[0].id_bouteille;
+                const quantite = response.data[0].quantite;
+                const newBouteilles = bouteilles.map((bouteille) => {
+                    if (
+                        bouteille.id_bouteille === idBouteille &&
+                        bouteille.id_cellier === idCellier
+                    ) {
+                        bouteille.quantite = quantite;
+                    }
+                    return bouteille;
+                });
+                setBouteilles(newBouteilles);
+            }
+        );
+    }
+
     return (
         <React.Fragment>
             <CelliersProvider value={celliers}>
                 <BouteillesProvider value={bouteilles}>
                     <Entete onSelectCellier={gereSelectCellier} />
-                    <Main />
+                    <Main gereQuantite={gereQuantite} />
                 </BouteillesProvider>
             </CelliersProvider>
         </React.Fragment>

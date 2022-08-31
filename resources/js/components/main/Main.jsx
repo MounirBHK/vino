@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Grid } from "@mui/material";
 import CarteBouteille from "./CarteBouteille";
 
-function Main() {
+function Main({ gereQuantite }) {
     const bouteilles = useContext(BouteillesContext);
     return (
         <div>
@@ -24,6 +24,7 @@ function Main() {
                                 prixBouteille={bouteille.prix_saq}
                                 idCellier={bouteille.id_cellier}
                                 idBouteille={bouteille.id_bouteille}
+                                gereQuantite={gereQuantite}
                             />
                         </Grid>
                     ))}

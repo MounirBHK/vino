@@ -15402,26 +15402,69 @@ function App() {
     return function getBouteilles(_x2) {
       return _ref2.apply(this, arguments);
     };
-  }(); // const getBouteilles = async () => {
-  //     return await axios.get(hostOriginURL + "/api/bouteilles");
-  // };
+  }();
 
+  var changeQuantite = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(idCellier, idBouteille, quantite, operation) {
+      var bouteille;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              bouteille = {
+                idCellier: idCellier,
+                idBouteille: idBouteille,
+                quantite: quantite,
+                operation: operation
+              };
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put(hostOriginURL + "/api/changeQuantiteBouteille", bouteille);
+
+            case 3:
+              return _context3.abrupt("return", _context3.sent);
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function changeQuantite(_x3, _x4, _x5, _x6) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var userId = user;
     getCelliers(userId).then(function (celliersData) {
       console.log(celliersData);
       setCelliers(celliersData.data);
-    }); // getBouteilles().then((bouteillesData) => {
-    //     setBouteilles(bouteillesData.data);
-    //     console.log(bouteillesData);
-    // });
+    });
   }, []);
 
   function gereSelectCellier(idCellier) {
     getBouteilles(idCellier).then(function (bouteillesData) {
       console.log(bouteillesData);
       setBouteilles(bouteillesData.data);
+    });
+  }
+
+  function gereQuantite(idCellier, idBouteille, quantite, operation) {
+    changeQuantite(idCellier, idBouteille, quantite, operation).then(function (response) {
+      console.log(response);
+      var idCellier = response.data[0].id_cellier;
+      var idBouteille = response.data[0].id_bouteille;
+      var quantite = response.data[0].quantite;
+      var newBouteilles = bouteilles.map(function (bouteille) {
+        if (bouteille.id_bouteille === idBouteille && bouteille.id_cellier === idCellier) {
+          bouteille.quantite = quantite;
+        }
+
+        return bouteille;
+      });
+      setBouteilles(newBouteilles);
     });
   }
 
@@ -15432,7 +15475,9 @@ function App() {
         value: bouteilles,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_entete_Entete__WEBPACK_IMPORTED_MODULE_4__["default"], {
           onSelectCellier: gereSelectCellier
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_main_Main__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_main_Main__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          gereQuantite: gereQuantite
+        })]
       })
     })
   });
@@ -15529,7 +15574,8 @@ function CarteBouteille(_ref) {
       millesimeBouteille = _ref.millesimeBouteille,
       prixBouteille = _ref.prixBouteille,
       idCellier = _ref.idCellier,
-      idBouteille = _ref.idBouteille;
+      idBouteille = _ref.idBouteille,
+      gereQuantite = _ref.gereQuantite;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: "Carte-bouteille",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -15564,13 +15610,15 @@ function CarteBouteille(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
         children: "Modifier"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        onClick: function onClick() {
-          return incrementeQuantite(idCellier, idBouteille, quantiteBouteille);
+        value: 1,
+        onClick: function onClick(e) {
+          return gereQuantite(idCellier, idBouteille, quantiteBouteille, e.target.value);
         },
         children: "Ajouter"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        onClick: function onClick() {
-          return decrementeQuantite(idCellier, quantiteBouteille);
+        value: -1,
+        onClick: function onClick(e) {
+          return gereQuantite(idCellier, idBouteille, quantiteBouteille, e.target.value);
         },
         children: "Boire"
       })]
@@ -15608,7 +15656,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Main() {
+function Main(_ref) {
+  var gereQuantite = _ref.gereQuantite;
   var bouteilles = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_bouteillesContext__WEBPACK_IMPORTED_MODULE_2__["default"]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
@@ -15630,7 +15679,8 @@ function Main() {
               millesimeBouteille: bouteille.millesime,
               prixBouteille: bouteille.prix_saq,
               idCellier: bouteille.id_cellier,
-              idBouteille: bouteille.id_bouteille
+              idBouteille: bouteille.id_bouteille,
+              gereQuantite: gereQuantite
             })
           }, bouteille.id_bouteille);
         })
