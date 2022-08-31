@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::get('bouteilles', [BouteilleController::class, 'index'])->name('bouteilles');
 Route::get('celliers/user/{userId}', [CellierController::class, 'index'])->name('celliers');
 Route::get('cellier/{idCellier}', [CellierBoutController::class, 'index'])->name('cellier-bouteilles');
+Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-bouteilles');

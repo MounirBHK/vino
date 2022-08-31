@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CellierBout;
 use Illuminate\Http\Request;
+use DB;
 
 class CellierBoutController extends Controller
 {
@@ -19,6 +20,18 @@ class CellierBoutController extends Controller
         ->JOIN('types', 'bouteilles.id_type', '=', 'types.id_type')
         ->get();
         return $bouteilles;
+    }
+    /**
+     * Display a listing of the resource.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function change(Request $request)
+    {
+        $request->quantite += $request->operation;
+        DB::table('cellier_bouts')->where('id_cellier', $request->idCellier)->where('id_bouteille', $request->idBouteille)->update(['quantite' => $request->quantite]);
+        $bouteille = DB::table('cellier_bouts')->where('id_cellier', $request->idCellier)->where('id_bouteille', $request->idBouteille)->get();
+        return $bouteille;
     }
 
     /**
