@@ -77,8 +77,11 @@ function App() {
         <React.Fragment>
             <CelliersProvider value={celliers}>
                 <BouteillesProvider value={bouteilles}>
-                    <Entete onSelectCellier={gereSelectCellier} />
-                    <Main gereQuantite={gereQuantite} />
+                    <Entete />
+                    <Main
+                        gereQuantite={gereQuantite}
+                        gereSelectCellier={gereSelectCellier}
+                    />
                 </BouteillesProvider>
             </CelliersProvider>
         </React.Fragment>
