@@ -8,18 +8,16 @@ import "./Cellier.scss";
 function Cellier({ gereQuantite }) {
     const bouteilles = useContext(BouteillesContext);
     return (
-        <ul>
-            <Grid container spacing={2}>
-                {bouteilles.map((bouteille) => (
-                    <Grid key={bouteille.id_bouteille} item xs={4}>
-                        <CarteBouteille
-                            bouteille={bouteille}
-                            gereQuantite={gereQuantite}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
-        </ul>
+        <Grid container spacing={4}>
+            {bouteilles.map((bouteille) => (
+                <Grid key={bouteille.id_bouteille} item xs={12}>
+                    <CarteBouteille
+                        bouteille={bouteille}
+                        gereQuantite={gereQuantite}
+                    />
+                </Grid>
+            ))}
+        </Grid>
     );
 }
 

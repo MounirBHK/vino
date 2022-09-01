@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { CelliersProvider } from "../context/celliersContext";
 import { BouteillesProvider } from "../context/bouteillesContext";
 import Entete from "./entete/Entete";
+import NavBottom from "./navigation/NavBottom";
 import Main from "./main/Main";
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
                         gereQuantite={gereQuantite}
                         gereSelectCellier={gereSelectCellier}
                     />
+                    <NavBottom />
                 </BouteillesProvider>
             </CelliersProvider>
         </React.Fragment>
