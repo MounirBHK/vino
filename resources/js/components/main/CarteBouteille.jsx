@@ -2,7 +2,6 @@ import React from "react";
 import "./CarteBouteille.scss";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
 import { Card } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 

@@ -5,11 +5,12 @@ import { BouteillesProvider } from "../context/bouteillesContext";
 import Entete from "./entete/Entete";
 import NavBottom from "./navigation/NavBottom";
 import Main from "./main/Main";
+import Homepage from "./homepage/Homepage";
 
 function App() {
     const [bouteilles, setBouteilles] = useState([]);
     const [celliers, setCelliers] = useState([]);
-    const [user, setUser] = useState(1);
+    const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
 
     const getCelliers = async (userId) => {
@@ -71,7 +72,7 @@ function App() {
         );
     }
 
-    return (
+    return user ? (
         <React.Fragment>
             <CelliersProvider value={celliers}>
                 <BouteillesProvider value={bouteilles}>
@@ -84,6 +85,8 @@ function App() {
                 </BouteillesProvider>
             </CelliersProvider>
         </React.Fragment>
+    ) : (
+        <Homepage />
     );
 }
 

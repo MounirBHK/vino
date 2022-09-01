@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import logoJaune from "../../../images/logoJaune.png";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Fab from "@mui/material/Fab";
-import CelliersContext from "../../context/celliersContext";
 import "./Entete.scss";
 
 function Entete() {

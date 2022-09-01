@@ -1,0 +1,13 @@
+.Homepage {
+    width: 100%;
+    height: 100vh;
+    background-color: #6a3352;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .homepage-logo {
+        width: 50%;
+    }
+}

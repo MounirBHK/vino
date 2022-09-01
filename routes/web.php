@@ -14,11 +14,8 @@ use App\Http\Controllers\CellierController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/{url}', function () {
     return view('welcome');
-});
+})->where(['url' => '|modifierBouteille|login|signup']);
 
-Route::get('/modifierBouteille', function () {
-    return view('welcome');
-});
 
