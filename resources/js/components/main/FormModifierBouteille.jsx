@@ -1,10 +1,13 @@
 import React from "react";
 import "./FormModifierBouteille.scss";
 
-function FormModifierBouteille() {
+function FormModifierBouteille({ idCellier, idBouteille }) {
     return (
         <React.Fragment>
-            <h1>Modification d'une bouteille</h1>
+            <h1>
+                Modification d'une bouteille - Cellier: {idCellier} - Bouteille:{" "}
+                {idBouteille}
+            </h1>
             <form>
                 <label htmlFor="description">Description:</label>
                 <input type="text" name="description" id="description" />

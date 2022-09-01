@@ -21,7 +21,9 @@ function CarteBouteille({ bouteille, gereQuantite }) {
             </div>
             <ButtonGroup className="options">
                 <Button>
-                    <Link to="/modifierBouteille/" params={{ test: "test" }}>
+                    <Link
+                        to={`/modifierBouteille/?idCellier=${bouteille.id_cellier}&idBouteille=${bouteille.id_bouteille}`}
+                    >
                         Modifier
                     </Link>
                 </Button>
