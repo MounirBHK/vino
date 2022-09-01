@@ -18,4 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/', [CellierController::class, 'index'])->name('celliers');
+Route::get('/modifierBouteille', function () {
+    return view('welcome');
+});
+

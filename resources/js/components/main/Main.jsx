@@ -1,35 +1,47 @@
 import React from "react";
 import "./Main.scss";
-import BouteillesContext from "../../context/bouteillesContext";
-import { useContext } from "react";
-import { Grid } from "@mui/material";
-import CarteBouteille from "./CarteBouteille";
+import Cellier from "./Cellier";
+import SelectCellier from "./SelectCellier";
+import FormModifierBouteille from "./FormModifierBouteille";
+import { Route, Routes } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+import TuneIcon from "@mui/icons-material/Tune";
 
-function Main({ gereQuantite }) {
-    const bouteilles = useContext(BouteillesContext);
+function Main({ gereQuantite, gereSelectCellier }) {
+    const [params, setParams] = useSearchParams();
+    const idCellier = params.get("idCellier");
+    const idBouteille = params.get("idBouteille");
+    console.log(idCellier, idBouteille);
     return (
-        <div>
-            <h1>Main</h1>
-            <ul>
-                <Grid container spacing={2}>
-                    {bouteilles.map((bouteille) => (
-                        <Grid key={bouteille.id_bouteille} item xs={4}>
-                            <CarteBouteille
-                                imgUrlBouteille={bouteille.url_img}
-                                nomBouteille={bouteille.nom_bouteille}
-                                quantiteBouteille={bouteille.quantite}
-                                paysBouteille={bouteille.pays}
-                                typeBouteille={bouteille.type}
-                                millesimeBouteille={bouteille.millesime}
-                                prixBouteille={bouteille.prix_saq}
-                                idCellier={bouteille.id_cellier}
-                                idBouteille={bouteille.id_bouteille}
-                                gereQuantite={gereQuantite}
+        <div className="Main">
+            <div className="Recherche">
+                <SearchIcon />
+                <input type="text" placeholder="Recherche..." />
+                <TuneIcon />
+            </div>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <React.Fragment>
+                            <SelectCellier
+                                gereSelectCellier={gereSelectCellier}
                             />
-                        </Grid>
-                    ))}
-                </Grid>
-            </ul>
+                            <Cellier gereQuantite={gereQuantite} />
+                        </React.Fragment>
+                    }
+                ></Route>
+                <Route
+                    path="/modifierBouteille/"
+                    element={
+                        <FormModifierBouteille
+                            idCellier={idCellier}
+                            idBouteille={idBouteille}
+                        />
+                    }
+                ></Route>
+            </Routes>
         </div>
     );
 }
