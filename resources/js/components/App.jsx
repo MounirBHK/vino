@@ -41,14 +41,12 @@ function App() {
     useEffect(() => {
         const userId = user;
         getCelliers(userId).then((celliersData) => {
-            console.log(celliersData);
             setCelliers(celliersData.data);
         });
     }, []);
 
     function gereSelectCellier(idCellier) {
         getBouteilles(idCellier).then((bouteillesData) => {
-            console.log(bouteillesData);
             setBouteilles(bouteillesData.data);
         });
     }
@@ -56,7 +54,6 @@ function App() {
     function gereQuantite(idCellier, idBouteille, quantite, operation) {
         changeQuantite(idCellier, idBouteille, quantite, operation).then(
             (response) => {
-                console.log(response);
                 const idCellier = response.data[0].id_cellier;
                 const idBouteille = response.data[0].id_bouteille;
                 const quantite = response.data[0].quantite;

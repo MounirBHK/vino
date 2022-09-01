@@ -26452,21 +26452,18 @@ function App() {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var userId = user;
     getCelliers(userId).then(function (celliersData) {
-      console.log(celliersData);
       setCelliers(celliersData.data);
     });
   }, []);
 
   function gereSelectCellier(idCellier) {
     getBouteilles(idCellier).then(function (bouteillesData) {
-      console.log(bouteillesData);
       setBouteilles(bouteillesData.data);
     });
   }
 
   function gereQuantite(idCellier, idBouteille, quantite, operation) {
     changeQuantite(idCellier, idBouteille, quantite, operation).then(function (response) {
-      console.log(response);
       var idCellier = response.data[0].id_cellier;
       var idBouteille = response.data[0].id_bouteille;
       var quantite = response.data[0].quantite;
@@ -26574,11 +26571,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _CarteBouteille_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CarteBouteille.scss */ "./resources/js/components/main/CarteBouteille.scss");
-/* harmony import */ var _mui_material_ButtonGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/ButtonGroup */ "./node_modules/@mui/material/esm/ButtonGroup/ButtonGroup.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/esm/Button/Button.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Card/Card.js");
+/* harmony import */ var _mui_material_ButtonGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/ButtonGroup */ "./node_modules/@mui/material/esm/ButtonGroup/ButtonGroup.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/esm/Button/Button.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Card/Card.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -26591,7 +26589,8 @@ __webpack_require__.r(__webpack_exports__);
 function CarteBouteille(_ref) {
   var bouteille = _ref.bouteille,
       gereQuantite = _ref.gereQuantite;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "Carte-bouteille",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "bouteille-img",
@@ -26620,20 +26619,22 @@ function CarteBouteille(_ref) {
         className: "prix",
         children: ["Prix: ", bouteille.prix_saq]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_ButtonGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_ButtonGroup__WEBPACK_IMPORTED_MODULE_5__["default"], {
       className: "options",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-          to: "/modifierBouteille/?idCellier=".concat(bouteille.id_cellier, "&idBouteille=").concat(bouteille.id_bouteille),
-          children: "Modifier"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        onClick: function onClick() {
+          return navigate("/modifierBouteille/", {
+            state: bouteille
+          });
+        },
+        children: "Modifier"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
         value: 1,
         onClick: function onClick(e) {
           return gereQuantite(bouteille.id_cellier, bouteille.id_bouteille, bouteille.quantite, e.target.value);
         },
         children: "Ajouter"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
         value: -1,
         onClick: function onClick(e) {
           return gereQuantite(bouteille.id_cellier, bouteille.id_bouteille, bouteille.quantite, e.target.value);
@@ -26716,11 +26717,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function FormModifierBouteille(_ref) {
-  var idCellier = _ref.idCellier,
-      idBouteille = _ref.idBouteille;
+  var bouteille = _ref.bouteille;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
-      children: ["Modification d'une bouteille - Cellier: ", idCellier, " - Bouteille:", " ", idBouteille]
+      children: ["Modification d'une bouteille - Cellier: ", bouteille.id_cellier, " - Bouteille: ", bouteille.id_bouteille]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
         htmlFor: "description",
@@ -26728,7 +26728,8 @@ function FormModifierBouteille(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "text",
         name: "description",
-        id: "description"
+        id: "description",
+        defaultValue: bouteille.description
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
         children: "Valider"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
@@ -26758,23 +26759,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Cellier__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cellier */ "./resources/js/components/main/Cellier.jsx");
 /* harmony import */ var _SelectCellier__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SelectCellier */ "./resources/js/components/main/SelectCellier.jsx");
 /* harmony import */ var _FormModifierBouteille__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormModifierBouteille */ "./resources/js/components/main/FormModifierBouteille.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var _mui_icons_material_Search__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/icons-material/Search */ "./node_modules/@mui/icons-material/Search.js");
 /* harmony import */ var _mui_icons_material_Tune__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/icons-material/Tune */ "./node_modules/@mui/icons-material/Tune.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -26791,14 +26779,9 @@ function Main(_ref) {
   var gereQuantite = _ref.gereQuantite,
       gereSelectCellier = _ref.gereSelectCellier;
 
-  var _useSearchParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useSearchParams)(),
-      _useSearchParams2 = _slicedToArray(_useSearchParams, 2),
-      params = _useSearchParams2[0],
-      setParams = _useSearchParams2[1];
+  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useLocation)(),
+      stateBouteille = _useLocation.state;
 
-  var idCellier = params.get("idCellier");
-  var idBouteille = params.get("idBouteille");
-  console.log(idCellier, idBouteille);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "Main",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -26807,8 +26790,8 @@ function Main(_ref) {
         type: "text",
         placeholder: "Recherche..."
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_icons_material_Tune__WEBPACK_IMPORTED_MODULE_8__["default"], {})]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_SelectCellier__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -26817,11 +26800,10 @@ function Main(_ref) {
             gereQuantite: gereQuantite
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/modifierBouteille/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormModifierBouteille__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          idCellier: idCellier,
-          idBouteille: idBouteille
+          bouteille: stateBouteille
         })
       })]
     })]
@@ -26953,7 +26935,7 @@ function SimpleBottomNavigation() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_BottomNavigation__WEBPACK_IMPORTED_MODULE_3__["default"], {
     showLabels: true,
     value: value,
-    onChange: function onChange(event, newValue) {
+    onChange: function onChange(events, newValue) {
       setValue(newValue);
     },
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_BottomNavigationAction__WEBPACK_IMPORTED_MODULE_4__["default"], {
