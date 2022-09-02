@@ -4,7 +4,7 @@ import logoJaune from "../../../images/logoJaune.png";
 import HomepageActions from "./HomepageActions";
 import Signup from "./Signup";
 import Login from "./Login";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 function Homepage() {
     return (
@@ -14,6 +14,10 @@ function Homepage() {
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/signup" element={<Signup />}></Route>
                 <Route path="/" element={<HomepageActions />}></Route>
+                <Route
+                    path="*"
+                    element={<Navigate to="/login" replace />}
+                ></Route>
             </Routes>
         </div>
     );
