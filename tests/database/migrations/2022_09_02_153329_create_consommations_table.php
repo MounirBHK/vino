@@ -21,7 +21,7 @@ class CreateConsommationsTable extends Migration
             
             $table->primary(['id_utilisateur', 'id_bouteille', 'date_consommation']);
             $table->foreign('id_bouteille', 'fk_consommation')->references('id_bouteille')->on('bouteilles');
-            $table->foreign('id_utilisateur', 'fk_consommation2')->references('id_utilisateur')->on('utilisateurs');
+            $table->foreign('id_utilisateur', 'fk_consommation2')->references('id')->on('users');
         });
     }
 

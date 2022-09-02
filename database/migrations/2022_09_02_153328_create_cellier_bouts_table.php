@@ -14,8 +14,8 @@ class CreateCellierBoutsTable extends Migration
     public function up()
     {
         Schema::create('cellier_bouts', function (Blueprint $table) {
-            $table->unsignedSmallInteger('id_cellier');
-            $table->unsignedSmallInteger('id_bouteille');
+            $table->unsignedBigInteger('id_cellier');
+            $table->unsignedBigInteger('id_bouteille');
             $table->smallInteger('quantite')->nullable();
             $table->date('derniere_trans')->nullable();
             

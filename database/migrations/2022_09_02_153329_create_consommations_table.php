@@ -14,14 +14,14 @@ class CreateConsommationsTable extends Migration
     public function up()
     {
         Schema::create('consommations', function (Blueprint $table) {
-            $table->unsignedSmallInteger('id_utilisateur');
-            $table->unsignedSmallInteger('id_bouteille');
+            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_bouteille');
             $table->dateTime('date_consommation');
             $table->smallInteger('quantite_cons')->nullable();
             
-            $table->primary(['id_utilisateur', 'id_bouteille', 'date_consommation']);
+            $table->primary(['id_user', 'id_bouteille', 'date_consommation']);
             $table->foreign('id_bouteille', 'fk_consommation')->references('id_bouteille')->on('bouteilles');
-            $table->foreign('id_utilisateur', 'fk_consommation2')->references('id_utilisateur')->on('utilisateurs');
+            $table->foreign('id_user', 'fk_consommation2')->references('id')->on('users');
         });
     }
 

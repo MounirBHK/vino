@@ -29,11 +29,19 @@ class CustomAuthController extends Controller
             'courriel' => 'required|email',
             'motDePasse' => 'required'
         ]);
-        $credentials = $request->only('courriel', 'motDePasse');
-        // if(!Auth::validate($credentials)): 
-        //     echo "erreur de validation";
-        // endif;
-        echo "connexion réussi";
+        $data = $request->all();
+        $credentials =[];
+        foreach($data as $key => $value) {
+            $credentials[$key] = $value;
+        }
+        $credentials = ['email' => $credentials['courriel'], 'password' => $credentials['motDePasse']];
+        if(!Auth::validate($credentials)): 
+            return response('error: No match');
+        endif;
+
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        Auth::login($user, true);
+        return $user;
     }
 
     /**

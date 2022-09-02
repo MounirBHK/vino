@@ -14,15 +14,15 @@ class CreateAchatsTable extends Migration
     public function up()
     {
         Schema::create('achats', function (Blueprint $table) {
-            $table->unsignedSmallInteger('id_utilisateur');
-            $table->unsignedSmallInteger('id_bouteille');
+            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_bouteille');
             $table->dateTime('date_achat');
             $table->smallInteger('quantite_achat')->nullable();
             $table->decimal('prix_achat', 6, 2)->nullable();
             
-            $table->primary(['id_utilisateur', 'id_bouteille', 'date_achat']);
+            $table->primary(['id_user', 'id_bouteille', 'date_achat']);
             $table->foreign('id_bouteille', 'fk_achat')->references('id_bouteille')->on('bouteilles');
-            $table->foreign('id_utilisateur', 'fk_achat2')->references('id_utilisateur')->on('utilisateurs');
+            $table->foreign('id_user', 'fk_achat2')->references('id')->on('users');
         });
     }
 

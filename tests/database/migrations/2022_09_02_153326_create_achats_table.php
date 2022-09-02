@@ -22,7 +22,7 @@ class CreateAchatsTable extends Migration
             
             $table->primary(['id_utilisateur', 'id_bouteille', 'date_achat']);
             $table->foreign('id_bouteille', 'fk_achat')->references('id_bouteille')->on('bouteilles');
-            $table->foreign('id_utilisateur', 'fk_achat2')->references('id_utilisateur')->on('utilisateurs');
+            $table->foreign('id_utilisateur', 'fk_achat2')->references('id')->on('users');
         });
     }
 

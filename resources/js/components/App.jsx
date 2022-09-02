@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { CelliersProvider } from "../context/celliersContext";
 import { BouteillesProvider } from "../context/bouteillesContext";
+import { UserProvider } from "../context/userContext";
 import Entete from "./entete/Entete";
 import NavBottom from "./navigation/NavBottom";
 import Main from "./main/Main";
@@ -40,11 +41,14 @@ function App() {
     };
 
     useEffect(() => {
-        const userId = user;
-        getCelliers(userId).then((celliersData) => {
-            setCelliers(celliersData.data);
-        });
-    }, []);
+        if (user) {
+            console.log(user);
+            const userId = user.id;
+            getCelliers(userId).then((celliersData) => {
+                setCelliers(celliersData.data);
+            });
+        }
+    }, [user]);
 
     function gereSelectCellier(idCellier) {
         getBouteilles(idCellier).then((bouteillesData) => {
@@ -74,19 +78,23 @@ function App() {
 
     return user ? (
         <React.Fragment>
-            <CelliersProvider value={celliers}>
-                <BouteillesProvider value={bouteilles}>
-                    <Entete />
-                    <Main
-                        gereQuantite={gereQuantite}
-                        gereSelectCellier={gereSelectCellier}
-                    />
-                    <NavBottom />
-                </BouteillesProvider>
-            </CelliersProvider>
+            <UserProvider value={user}>
+                <CelliersProvider value={celliers}>
+                    <BouteillesProvider value={bouteilles}>
+                        <Entete />
+                        <Main
+                            gereQuantite={gereQuantite}
+                            gereSelectCellier={gereSelectCellier}
+                        />
+                        <NavBottom />
+                    </BouteillesProvider>
+                </CelliersProvider>
+            </UserProvider>
         </React.Fragment>
     ) : (
-        <Homepage />
+        <UserProvider value={{ user: [user, setUser] }}>
+            <Homepage />
+        </UserProvider>
     );
 }
 

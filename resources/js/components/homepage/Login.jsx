@@ -1,11 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./Login.scss";
 import { Grid, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import UserContext from "../../context/userContext";
 
 function Login() {
+    const { user } = useContext(UserContext);
+    const [userState, setUser] = user;
     const [formValues, setFormValues] = useState({
         courriel: "",
         motDePasse: "",
@@ -27,7 +30,8 @@ function Login() {
         e.preventDefault();
         envoieIdentifiants(formValues)
             .then((response) => {
-                console.log(response);
+                history.pushState(null, "", "/dashboard");
+                setUser(response.data);
             })
             .catch((error) => {
                 console.log(error);

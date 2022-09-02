@@ -19,7 +19,7 @@ function Main({ gereQuantite, gereSelectCellier }) {
             </div>
             <Routes>
                 <Route
-                    path="/"
+                    path="*"
                     element={
                         <React.Fragment>
                             <SelectCellier

@@ -16,6 +16,6 @@ use App\Http\Controllers\CellierController;
 
 Route::get('/{url}', function () {
     return view('welcome');
-})->where(['url' => '|modifierBouteille|login|signup']);
+})->where(['url' => '|modifierBouteille|login|signup|dashboard']);
 
 

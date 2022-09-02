@@ -14,7 +14,7 @@ class CellierController extends Controller
      */
     public function index($userId)
     {
-        $celliers = Cellier::select()->where('id_utilisateur', '=', $userId)->get();
+        $celliers = Cellier::select()->where('id_user', '=', $userId)->get();
         return $celliers;
     }
 

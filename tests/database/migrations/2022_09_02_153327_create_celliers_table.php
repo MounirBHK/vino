@@ -21,7 +21,7 @@ class CreateCelliersTable extends Migration
             $table->smallInteger('nbr_ligne')->nullable();
             $table->integer('capacite')->nullable();
             
-            $table->foreign('id_utilisateur', 'fk_avoir')->references('id_utilisateur')->on('utilisateurs');
+            $table->foreign('id_utilisateur', 'fk_avoir')->references('id')->on('users');
         });
     }
 

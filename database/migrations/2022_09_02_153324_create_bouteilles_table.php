@@ -14,8 +14,8 @@ class CreateBouteillesTable extends Migration
     public function up()
     {
         Schema::create('bouteilles', function (Blueprint $table) {
-            $table->smallIncrements('id_bouteille')->unsigned()->primary();
-            $table->unsignedSmallInteger('id_type');
+            $table->id('id_bouteille');
+            $table->unsignedBigInteger('id_type');
             $table->string('nom_bouteille');
             $table->string('image')->nullable();
             $table->string('code_saq', 25)->nullable();

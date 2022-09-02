@@ -14,14 +14,14 @@ class CreateCelliersTable extends Migration
     public function up()
     {
         Schema::create('celliers', function (Blueprint $table) {
-            $table->smallIncrements('id_cellier')->unsigned()->primary();
-            $table->unsignedSmallInteger('id_utilisateur');
+            $table->id('id_cellier');
+            $table->unsignedBigInteger('id_user');
             $table->string('lib_cellier', 20)->nullable();
             $table->smallInteger('nbr_colonne')->nullable();
             $table->smallInteger('nbr_ligne')->nullable();
             $table->integer('capacite')->nullable();
             
-            $table->foreign('id_utilisateur', 'fk_avoir')->references('id_utilisateur')->on('utilisateurs');
+            $table->foreign('id_user', 'fk_avoir')->references('id')->on('users');
         });
     }
 
