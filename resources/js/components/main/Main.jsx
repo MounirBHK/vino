@@ -19,20 +19,31 @@ function Main({ gereQuantite, gereSelectCellier }) {
             </div>
             <Routes>
                 <Route
-                    path="*"
+                    path="/*"
                     element={
-                        <React.Fragment>
-                            <SelectCellier
-                                gereSelectCellier={gereSelectCellier}
-                            />
-                            <Cellier gereQuantite={gereQuantite} />
-                        </React.Fragment>
-                    }
-                ></Route>
-                <Route
-                    path="/modifierBouteille/"
-                    element={
-                        <FormModifierBouteille bouteille={stateBouteille} />
+                        <Routes>
+                            <Route
+                                path="/celliers"
+                                element={
+                                    <React.Fragment>
+                                        <SelectCellier
+                                            gereSelectCellier={
+                                                gereSelectCellier
+                                            }
+                                        />
+                                        <Cellier gereQuantite={gereQuantite} />
+                                    </React.Fragment>
+                                }
+                            ></Route>
+                            <Route
+                                path="/modifierBouteille/"
+                                element={
+                                    <FormModifierBouteille
+                                        bouteille={stateBouteille}
+                                    />
+                                }
+                            ></Route>
+                        </Routes>
                     }
                 ></Route>
             </Routes>

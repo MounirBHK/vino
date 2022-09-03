@@ -14,8 +14,9 @@ use App\Http\Controllers\CellierController;
 |
 */
 
-Route::get('/{url}', function () {
+Route::fallback( function () {
     return view('welcome');
-})->where(['url' => '|modifierBouteille|login|signup|dashboard']);
+});
+
 
 

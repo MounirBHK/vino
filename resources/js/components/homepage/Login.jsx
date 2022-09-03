@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import "./Login.scss";
 import { Grid, TextField, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 
@@ -14,6 +14,7 @@ function Login() {
         motDePasse: "",
     });
     const hostOriginURL = window.location.origin;
+    const navigate = useNavigate();
     const envoieIdentifiants = async (identifiants) => {
         return await axios.post(
             hostOriginURL + "/api/custom-login",
@@ -30,8 +31,10 @@ function Login() {
         e.preventDefault();
         envoieIdentifiants(formValues)
             .then((response) => {
-                history.pushState(null, "", "/dashboard");
-                setUser(response.data);
+                const UserLoggedIn = response.data;
+                localStorage.setItem("user", JSON.stringify(UserLoggedIn));
+                setUser(UserLoggedIn);
+                navigate("/dashboard", {});
             })
             .catch((error) => {
                 console.log(error);

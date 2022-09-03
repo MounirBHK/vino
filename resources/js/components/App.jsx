@@ -1,18 +1,21 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import { CelliersProvider } from "../context/celliersContext";
 import { BouteillesProvider } from "../context/bouteillesContext";
 import { UserProvider } from "../context/userContext";
 import Entete from "./entete/Entete";
-import NavBottom from "./navigation/NavBottom";
 import Main from "./main/Main";
+import NavBottom from "./navigation/NavBottom";
 import Homepage from "./homepage/Homepage";
+import Page404 from "./Page404";
 
 function App() {
     const [bouteilles, setBouteilles] = useState([]);
     const [celliers, setCelliers] = useState([]);
     const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
+    const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
 
     const getCelliers = async (userId) => {
         return await axios.get(hostOriginURL + "/api/celliers/user/" + userId);
@@ -39,16 +42,23 @@ function App() {
             bouteille
         );
     };
-
     useEffect(() => {
-        if (user) {
-            console.log(user);
-            const userId = user.id;
+        if (userLoggedIn) {
+            const userId = userLoggedIn.id;
             getCelliers(userId).then((celliersData) => {
                 setCelliers(celliersData.data);
             });
         }
     }, [user]);
+
+    function gereDeconnexion(userLoggedIn) {
+        const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
+        if (userInLocalStorage.id === userLoggedIn.id) {
+            localStorage.removeItem("user");
+            setUser(null);
+            location.reload();
+        }
+    }
 
     function gereSelectCellier(idCellier) {
         getBouteilles(idCellier).then((bouteillesData) => {
@@ -76,25 +86,42 @@ function App() {
         );
     }
 
-    return user ? (
-        <React.Fragment>
-            <UserProvider value={user}>
-                <CelliersProvider value={celliers}>
-                    <BouteillesProvider value={bouteilles}>
-                        <Entete />
-                        <Main
-                            gereQuantite={gereQuantite}
-                            gereSelectCellier={gereSelectCellier}
-                        />
-                        <NavBottom />
-                    </BouteillesProvider>
-                </CelliersProvider>
-            </UserProvider>
-        </React.Fragment>
+    return userLoggedIn ? (
+        <Routes>
+            <Route
+                path="/dashboard/*"
+                element={
+                    <UserProvider value={user}>
+                        <CelliersProvider value={celliers}>
+                            <BouteillesProvider value={bouteilles}>
+                                <Entete
+                                    userLoggedIn={userLoggedIn}
+                                    gereDeconnexion={gereDeconnexion}
+                                />
+                                <Main
+                                    gereQuantite={gereQuantite}
+                                    gereSelectCellier={gereSelectCellier}
+                                />
+                                <NavBottom />
+                            </BouteillesProvider>
+                        </CelliersProvider>
+                    </UserProvider>
+                }
+            ></Route>
+            <Route path="*" element={<Page404 />}></Route>
+        </Routes>
     ) : (
-        <UserProvider value={{ user: [user, setUser] }}>
-            <Homepage />
-        </UserProvider>
+        <Routes>
+            <Route
+                path="/*"
+                element={
+                    <UserProvider value={{ user: [user, setUser] }}>
+                        <Homepage />
+                    </UserProvider>
+                }
+            ></Route>
+            <Route path="*" element={<Page404 />}></Route>
+        </Routes>
     );
 }
 

@@ -35,8 +35,12 @@ html {
 
     .utilisateur {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
+
+        .logout-icon {
+            width: 3rem;
+        }
     }
 
     .h1 {
