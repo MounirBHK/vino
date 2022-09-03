@@ -17,7 +17,7 @@ function Login() {
     const navigate = useNavigate();
     const envoieIdentifiants = async (identifiants) => {
         return await axios.post(
-            hostOriginURL + "/api/custom-login",
+            hostOriginURL + "/api/custom-auth/login",
             identifiants
         );
     };

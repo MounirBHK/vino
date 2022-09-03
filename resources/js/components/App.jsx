@@ -42,6 +42,11 @@ function App() {
             bouteille
         );
     };
+
+    const deconnecteUser = async () => {
+        return await axios.get(hostOriginURL + "/api/custom-auth/logout");
+    };
+
     useEffect(() => {
         if (userLoggedIn) {
             const userId = userLoggedIn.id;
@@ -54,9 +59,12 @@ function App() {
     function gereDeconnexion(userLoggedIn) {
         const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
         if (userInLocalStorage.id === userLoggedIn.id) {
-            localStorage.removeItem("user");
-            setUser(null);
-            location.reload();
+            deconnecteUser().then((response) => {
+                if (response.data === 1) {
+                    localStorage.removeItem("user");
+                    setUser(null);
+                }
+            });
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,13 @@ class CustomAuthController extends Controller
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
         Auth::login($user, true);
         return $user;
+    }
+
+    public function customLogout(){
+        Session::flush();
+        Auth::logout();
+
+        return true;
     }
 
     /**

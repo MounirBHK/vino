@@ -23,7 +23,7 @@ function CarteBouteille({ bouteille, gereQuantite }) {
             <ButtonGroup className="options">
                 <Button
                     onClick={() =>
-                        navigate("/dashboard/modifierBouteille/", {
+                        navigate("/dashboard/modifierBouteille", {
                             state: bouteille,
                         })
                     }

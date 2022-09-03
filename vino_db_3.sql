@@ -88,11 +88,11 @@ CREATE TABLE `celliers` (
 --
 
 INSERT INTO `celliers` (`id_cellier`, `id_user`, `lib_cellier`, `nbr_colonne`, `nbr_ligne`, `capacite`) VALUES
-(1, 6, 'cellier_user1', NULL, NULL, 160),
-(2, 6, 'cellier_user2', NULL, NULL, 260),
-(3, 7, 'cellier_user3', NULL, NULL, 450),
-(4, 8, 'cellier_user4', NULL, NULL, 585),
-(5, 9, 'cellier_user5', NULL, NULL, 640);
+(1, 1, 'cellier_user1', NULL, NULL, 160),
+(2, 1, 'cellier_user2', NULL, NULL, 260),
+(3, 2, 'cellier_user3', NULL, NULL, 450),
+(4, 3, 'cellier_user4', NULL, NULL, 585),
+(5, 4, 'cellier_user5', NULL, NULL, 640);
 
 -- --------------------------------------------------------
 
@@ -253,10 +253,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(6, 'Brycen Kunde PhD', 'fbalistreri@example.org', '2022-09-02 22:09:23', '$2y$10$3Kn/TXzCHNZ7ZGmRVzn92.sihZngwAb/OMFMiffEa9mN3uAoGiWLq', 'tHWgWOYw1W', '2022-09-02 22:09:23', '2022-09-02 22:09:23'),
-(7, 'Prof. Jensen Parker', 'qhagenes@example.org', '2022-09-02 23:14:21', '$2y$10$zUwkF/EGk70bLMXm7e2JwOqHQwMWuYiPq5NFPZHJVcGsnyNHW5TCy', 'ldTbSTqzJE', '2022-09-02 23:14:21', '2022-09-02 23:14:21'),
-(8, 'Rocio Schimmel', 'tbradtke@example.net', '2022-09-02 23:14:21', '$2y$10$TemRmoGoI1NJ4ubuyftwSe/kN/lXnY2Fl2njl.OPuIG24qoBpmLz6', 'kTLnZ03RyG', '2022-09-02 23:14:21', '2022-09-02 23:14:21'),
-(9, 'Mr. Coleman Conroy II', 'aorn@example.net', '2022-09-02 23:14:21', '$2y$10$EyDuI2Tb170/TBer8Actn.jbQre9cVo3DRVn2X6K.sazfhBvmO3va', 'DHHudbbYLy', '2022-09-02 23:14:21', '2022-09-02 23:14:21');
+(1, 'Brycen Kunde PhD', 'fbalistreri@example.org', '2022-09-02 22:09:23', '$2y$10$3Kn/TXzCHNZ7ZGmRVzn92.sihZngwAb/OMFMiffEa9mN3uAoGiWLq', 'tHWgWOYw1W', '2022-09-02 22:09:23', '2022-09-02 22:09:23'),
+(2, 'Prof. Jensen Parker', 'qhagenes@example.org', '2022-09-02 23:14:21', '$2y$10$zUwkF/EGk70bLMXm7e2JwOqHQwMWuYiPq5NFPZHJVcGsnyNHW5TCy', 'ldTbSTqzJE', '2022-09-02 23:14:21', '2022-09-02 23:14:21'),
+(3, 'Rocio Schimmel', 'tbradtke@example.net', '2022-09-02 23:14:21', '$2y$10$TemRmoGoI1NJ4ubuyftwSe/kN/lXnY2Fl2njl.OPuIG24qoBpmLz6', 'kTLnZ03RyG', '2022-09-02 23:14:21', '2022-09-02 23:14:21'),
+(4, 'Mr. Coleman Conroy II', 'aorn@example.net', '2022-09-02 23:14:21', '$2y$10$EyDuI2Tb170/TBer8Actn.jbQre9cVo3DRVn2X6K.sazfhBvmO3va', 'DHHudbbYLy', '2022-09-02 23:14:21', '2022-09-02 23:14:21');
 
 --
 -- Index pour les tables déchargées

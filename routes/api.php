@@ -23,5 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('celliers/user/{userId}', [CellierController::class, 'index'])->name('celliers');
 Route::get('cellier/{idCellier}', [CellierBoutController::class, 'index'])->name('cellier-bouteilles');
-Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-bouteilles');
-Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
+Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-quantite-bouteille');
+Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
+Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');
