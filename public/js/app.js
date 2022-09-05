@@ -28393,7 +28393,11 @@ function App() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get(hostOriginURL + "/api/celliers/user/" + userId);
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get(hostOriginURL + "/api/celliers/user/" + userId, {
+                headers: {
+                  Authorization: "Bearer " + userLoggedIn.access_token
+                }
+              });
 
             case 2:
               return _context.abrupt("return", _context.sent);
@@ -28418,7 +28422,11 @@ function App() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get(hostOriginURL + "/api/cellier/" + idCellier);
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get(hostOriginURL + "/api/cellier/" + idCellier, {
+                headers: {
+                  Authorization: "Bearer " + userLoggedIn.access_token
+                }
+              });
 
             case 2:
               return _context2.abrupt("return", _context2.sent);
@@ -28450,7 +28458,11 @@ function App() {
                 operation: operation
               };
               _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().put(hostOriginURL + "/api/changeQuantiteBouteille", bouteille);
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put(hostOriginURL + "/api/changeQuantiteBouteille", bouteille, {
+                headers: {
+                  Authorization: "Bearer " + userLoggedIn.access_token
+                }
+              });
 
             case 3:
               return _context3.abrupt("return", _context3.sent);
@@ -28495,8 +28507,9 @@ function App() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (userLoggedIn) {
-      var userId = userLoggedIn.id;
+      var userId = userLoggedIn.user.id;
       getCelliers(userId).then(function (celliersData) {
+        console.log(celliersData);
         setCelliers(celliersData.data);
       });
     }
@@ -28505,7 +28518,7 @@ function App() {
   function gereDeconnexion(userLoggedIn) {
     var userInLocalStorage = JSON.parse(localStorage.getItem("user"));
 
-    if (userInLocalStorage.id === userLoggedIn.id) {
+    if (userInLocalStorage.user.id === userLoggedIn.user.id) {
       deconnecteUser().then(function (response) {
         if (response.data === 1) {
           localStorage.removeItem("user");
@@ -28664,7 +28677,7 @@ function Entete(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "utilisateur",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-          children: ["Bonjour,", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), " ", userLoggedIn.name]
+          children: ["Bonjour,", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), " ", userLoggedIn.user.name]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_icons_material_AccountCircleOutlined__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
           className: "logout-icon",
           src: _images_logout_icon_png__WEBPACK_IMPORTED_MODULE_2__["default"],

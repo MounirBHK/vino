@@ -18,11 +18,19 @@ function App() {
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
 
     const getCelliers = async (userId) => {
-        return await axios.get(hostOriginURL + "/api/celliers/user/" + userId);
+        return await axios.get(hostOriginURL + "/api/celliers/user/" + userId, {
+            headers: {
+                Authorization: "Bearer " + userLoggedIn.access_token,
+            },
+        });
     };
 
     const getBouteilles = async (idCellier) => {
-        return await axios.get(hostOriginURL + "/api/cellier/" + idCellier);
+        return await axios.get(hostOriginURL + "/api/cellier/" + idCellier, {
+            headers: {
+                Authorization: "Bearer " + userLoggedIn.access_token,
+            },
+        });
     };
 
     const changeQuantite = async (
@@ -39,7 +47,12 @@ function App() {
         };
         return await axios.put(
             hostOriginURL + "/api/changeQuantiteBouteille",
-            bouteille
+            bouteille,
+            {
+                headers: {
+                    Authorization: "Bearer " + userLoggedIn.access_token,
+                },
+            }
         );
     };
 
@@ -49,8 +62,9 @@ function App() {
 
     useEffect(() => {
         if (userLoggedIn) {
-            const userId = userLoggedIn.id;
+            const userId = userLoggedIn.user.id;
             getCelliers(userId).then((celliersData) => {
+                console.log(celliersData);
                 setCelliers(celliersData.data);
             });
         }
@@ -58,7 +72,7 @@ function App() {
 
     function gereDeconnexion(userLoggedIn) {
         const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
-        if (userInLocalStorage.id === userLoggedIn.id) {
+        if (userInLocalStorage.user.id === userLoggedIn.user.id) {
             deconnecteUser().then((response) => {
                 if (response.data === 1) {
                     localStorage.removeItem("user");

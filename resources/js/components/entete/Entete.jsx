@@ -14,7 +14,7 @@ function Entete({ userLoggedIn, gereDeconnexion }) {
                 <div className="utilisateur">
                     <p>
                         Bonjour,
-                        <br /> {userLoggedIn.name}
+                        <br /> {userLoggedIn.user.name}
                     </p>
                     <AccountCircleOutlinedIcon />
                     <img

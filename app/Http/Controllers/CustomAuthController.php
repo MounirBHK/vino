@@ -22,7 +22,7 @@ class CustomAuthController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\jsonResponse 
      */
     public function customLogin(Request $request)
     {
@@ -37,8 +37,12 @@ class CustomAuthController extends Controller
         endif;
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        $token = $user->createToken('auth_token')->plainTextToken;
         Auth::login($user, true);
-        return $user;
+        return response()->json([
+            'user' => $user,
+            'access_token' => $token
+        ]);
     }
 
     public function customLogout(){

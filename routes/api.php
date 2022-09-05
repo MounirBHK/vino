@@ -17,12 +17,15 @@ use App\Http\Controllers\CustomAuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::get('celliers/user/{userId}', [CellierController::class, 'index'])->name('celliers');
+    Route::get('cellier/{idCellier}', [CellierBoutController::class, 'index'])->name('cellier-bouteilles');
+    Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-quantite-bouteille');
 });
 
-Route::get('celliers/user/{userId}', [CellierController::class, 'index'])->name('celliers');
-Route::get('cellier/{idCellier}', [CellierBoutController::class, 'index'])->name('cellier-bouteilles');
-Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-quantite-bouteille');
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
 Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');
