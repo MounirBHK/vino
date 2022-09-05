@@ -26,18 +26,14 @@ class CustomAuthController extends Controller
      */
     public function customLogin(Request $request)
     {
-        $request->validate([
+        $fields = $request->validate([
             'courriel' => 'required|email',
             'motDePasse' => 'required'
         ]);
-        $data = $request->all();
-        $credentials =[];
-        foreach($data as $key => $value) {
-            $credentials[$key] = $value;
-        }
-        $credentials = ['email' => $credentials['courriel'], 'password' => $credentials['motDePasse']];
+       
+        $credentials = ['email' => $fields['courriel'], 'password' => $fields['motDePasse']];
         if(!Auth::validate($credentials)): 
-            return response('error: No match');
+            return response('Erreur de connexion: mauvais identifiants', 401);
         endif;
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);

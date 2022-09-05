@@ -7,7 +7,6 @@ import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
-import Page404 from "../Page404";
 
 function Main({ gereQuantite, gereSelectCellier }) {
     const { state: stateBouteille } = useLocation();
