@@ -46,8 +46,10 @@ class CustomAuthController extends Controller
     }
 
     public function customLogout(){
+        $user = Auth::user();
+        $user->tokens()->delete();
         Session::flush();
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         return true;
     }

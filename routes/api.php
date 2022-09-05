@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\CellierBoutController;
@@ -25,7 +24,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('celliers/user/{userId}', [CellierController::class, 'index'])->name('celliers');
     Route::get('cellier/{idCellier}', [CellierBoutController::class, 'index'])->name('cellier-bouteilles');
     Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-quantite-bouteille');
+    Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');
 });
 
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
-Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');

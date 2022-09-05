@@ -28487,7 +28487,11 @@ function App() {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get(hostOriginURL + "/api/custom-auth/logout");
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get(hostOriginURL + "/api/custom-auth/logout", {
+                headers: {
+                  Authorization: "Bearer " + userLoggedIn.access_token
+                }
+              });
 
             case 2:
               return _context4.abrupt("return", _context4.sent);
@@ -28509,7 +28513,6 @@ function App() {
     if (userLoggedIn) {
       var userId = userLoggedIn.user.id;
       getCelliers(userId).then(function (celliersData) {
-        console.log(celliersData);
         setCelliers(celliersData.data);
       });
     }

@@ -57,14 +57,17 @@ function App() {
     };
 
     const deconnecteUser = async () => {
-        return await axios.get(hostOriginURL + "/api/custom-auth/logout");
+        return await axios.get(hostOriginURL + "/api/custom-auth/logout", {
+            headers: {
+                Authorization: "Bearer " + userLoggedIn.access_token,
+            },
+        });
     };
 
     useEffect(() => {
         if (userLoggedIn) {
             const userId = userLoggedIn.user.id;
             getCelliers(userId).then((celliersData) => {
-                console.log(celliersData);
                 setCelliers(celliersData.data);
             });
         }
