@@ -24,7 +24,6 @@ function Login() {
         );
     };
 
-    console.log(loginErrorMsg);
     function gereChangementInput(e) {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
@@ -32,6 +31,7 @@ function Login() {
 
     function gereConnexion(e) {
         e.preventDefault();
+        console.log("login");
         envoieIdentifiants(formValues)
             .then((response) => {
                 const UserLoggedIn = response.data;

@@ -28517,6 +28517,12 @@ function App() {
       });
     }
   }, [user]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    //Réinitialise le user dans le cas d'un rafraichissement forcé de la page
+    if (userLoggedIn) {
+      setUser(userLoggedIn);
+    }
+  }, []);
 
   function gereDeconnexion(userLoggedIn) {
     var userInLocalStorage = JSON.parse(localStorage.getItem("user"));
@@ -28932,8 +28938,6 @@ function Login() {
     };
   }();
 
-  console.log(loginErrorMsg);
-
   function gereChangementInput(e) {
     var _e$target = e.target,
         name = _e$target.name,
@@ -28943,6 +28947,7 @@ function Login() {
 
   function gereConnexion(e) {
     e.preventDefault();
+    console.log("login");
     envoieIdentifiants(formValues).then(function (response) {
       var UserLoggedIn = response.data;
       localStorage.setItem("user", JSON.stringify(UserLoggedIn));
@@ -29043,11 +29048,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Signup_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Signup.scss */ "./resources/js/components/homepage/Signup.scss");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Grid/Grid.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/TextField/TextField.js");
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Button/Button.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Grid/Grid.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/TextField/TextField.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material */ "./node_modules/@mui/material/esm/Button/Button.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var _formValidator_signupForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formValidator/signupForm */ "./resources/js/components/homepage/formValidator/signupForm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 
@@ -29056,67 +29082,238 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Signup() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    className: "Login",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      item: true,
-      xs: 12,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        required: true,
-        variant: "filled",
-        label: "Courriel",
-        margin: "dense",
-        children: "Courriel"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      item: true,
-      xs: 12,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        required: true,
-        variant: "filled",
-        label: "Pr\xE9nom",
-        margin: "dense",
-        children: "Pr\xE9nom"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      item: true,
-      xs: 12,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        required: true,
-        variant: "filled",
-        label: "Nom",
-        margin: "dense",
-        children: "Nom"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      item: true,
-      xs: 12,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        required: true,
-        variant: "filled",
-        label: "Mot de passe",
-        margin: "dense",
-        children: "Mot de passe"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      item: true,
-      xs: 12,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        variant: "contained",
-        children: "Valider"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      item: true,
-      xs: 12,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        to: "/login",
-        children: "D\xE9j\xE0 Membre? Connectez-vous ici!"
-      })
-    })]
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    courriel: "",
+    nom_utilisateur: "",
+    prenom: "",
+    nom: "",
+    motDePasse: "",
+    motDePasse_confirme: ""
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      formValues = _useState2[0],
+      setFormValues = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      formErrors = _useState4[0],
+      setFormErrors = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      formIsValid = _useState6[0],
+      setFormIsValid = _useState6[1];
+
+  var hostOriginURL = window.location.origin;
+
+  function gereChangementInputValue(e) {
+    var _e$target = e.target,
+        name = _e$target.name,
+        value = _e$target.value;
+    setFormValues(_objectSpread(_objectSpread({}, formValues), {}, _defineProperty({}, name, value)));
+  }
+
+  function gereChangementInput(e) {
+    var _e$target2 = e.target,
+        name = _e$target2.name,
+        value = _e$target2.value;
+    var inputError = (0,_formValidator_signupForm__WEBPACK_IMPORTED_MODULE_2__.getInputError)(name, value);
+    if (inputError) setFormErrors(_objectSpread(_objectSpread({}, formErrors), {}, _defineProperty({}, name, inputError)));else setFormValues(_objectSpread(_objectSpread({}, formValues), {}, _defineProperty({}, name, value.trim())));
+  }
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var isFormFilled = true;
+
+    for (var input in formValues) {
+      var errorInput = (0,_formValidator_signupForm__WEBPACK_IMPORTED_MODULE_2__.getInputError)(input, formValues[input]);
+
+      if (formValues[input] === "" || errorInput !== null) {
+        isFormFilled = false;
+        break;
+      }
+    }
+
+    if (Object.keys(formErrors).length === 0 && isFormFilled) setFormIsValid(true);else setFormIsValid(false);
+  }, [formErrors, formValues]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("form", {
+    onSubmit: null,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      className: "Login",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          required: true,
+          type: "email",
+          id: "courriel",
+          name: "courriel",
+          variant: "filled",
+          label: "Courriel",
+          margin: "dense",
+          value: formValues.courriel,
+          onBlur: gereChangementInput,
+          onChange: gereChangementInputValue,
+          error: formErrors.courriel ? true : false,
+          helperText: formErrors.courriel,
+          children: "Courriel"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          required: true,
+          type: "text",
+          id: "nom_utilisateur",
+          name: "nom_utilisateur",
+          variant: "filled",
+          label: "Nom Utilisateur",
+          margin: "dense",
+          value: formValues.nom_utilisateur,
+          onBlur: gereChangementInput,
+          onChange: gereChangementInputValue,
+          error: formErrors.nom_utilisateur ? true : false,
+          helperText: formErrors.nom_utilisateur,
+          children: "Nom Utilisateur"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          required: true,
+          type: "text",
+          id: "prenom",
+          name: "prenom",
+          variant: "filled",
+          label: "Pr\xE9nom",
+          margin: "dense",
+          value: formValues.prenom,
+          onBlur: gereChangementInput,
+          onChange: gereChangementInputValue,
+          error: formErrors.prenom ? true : false,
+          helperText: formErrors.prenom,
+          children: "Pr\xE9nom"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          required: true,
+          type: "text",
+          id: "nom",
+          name: "nom",
+          variant: "filled",
+          label: "Nom",
+          margin: "dense",
+          value: formValues.nom,
+          onBlur: gereChangementInput,
+          onChange: gereChangementInputValue,
+          error: formErrors.nom ? true : false,
+          helperText: formErrors.nom,
+          children: "Nom"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          required: true,
+          type: "password",
+          id: "motDePasse",
+          name: "motDePasse",
+          variant: "filled",
+          label: "Mot de passe",
+          margin: "dense",
+          value: formValues.motDePasse,
+          onBlur: gereChangementInput,
+          onChange: gereChangementInputValue,
+          error: formErrors.motDePasse ? true : false,
+          helperText: formErrors.motDePasse,
+          children: "Mot de passe"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          required: true,
+          type: "password",
+          id: "motDePasse_confirme",
+          name: "motDePasse_confirme",
+          variant: "filled",
+          label: "Confirmer Mot de passe",
+          margin: "dense",
+          value: formValues.motDePasse_confirme,
+          onBlur: gereChangementInput,
+          onChange: gereChangementInputValue,
+          error: formErrors.motDePasse_confirme ? true : false,
+          helperText: formErrors.motDePasse_confirme,
+          children: "Confirmer Mot de passe"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          variant: "contained",
+          type: "submit",
+          disabled: !formIsValid,
+          children: "Valider"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+          to: "/login",
+          children: "D\xE9j\xE0 Membre? Connectez-vous ici!"
+        })
+      })]
+    })
   });
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Signup);
+
+/***/ }),
+
+/***/ "./resources/js/components/homepage/formValidator/signupForm.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/homepage/formValidator/signupForm.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getInputError": () => (/* binding */ getInputError),
+/* harmony export */   "validateForm": () => (/* binding */ validateForm)
+/* harmony export */ });
+function validateForm(formValues) {}
+function getInputError(name, value) {
+  var errorMsg = null;
+  var regex;
+
+  switch (name) {
+    case "prenom":
+    case "nom":
+      regex = new RegExp(/^[a-z]{2}[a-z'-]{0,28}$/);
+      if (!regex.test(value.trim())) errorMsg = "Doit comporter entre 2 et 30 caractères alphabétiques";
+      break;
+
+    case "nom_utilisateur":
+      regex = new RegExp(/^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/);
+      if (!regex.test(value.trim())) errorMsg = "Doit comporter entre 6 et 30 caractères alphanumériques";
+      break;
+
+    case "courriel":
+      regex = new RegExp(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/);
+      if (!regex.test(value.trim())) errorMsg = "Format d'adresse courriel invalide";
+      break;
+
+    case "motDePasse":
+    case "motDePasse_confirme":
+      regex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/);
+      if (!regex.test(value.trim())) errorMsg = "Doit comporter au moins 8 caractères alphanumériques: au moins 1 lettre majuscule, 1 lettre minuscule et 1 chiffre";
+  }
+
+  return errorMsg;
+}
 
 /***/ }),
 
