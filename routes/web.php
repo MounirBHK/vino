@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CellierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +13,9 @@ use App\Http\Controllers\CellierController;
 |
 */
 
-Route::get('/', function () {
+Route::fallback( function () {
     return view('welcome');
 });
 
-Route::get('/modifierBouteille', function () {
-    return view('welcome');
-});
+
 

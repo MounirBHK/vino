@@ -2,10 +2,11 @@ import React from "react";
 import "./CarteBouteille.scss";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
 import { Card } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function CarteBouteille({ bouteille, gereQuantite }) {
+    const navigate = useNavigate();
     return (
         <Card className="Carte-bouteille">
             <div className="bouteille-img">
@@ -20,12 +21,14 @@ function CarteBouteille({ bouteille, gereQuantite }) {
                 <p className="prix">Prix: {bouteille.prix_saq}</p>
             </div>
             <ButtonGroup className="options">
-                <Button>
-                    <Link
-                        to={`/modifierBouteille/?idCellier=${bouteille.id_cellier}&idBouteille=${bouteille.id_bouteille}`}
-                    >
-                        Modifier
-                    </Link>
+                <Button
+                    onClick={() =>
+                        navigate("/dashboard/modifierBouteille", {
+                            state: bouteille,
+                        })
+                    }
+                >
+                    Modifier
                 </Button>
                 <Button
                     value={1}

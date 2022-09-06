@@ -3,16 +3,14 @@ import "./Main.scss";
 import Cellier from "./Cellier";
 import SelectCellier from "./SelectCellier";
 import FormModifierBouteille from "./FormModifierBouteille";
-import { Route, Routes } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
+import FormAjoutCellier from "./FormAjoutCellier";
+import FormAjoutBouteille from "./FormAjoutBouteille";
+import { Route, Routes, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
 
 function Main({ gereQuantite, gereSelectCellier }) {
-    const [params, setParams] = useSearchParams();
-    const idCellier = params.get("idCellier");
-    const idBouteille = params.get("idBouteille");
-    console.log(idCellier, idBouteille);
+    const { state: stateBouteille } = useLocation();
     return (
         <div className="Main">
             <div className="Recherche">
@@ -22,23 +20,39 @@ function Main({ gereQuantite, gereSelectCellier }) {
             </div>
             <Routes>
                 <Route
-                    path="/"
+                    path="/*"
                     element={
-                        <React.Fragment>
-                            <SelectCellier
-                                gereSelectCellier={gereSelectCellier}
-                            />
-                            <Cellier gereQuantite={gereQuantite} />
-                        </React.Fragment>
-                    }
-                ></Route>
-                <Route
-                    path="/modifierBouteille/"
-                    element={
-                        <FormModifierBouteille
-                            idCellier={idCellier}
-                            idBouteille={idBouteille}
-                        />
+                        <Routes>
+                            <Route
+                                path="/celliers"
+                                element={
+                                    <React.Fragment>
+                                        <SelectCellier
+                                            gereSelectCellier={
+                                                gereSelectCellier
+                                            }
+                                        />
+                                        <Cellier gereQuantite={gereQuantite} />
+                                    </React.Fragment>
+                                }
+                            ></Route>
+                            <Route
+                                path="/modifierBouteille"
+                                element={
+                                    <FormModifierBouteille
+                                        bouteille={stateBouteille}
+                                    />
+                                }
+                            ></Route>
+                            <Route
+                                path="/ajoutCellier"
+                                element={<FormAjoutCellier />}
+                            ></Route>
+                            <Route
+                                path="/ajoutBouteille"
+                                element={<FormAjoutBouteille />}
+                            ></Route>
+                        </Routes>
                     }
                 ></Route>
             </Routes>
