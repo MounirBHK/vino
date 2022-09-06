@@ -3,8 +3,9 @@ import "./Main.scss";
 import Cellier from "./Cellier";
 import SelectCellier from "./SelectCellier";
 import FormModifierBouteille from "./FormModifierBouteille";
-import { Route, Routes } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import FormAjoutCellier from "./FormAjoutCellier";
+import FormAjoutBouteille from "./FormAjoutBouteille";
+import { Route, Routes, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
 
@@ -42,6 +43,14 @@ function Main({ gereQuantite, gereSelectCellier }) {
                                         bouteille={stateBouteille}
                                     />
                                 }
+                            ></Route>
+                            <Route
+                                path="/ajoutCellier"
+                                element={<FormAjoutCellier />}
+                            ></Route>
+                            <Route
+                                path="/ajoutBouteille"
+                                element={<FormAjoutBouteille />}
                             ></Route>
                         </Routes>
                     }

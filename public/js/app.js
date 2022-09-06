@@ -28650,13 +28650,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var _images_logoJaune_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../images/logoJaune.png */ "./resources/images/logoJaune.png");
 /* harmony import */ var _images_logout_icon_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../images/logout-icon.png */ "./resources/images/logout-icon.png");
 /* harmony import */ var _mui_icons_material_AccountCircleOutlined__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/icons-material/AccountCircleOutlined */ "./node_modules/@mui/icons-material/AccountCircleOutlined.js");
-/* harmony import */ var _mui_material_Fab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Fab */ "./node_modules/@mui/material/esm/Fab/Fab.js");
 /* harmony import */ var _Entete_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Entete.scss */ "./resources/js/components/entete/Entete.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -28695,11 +28695,17 @@ function Entete(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
         children: "Tableau de bord"
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_mui_material_Fab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      variant: "extended",
-      children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "actions",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
         to: "/dashboard/celliers",
         children: "Vos celliers"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        to: "/dashboard/ajoutCellier",
+        children: "+ cellier"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        to: "/dashboard/ajoutBouteille",
+        children: "+ bouteille"
       })]
     })]
   });
@@ -29252,6 +29258,64 @@ function Cellier(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/components/main/FormAjoutBouteille.jsx":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/main/FormAjoutBouteille.jsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+function FormAjoutBouteille() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+      children: "Formulaire ajout bouteille"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("form", {})]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormAjoutBouteille);
+
+/***/ }),
+
+/***/ "./resources/js/components/main/FormAjoutCellier.jsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/main/FormAjoutCellier.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+function FormAjoutCellier() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+      children: "Formulaire ajout cellier"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("form", {})]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormAjoutCellier);
+
+/***/ }),
+
 /***/ "./resources/js/components/main/FormModifierBouteille.jsx":
 /*!****************************************************************!*\
   !*** ./resources/js/components/main/FormModifierBouteille.jsx ***!
@@ -29314,10 +29378,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Cellier__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cellier */ "./resources/js/components/main/Cellier.jsx");
 /* harmony import */ var _SelectCellier__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SelectCellier */ "./resources/js/components/main/SelectCellier.jsx");
 /* harmony import */ var _FormModifierBouteille__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormModifierBouteille */ "./resources/js/components/main/FormModifierBouteille.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var _mui_icons_material_Search__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/icons-material/Search */ "./node_modules/@mui/icons-material/Search.js");
-/* harmony import */ var _mui_icons_material_Tune__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/icons-material/Tune */ "./node_modules/@mui/icons-material/Tune.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _FormAjoutCellier__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormAjoutCellier */ "./resources/js/components/main/FormAjoutCellier.jsx");
+/* harmony import */ var _FormAjoutBouteille__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormAjoutBouteille */ "./resources/js/components/main/FormAjoutBouteille.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _mui_icons_material_Search__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/icons-material/Search */ "./node_modules/@mui/icons-material/Search.js");
+/* harmony import */ var _mui_icons_material_Tune__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/icons-material/Tune */ "./node_modules/@mui/icons-material/Tune.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -29334,35 +29401,41 @@ function Main(_ref) {
   var gereQuantite = _ref.gereQuantite,
       gereSelectCellier = _ref.gereSelectCellier;
 
-  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useLocation)(),
+  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useLocation)(),
       stateBouteille = _useLocation.state;
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     className: "Main",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "Recherche",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_icons_material_Search__WEBPACK_IMPORTED_MODULE_7__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_icons_material_Search__WEBPACK_IMPORTED_MODULE_9__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
         type: "text",
         placeholder: "Recherche..."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_icons_material_Tune__WEBPACK_IMPORTED_MODULE_8__["default"], {})]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_icons_material_Tune__WEBPACK_IMPORTED_MODULE_10__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Routes, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
         path: "/*",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Routes, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
             path: "/celliers",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_SelectCellier__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_SelectCellier__WEBPACK_IMPORTED_MODULE_3__["default"], {
                 gereSelectCellier: gereSelectCellier
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Cellier__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Cellier__WEBPACK_IMPORTED_MODULE_2__["default"], {
                 gereQuantite: gereQuantite
               })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
             path: "/modifierBouteille",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_FormModifierBouteille__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_FormModifierBouteille__WEBPACK_IMPORTED_MODULE_4__["default"], {
               bouteille: stateBouteille
             })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+            path: "/ajoutCellier",
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_FormAjoutCellier__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+            path: "/ajoutBouteille",
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_FormAjoutBouteille__WEBPACK_IMPORTED_MODULE_6__["default"], {})
           })]
         })
       })
@@ -34905,7 +34978,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*,\nhtml {\n  margin: 0;\n  padding: 0;\n}\n\n.App-header {\n  width: 100%;\n  height: 200px;\n  background-color: #6a3352;\n  color: #ffe599;\n  font-family: \"Open Sans\", sans-serif;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  position: relative;\n}\n.App-header h2 {\n  text-transform: capitalize;\n}\n.App-header .image {\n  height: 20%;\n  width: 30%;\n  max-height: 75px;\n}\n.App-header img {\n  box-sizing: border-box;\n  max-height: 75px;\n}\n.App-header .utilisateur {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n}\n.App-header .utilisateur .logout-icon {\n  width: 3rem;\n}\n.App-header .h1 {\n  align-items: center;\n  font-size: 1.3em;\n  font-family: \"EB Garamond\", serif;\n  display: flex;\n  justify-content: center;\n}\n.App-header a {\n  color: #ffe599;\n}\n.App-header .profil {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 5px 15px 5px 15px !important;\n  gap: 15px;\n}\n.App-header .MuiDialog-paper,\n.App-header .MuiDialog-container {\n  padding: 10px !important;\n  width: 300px;\n  max-width: 75%;\n}\n.App-header p {\n  text-align: right;\n  padding-right: 5px;\n}\n.App-header .MuiFab-root {\n  position: absolute;\n  bottom: 10px;\n  width: 40% !important;\n  height: 15%;\n  margin: 0 10px 0 10px !important;\n  font-family: \"Open Sans\", sans-serif;\n  font-weight: 600;\n  font-size: medium;\n  background-color: #c07a71 !important;\n  color: white !important;\n}\n.App-header .MuiSvgIcon-root {\n  font-size: 3rem;\n  color: #ffe599 !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "*,\nhtml {\n  margin: 0;\n  padding: 0;\n}\n\n.App-header {\n  width: 100%;\n  height: 200px;\n  background-color: #6a3352;\n  color: #ffe599;\n  font-family: \"Open Sans\", sans-serif;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  position: relative;\n}\n.App-header h2 {\n  text-transform: capitalize;\n}\n.App-header .actions {\n  display: flex;\n}\n.App-header .image {\n  height: 20%;\n  width: 30%;\n  max-height: 75px;\n}\n.App-header img {\n  box-sizing: border-box;\n  max-height: 75px;\n}\n.App-header .utilisateur {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n}\n.App-header .utilisateur .logout-icon {\n  width: 3rem;\n}\n.App-header .h1 {\n  align-items: center;\n  font-size: 1.3em;\n  font-family: \"EB Garamond\", serif;\n  display: flex;\n  justify-content: center;\n}\n.App-header a {\n  color: #ffe599;\n}\n.App-header .profil {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 5px 15px 5px 15px !important;\n  gap: 15px;\n}\n.App-header .MuiDialog-paper,\n.App-header .MuiDialog-container {\n  padding: 10px !important;\n  width: 300px;\n  max-width: 75%;\n}\n.App-header p {\n  text-align: right;\n  padding-right: 5px;\n}\n.App-header .MuiFab-root {\n  position: absolute;\n  bottom: 10px;\n  width: 40% !important;\n  height: 15%;\n  margin: 0 10px 0 10px !important;\n  font-family: \"Open Sans\", sans-serif;\n  font-weight: 600;\n  font-size: medium;\n  background-color: #c07a71 !important;\n  color: white !important;\n}\n.App-header .MuiSvgIcon-root {\n  font-size: 3rem;\n  color: #ffe599 !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

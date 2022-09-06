@@ -4,6 +4,7 @@ import logoJaune from "../../../images/logoJaune.png";
 import logoutIcon from "../../../images/logout-icon.png";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Fab from "@mui/material/Fab";
+import { Button } from "@mui/material";
 import "./Entete.scss";
 
 function Entete({ userLoggedIn, gereDeconnexion }) {
@@ -28,10 +29,11 @@ function Entete({ userLoggedIn, gereDeconnexion }) {
             <div className="h1">
                 <h1>Tableau de bord</h1>
             </div>
-            <Fab variant="extended">
-                {" "}
+            <div className="actions">
                 <Link to="/dashboard/celliers">Vos celliers</Link>
-            </Fab>
+                <Link to="/dashboard/ajoutCellier">+ cellier</Link>
+                <Link to="/dashboard/ajoutBouteille">+ bouteille</Link>
+            </div>
         </div>
     );
 }
