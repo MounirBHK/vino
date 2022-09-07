@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Session;
-use App\Models\Utilisateur;
+use Hash;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class CustomAuthController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @return \Illuminate\Http\jsonResponse 
      */
@@ -54,6 +55,28 @@ class CustomAuthController extends Controller
         return true;
     }
 
+    public function customSignup(Request $request){
+        $request->validate([
+            'courriel' => 'required|email',
+            'nom_utilisateur' => 'required|string|min:6|max:30',
+            'prenom' => 'required|alpha|min:2|max:30',
+            'nom' => 'required|alpha|min:2|max:30',
+            'motDePasse' => 'required',
+            'motDePasse_confirme' => 'required|same:motDePasse'
+        ]);
+
+        $user = new User;
+        $user->fill([
+            'name'      => $request->nom_utilisateur,
+            'email'     => $request->courriel,
+            'password'  => Hash::make($request->motDePasse),
+            'prenom'    => $request->prenom,
+            'nom'       => $request->nom
+        ]);
+        $user->save();
+        return $user;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -78,10 +101,10 @@ class CustomAuthController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Utilisateur  $utilisateur
+     * @param \App\Models\User;  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Utilisateur $utilisateur)
+    public function show(User $user)
     {
         //
     }
@@ -89,10 +112,10 @@ class CustomAuthController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Utilisateur  $utilisateur
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Utilisateur $utilisateur)
+    public function edit(User $user)
     {
         //
     }
@@ -101,10 +124,10 @@ class CustomAuthController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Utilisateur  $utilisateur
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Utilisateur $utilisateur)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -112,10 +135,10 @@ class CustomAuthController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Utilisateur  $utilisateur
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Utilisateur $utilisateur)
+    public function destroy(User $user)
     {
         //
     }

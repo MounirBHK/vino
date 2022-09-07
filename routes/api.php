@@ -28,3 +28,4 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 });
 
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
+Route::post('custom-auth/signup', [CustomAuthController::class, 'customSignup'])->name('custom-signup');

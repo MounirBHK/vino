@@ -1,12 +1,10 @@
-export function validateForm(formValues) {}
-
 export function getInputError(name, value) {
     let errorMsg = null;
     let regex;
     switch (name) {
         case "prenom":
         case "nom":
-            regex = new RegExp(/^[a-z]{2}[a-z'-]{0,28}$/);
+            regex = new RegExp(/^[a-zA-Z]{2}[a-z'-]{0,28}$/);
             if (!regex.test(value.trim()))
                 errorMsg =
                     "Doit comporter entre 2 et 30 caractères alphabétiques";

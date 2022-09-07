@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./Signup.scss";
 import { Grid, TextField, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getInputError } from "./formValidator/signupForm";
 
 function Signup() {
@@ -17,6 +17,14 @@ function Signup() {
     const [formErrors, setFormErrors] = useState({});
     const [formIsValid, setFormIsValid] = useState(false);
     const hostOriginURL = window.location.origin;
+    const navigate = useNavigate();
+
+    const envoieDonneesForm = async (donnees) => {
+        return await axios.post(
+            hostOriginURL + "/api/custom-auth/signup",
+            donnees
+        );
+    };
 
     function gereChangementInputValue(e) {
         const { name, value } = e.target;
@@ -27,25 +35,42 @@ function Signup() {
         const { name, value } = e.target;
         const inputError = getInputError(name, value);
         if (inputError) setFormErrors({ ...formErrors, [name]: inputError });
-        else setFormValues({ ...formValues, [name]: value.trim() });
+        else {
+            delete formErrors[name];
+            setFormValues({ ...formValues, [name]: value.trim() });
+        }
+    }
+
+    function soumetFormulaire(e) {
+        e.preventDefault();
+        envoieDonneesForm(formValues).then((response) => {
+            if (response.status === 201 && response.statusText === "Created")
+                navigate("/login", {});
+        });
     }
 
     useEffect(() => {
         let isFormFilled = true;
+        let password;
+        let password_confirmed;
         for (const input in formValues) {
+            if (input === "motDePasse") password = formValues[input];
+            if (input === "motDePasse_confirme")
+                password_confirmed = formValues[input];
             const errorInput = getInputError(input, formValues[input]);
             if (formValues[input] === "" || errorInput !== null) {
                 isFormFilled = false;
                 break;
             }
         }
+        if (password !== password_confirmed) isFormFilled = false;
         if (Object.keys(formErrors).length === 0 && isFormFilled)
             setFormIsValid(true);
         else setFormIsValid(false);
     }, [formErrors, formValues]);
 
     return (
-        <form onSubmit={null}>
+        <form onSubmit={soumetFormulaire}>
             <Grid className="Login">
                 <Grid item xs={12}>
                     <TextField
