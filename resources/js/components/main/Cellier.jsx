@@ -10,7 +10,7 @@ function Cellier({ gereQuantite }) {
     return (
         <Grid container spacing={4}>
             {bouteilles.map((bouteille) => (
-                <Grid key={bouteille.id_bouteille} item xs={12}>
+                <Grid key={bouteille.id} item xs={12}>
                     <CarteBouteille
                         bouteille={bouteille}
                         gereQuantite={gereQuantite}

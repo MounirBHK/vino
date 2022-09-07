@@ -14,7 +14,7 @@ class CreateBouteillesTable extends Migration
     public function up()
     {
         Schema::create('bouteilles', function (Blueprint $table) {
-            $table->id('id_bouteille');
+            $table->id();
             $table->unsignedBigInteger('id_type');
             $table->string('nom_bouteille');
             $table->string('image')->nullable();
@@ -29,8 +29,9 @@ class CreateBouteillesTable extends Migration
             $table->string('producteur')->nullable();
             $table->string('region')->nullable();
             $table->integer('millesime')->nullable();
+            $table->timestamps();
             
-            $table->foreign('id_type', 'fk_appartenir')->references('id_type')->on('types');
+            $table->foreign('id_type', 'fk_appartenir')->references('id')->on('types');
         });
     }
 

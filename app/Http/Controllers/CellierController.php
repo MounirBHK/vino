@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cellier;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class CellierController extends Controller
@@ -36,7 +37,7 @@ class CellierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**

@@ -29162,6 +29162,7 @@ function Signup() {
   function soumetFormulaire(e) {
     e.preventDefault();
     envoieDonneesForm(formValues).then(function (response) {
+      console.log(response);
       if (response.status === 201 && response.statusText === "Created") navigate("/login", {});
     });
   }
@@ -29494,7 +29495,7 @@ function Cellier(_ref) {
           bouteille: bouteille,
           gereQuantite: gereQuantite
         })
-      }, bouteille.id_bouteille);
+      }, bouteille.id);
     })
   });
 }
@@ -29745,9 +29746,9 @@ function SelectCellier(_ref) {
       }), celliers.map(function (cellier) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
           className: "selectItem",
-          value: cellier.id_cellier,
-          children: [cellier.id_cellier, " - ", cellier.lib_cellier]
-        }, cellier.id_cellier);
+          value: cellier.id,
+          children: [cellier.id, " - ", cellier.lib_cellier]
+        }, cellier.id);
       })]
     })
   });

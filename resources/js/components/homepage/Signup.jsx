@@ -44,6 +44,7 @@ function Signup() {
     function soumetFormulaire(e) {
         e.preventDefault();
         envoieDonneesForm(formValues).then((response) => {
+            console.log(response);
             if (response.status === 201 && response.statusText === "Created")
                 navigate("/login", {});
         });
