@@ -10,11 +10,14 @@ class BouteilleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return  \Illuminate\Http\jsonResponse 
      */
     public function index()
     {
-        //
+        $bouteilles = Bouteille::all();
+        return response($bouteilles
+        )->header('Content-range', 'bouteilles : 0-9/10');
+ 
     }
 
     /**
@@ -24,7 +27,7 @@ class BouteilleController extends Controller
      */
     public function create()
     {
-        //
+        return 'hello world';
     }
 
     /**

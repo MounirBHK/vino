@@ -8,6 +8,7 @@ import Entete from "./entete/Entete";
 import Main from "./main/Main";
 import NavBottom from "./navigation/NavBottom";
 import Homepage from "./homepage/Homepage";
+import AdminHome from "./admin/AdminHome";
 import Page404 from "./Page404";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+    const adminUser = localStorage.getItem("adminUser") || null;
     const navigate = useNavigate();
 
     const getCelliers = async (userId) => {
@@ -78,9 +80,11 @@ function App() {
         //Réinitialise le user dans le cas d'un rafraichissement forcé de la page
         if (userLoggedIn) {
             setUser(userLoggedIn);
-            if (!window.location.href.includes("dashboard"))
+            if (!window.location.pathname.includes("dashboard"))
                 navigate("/dashboard", {});
         }
+        if (adminUser && window.location.pathname.includes("admin"))
+            navigate("/admin", {});
     }, []);
 
     function gereDeconnexion(userLoggedIn) {
@@ -155,6 +159,7 @@ function App() {
                     </UserProvider>
                 }
             ></Route>
+            <Route path="/admin/*" element={<AdminHome />}></Route>
             <Route path="*" element={<Page404 />}></Route>
         </Routes>
     );

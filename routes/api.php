@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CellierController;
 use App\Http\Controllers\CellierBoutController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\BouteilleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-quantite-bouteille');
     Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');
 });
+
+Route::get('bouteilles', [BouteilleController::class, 'index'])->name('bouteilles');
+Route::get('saq', [BouteilleController::class, 'create'])->name('saq');
 
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
 Route::post('custom-auth/signup', [CustomAuthController::class, 'customSignup'])->name('custom-signup');
