@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : ven. 02 sep. 2022 à 15:23
+-- Généré le : mer. 07 sep. 2022 à 13:28
 -- Version du serveur :  5.7.34
 -- Version de PHP : 7.4.21
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `vino_db_2`
+-- Base de données : `vino_db_3`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +32,9 @@ CREATE TABLE `achats` (
   `id_bouteille` bigint(20) UNSIGNED NOT NULL,
   `date_achat` datetime NOT NULL,
   `quantite_achat` smallint(6) DEFAULT NULL,
-  `prix_achat` decimal(6,2) DEFAULT NULL
+  `prix_achat` decimal(6,2) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -42,7 +44,7 @@ CREATE TABLE `achats` (
 --
 
 CREATE TABLE `bouteilles` (
-  `id_bouteille` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `id_type` bigint(20) UNSIGNED NOT NULL,
   `nom_bouteille` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -56,17 +58,19 @@ CREATE TABLE `bouteilles` (
   `degre_alcool` smallint(6) DEFAULT NULL,
   `producteur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `region` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `millesime` int(11) DEFAULT NULL
+  `millesime` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `bouteilles`
 --
 
-INSERT INTO `bouteilles` (`id_bouteille`, `id_type`, `nom_bouteille`, `image`, `code_saq`, `pays`, `description`, `prix_saq`, `url_saq`, `url_img`, `format`, `degre_alcool`, `producteur`, `region`, `millesime`) VALUES
-(1, 1, 'Chateau Margot', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', 'sdvsv3463', 'France', 'dlkjvhskdv', '15.00', NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', '750', 13, 'test', 'Bordeaux', 1980),
-(2, 2, 'Chateau Margot', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', 'sdvsv3463', 'France', 'dlkjvhskdv', '40.00', NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', '900', 15, 'test', 'Bordeaux', 1988),
-(3, 3, 'Chateau Margot', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', 'sdvsv3463', 'France', 'dlkjvhskdv', '20.00', NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', '750', 13, 'test', 'Bordeaux', 1998);
+INSERT INTO `bouteilles` (`id`, `id_type`, `nom_bouteille`, `image`, `code_saq`, `pays`, `description`, `prix_saq`, `url_saq`, `url_img`, `format`, `degre_alcool`, `producteur`, `region`, `millesime`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Chateau Margot', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', 'sdvsv3463', 'France', 'dlkjvhskdv', '15.00', NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', '750', 13, 'test', 'Bordeaux', 1980, NULL, NULL),
+(2, 2, 'Chateau Margot', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', 'sdvsv3463', 'France', 'dlkjvhskdv', '40.00', NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', '900', 15, 'test', 'Bordeaux', 1988, NULL, NULL),
+(3, 3, 'Chateau Margot', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', 'sdvsv3463', 'France', 'dlkjvhskdv', '20.00', NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg/280px-Glass_of_Red_Wine_with_a_bottle_of_Red_Wine_-_Evan_Swigart.jpg', '750', 13, 'test', 'Bordeaux', 1998, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -75,24 +79,26 @@ INSERT INTO `bouteilles` (`id_bouteille`, `id_type`, `nom_bouteille`, `image`, `
 --
 
 CREATE TABLE `celliers` (
-  `id_cellier` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `id_user` bigint(20) UNSIGNED NOT NULL,
   `lib_cellier` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nbr_colonne` smallint(6) DEFAULT NULL,
   `nbr_ligne` smallint(6) DEFAULT NULL,
-  `capacite` int(11) DEFAULT NULL
+  `capacite` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `celliers`
 --
 
-INSERT INTO `celliers` (`id_cellier`, `id_user`, `lib_cellier`, `nbr_colonne`, `nbr_ligne`, `capacite`) VALUES
-(1, 1, 'cellier_user1', NULL, NULL, 160),
-(2, 1, 'cellier_user2', NULL, NULL, 260),
-(3, 2, 'cellier_user3', NULL, NULL, 450),
-(4, 3, 'cellier_user4', NULL, NULL, 585),
-(5, 4, 'cellier_user5', NULL, NULL, 640);
+INSERT INTO `celliers` (`id`, `id_user`, `lib_cellier`, `nbr_colonne`, `nbr_ligne`, `capacite`, `created_at`, `updated_at`) VALUES
+(1, 1, 'cellier_user1', NULL, NULL, 160, NULL, NULL),
+(2, 1, 'cellier_user2', NULL, NULL, 260, NULL, NULL),
+(3, 2, 'cellier_user3', NULL, NULL, 450, NULL, NULL),
+(4, 3, 'cellier_user4', NULL, NULL, 585, NULL, NULL),
+(5, 4, 'cellier_user5', NULL, NULL, 640, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -104,25 +110,27 @@ CREATE TABLE `cellier_bouts` (
   `id_cellier` bigint(20) UNSIGNED NOT NULL,
   `id_bouteille` bigint(20) UNSIGNED NOT NULL,
   `quantite` smallint(6) DEFAULT NULL,
-  `derniere_trans` date DEFAULT NULL
+  `derniere_trans` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `cellier_bouts`
 --
 
-INSERT INTO `cellier_bouts` (`id_cellier`, `id_bouteille`, `quantite`, `derniere_trans`) VALUES
-(1, 1, 21, '2022-08-16'),
-(1, 2, 10, '2022-08-15'),
-(1, 3, 5, '2022-08-18'),
-(2, 1, 40, '2022-08-20'),
-(2, 3, 17, '2022-08-20'),
-(3, 1, 20, '2022-08-16'),
-(3, 2, 10, '2022-08-15'),
-(3, 3, 5, '2022-08-18'),
-(4, 1, 40, '2022-08-20'),
-(5, 2, 2, '2022-08-30'),
-(5, 3, 27, '2022-08-20');
+INSERT INTO `cellier_bouts` (`id_cellier`, `id_bouteille`, `quantite`, `derniere_trans`, `created_at`, `updated_at`) VALUES
+(1, 1, 20, '2022-08-16', NULL, NULL),
+(1, 2, 10, '2022-08-15', NULL, NULL),
+(1, 3, 5, '2022-08-18', NULL, NULL),
+(2, 1, 31, '2022-08-20', NULL, NULL),
+(2, 3, 17, '2022-08-20', NULL, NULL),
+(3, 1, 19, '2022-08-16', NULL, NULL),
+(3, 2, 10, '2022-08-15', NULL, NULL),
+(3, 3, 5, '2022-08-18', NULL, NULL),
+(4, 1, 40, '2022-08-20', NULL, NULL),
+(5, 2, 2, '2022-08-30', NULL, NULL),
+(5, 3, 27, '2022-08-20', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -134,7 +142,9 @@ CREATE TABLE `consommations` (
   `id_user` bigint(20) UNSIGNED NOT NULL,
   `id_bouteille` bigint(20) UNSIGNED NOT NULL,
   `date_consommation` datetime NOT NULL,
-  `quantite_cons` smallint(6) DEFAULT NULL
+  `quantite_cons` smallint(6) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -218,18 +228,20 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `types` (
-  `id_type` bigint(20) UNSIGNED NOT NULL,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `types`
 --
 
-INSERT INTO `types` (`id_type`, `type`) VALUES
-(1, 'Vin Rose'),
-(2, 'Vin Blanc'),
-(3, 'Vin Rouge');
+INSERT INTO `types` (`id`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Vin Rose', NULL, NULL),
+(2, 'Vin Blanc', NULL, NULL),
+(3, 'Vin Rouge', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -243,6 +255,8 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -252,11 +266,11 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Brycen Kunde PhD', 'fbalistreri@example.org', '2022-09-02 22:09:23', '$2y$10$3Kn/TXzCHNZ7ZGmRVzn92.sihZngwAb/OMFMiffEa9mN3uAoGiWLq', 'tHWgWOYw1W', '2022-09-02 22:09:23', '2022-09-02 22:09:23'),
-(2, 'Prof. Jensen Parker', 'qhagenes@example.org', '2022-09-02 23:14:21', '$2y$10$zUwkF/EGk70bLMXm7e2JwOqHQwMWuYiPq5NFPZHJVcGsnyNHW5TCy', 'ldTbSTqzJE', '2022-09-02 23:14:21', '2022-09-02 23:14:21'),
-(3, 'Rocio Schimmel', 'tbradtke@example.net', '2022-09-02 23:14:21', '$2y$10$TemRmoGoI1NJ4ubuyftwSe/kN/lXnY2Fl2njl.OPuIG24qoBpmLz6', 'kTLnZ03RyG', '2022-09-02 23:14:21', '2022-09-02 23:14:21'),
-(4, 'Mr. Coleman Conroy II', 'aorn@example.net', '2022-09-02 23:14:21', '$2y$10$EyDuI2Tb170/TBer8Actn.jbQre9cVo3DRVn2X6K.sazfhBvmO3va', 'DHHudbbYLy', '2022-09-02 23:14:21', '2022-09-02 23:14:21');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `prenom`, `nom`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'test666', 'test@test.com', NULL, '$2y$10$/ixtWz3adfKjDu4JI87YCep8pHMMDQYaTKuUhSyiAsJkdgJjvNXga', 'test', 'test', 'OtRZHYSjnviRD7XVJ9Q4Z410gW1BQpDsnan9uC4weYldZ8kTu4gV9e1iVQKe', '2022-09-07 20:11:59', '2022-09-07 20:11:59'),
+(2, 'Mr. Kade Bednar DVM', 'nwintheiser@example.net', '2022-09-07 21:10:07', '$2y$10$PO24wb9/zYCbX68jOGH6eO3K0ta8dgy7pbRPbR.DUpGdmz7xApOjW', 'Anibal', 'Brown', 'S3dPxoFjj4', '2022-09-07 21:10:07', '2022-09-07 21:10:07'),
+(3, 'Lacey Kautzer', 'adams.maria@example.org', '2022-09-07 21:10:07', '$2y$10$SkkbOv0da5IuCbq4Z4McBejMGVXVgJn1MDwGuegQi5SNiZo0AoVz.', 'Johnpaul', 'Runte', 'hVFeSmyo04', '2022-09-07 21:10:07', '2022-09-07 21:10:07'),
+(4, 'Lane West', 'micheal03@example.net', '2022-09-07 21:10:07', '$2y$10$9xPxijOMtyUhLyci9ZK2NepRQMrdEVkUUGejAJvCtJiaKAIszhNIS', 'Petra', 'Abernathy', 'dCTVRfKZ59', '2022-09-07 21:10:07', '2022-09-07 21:10:07');
 
 --
 -- Index pour les tables déchargées
@@ -273,14 +287,14 @@ ALTER TABLE `achats`
 -- Index pour la table `bouteilles`
 --
 ALTER TABLE `bouteilles`
-  ADD PRIMARY KEY (`id_bouteille`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_appartenir` (`id_type`);
 
 --
 -- Index pour la table `celliers`
 --
 ALTER TABLE `celliers`
-  ADD PRIMARY KEY (`id_cellier`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_avoir` (`id_user`);
 
 --
@@ -328,7 +342,7 @@ ALTER TABLE `personal_access_tokens`
 -- Index pour la table `types`
 --
 ALTER TABLE `types`
-  ADD PRIMARY KEY (`id_type`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `users`
@@ -345,13 +359,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `bouteilles`
 --
 ALTER TABLE `bouteilles`
-  MODIFY `id_bouteille` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `celliers`
 --
 ALTER TABLE `celliers`
-  MODIFY `id_cellier` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -369,19 +383,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `types`
 --
 ALTER TABLE `types`
-  MODIFY `id_type` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -391,14 +405,14 @@ ALTER TABLE `users`
 -- Contraintes pour la table `achats`
 --
 ALTER TABLE `achats`
-  ADD CONSTRAINT `fk_achat` FOREIGN KEY (`id_bouteille`) REFERENCES `bouteilles` (`id_bouteille`),
+  ADD CONSTRAINT `fk_achat` FOREIGN KEY (`id_bouteille`) REFERENCES `bouteilles` (`id`),
   ADD CONSTRAINT `fk_achat2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Contraintes pour la table `bouteilles`
 --
 ALTER TABLE `bouteilles`
-  ADD CONSTRAINT `fk_appartenir` FOREIGN KEY (`id_type`) REFERENCES `types` (`id_type`);
+  ADD CONSTRAINT `fk_appartenir` FOREIGN KEY (`id_type`) REFERENCES `types` (`id`);
 
 --
 -- Contraintes pour la table `celliers`
@@ -410,14 +424,14 @@ ALTER TABLE `celliers`
 -- Contraintes pour la table `cellier_bouts`
 --
 ALTER TABLE `cellier_bouts`
-  ADD CONSTRAINT `fk_cellier_bout` FOREIGN KEY (`id_bouteille`) REFERENCES `bouteilles` (`id_bouteille`),
-  ADD CONSTRAINT `fk_cellier_bout2` FOREIGN KEY (`id_cellier`) REFERENCES `celliers` (`id_cellier`);
+  ADD CONSTRAINT `fk_cellier_bout` FOREIGN KEY (`id_bouteille`) REFERENCES `bouteilles` (`id`),
+  ADD CONSTRAINT `fk_cellier_bout2` FOREIGN KEY (`id_cellier`) REFERENCES `celliers` (`id`);
 
 --
 -- Contraintes pour la table `consommations`
 --
 ALTER TABLE `consommations`
-  ADD CONSTRAINT `fk_consommation` FOREIGN KEY (`id_bouteille`) REFERENCES `bouteilles` (`id_bouteille`),
+  ADD CONSTRAINT `fk_consommation` FOREIGN KEY (`id_bouteille`) REFERENCES `bouteilles` (`id`),
   ADD CONSTRAINT `fk_consommation2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 COMMIT;
 

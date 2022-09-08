@@ -73,6 +73,13 @@ function App() {
         }
     }, [user]);
 
+    useEffect(() => {
+        //Réinitialise le user dans le cas d'un rafraichissement forcé de la page
+        if (userLoggedIn) {
+            setUser(userLoggedIn);
+        }
+    }, []);
+
     function gereDeconnexion(userLoggedIn) {
         const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
         if (userInLocalStorage.user.id === userLoggedIn.user.id) {

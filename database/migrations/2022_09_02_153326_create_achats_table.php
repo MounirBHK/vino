@@ -19,9 +19,10 @@ class CreateAchatsTable extends Migration
             $table->dateTime('date_achat');
             $table->smallInteger('quantite_achat')->nullable();
             $table->decimal('prix_achat', 6, 2)->nullable();
+            $table->timestamps();
             
             $table->primary(['id_user', 'id_bouteille', 'date_achat']);
-            $table->foreign('id_bouteille', 'fk_achat')->references('id_bouteille')->on('bouteilles');
+            $table->foreign('id_bouteille', 'fk_achat')->references('id')->on('bouteilles');
             $table->foreign('id_user', 'fk_achat2')->references('id')->on('users');
         });
     }

@@ -16,8 +16,8 @@ class CellierBoutController extends Controller
     public function index($idCellier)
     {
         $bouteilles = CellierBout::select()->where('id_cellier', '=', $idCellier)
-        ->JOIN('bouteilles', 'bouteilles.id_bouteille', '=', 'cellier_bouts.id_bouteille')
-        ->JOIN('types', 'bouteilles.id_type', '=', 'types.id_type')
+        ->JOIN('bouteilles', 'bouteilles.id', '=', 'cellier_bouts.id_bouteille')
+        ->JOIN('types', 'bouteilles.id_type', '=', 'types.id')
         ->get();
         return $bouteilles;
     }

@@ -18,9 +18,10 @@ class CreateConsommationsTable extends Migration
             $table->unsignedBigInteger('id_bouteille');
             $table->dateTime('date_consommation');
             $table->smallInteger('quantite_cons')->nullable();
+            $table->timestamps();
             
             $table->primary(['id_user', 'id_bouteille', 'date_consommation']);
-            $table->foreign('id_bouteille', 'fk_consommation')->references('id_bouteille')->on('bouteilles');
+            $table->foreign('id_bouteille', 'fk_consommation')->references('id')->on('bouteilles');
             $table->foreign('id_user', 'fk_consommation2')->references('id')->on('users');
         });
     }

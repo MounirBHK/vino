@@ -18,10 +18,11 @@ class CreateCellierBoutsTable extends Migration
             $table->unsignedBigInteger('id_bouteille');
             $table->smallInteger('quantite')->nullable();
             $table->date('derniere_trans')->nullable();
+            $table->timestamps();
             
             $table->primary(['id_cellier', 'id_bouteille']);
-            $table->foreign('id_bouteille', 'fk_cellier_bout')->references('id_bouteille')->on('bouteilles');
-            $table->foreign('id_cellier', 'fk_cellier_bout2')->references('id_cellier')->on('celliers');
+            $table->foreign('id_bouteille', 'fk_cellier_bout')->references('id')->on('bouteilles');
+            $table->foreign('id_cellier', 'fk_cellier_bout2')->references('id')->on('celliers');
         });
     }
 

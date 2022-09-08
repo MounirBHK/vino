@@ -24,10 +24,10 @@ function SelectCellier({ gereSelectCellier }) {
                     return (
                         <MenuItem
                             className="selectItem"
-                            key={cellier.id_cellier}
-                            value={cellier.id_cellier}
+                            key={cellier.id}
+                            value={cellier.id}
                         >
-                            {cellier.id_cellier} - {cellier.lib_cellier}
+                            {cellier.id} - {cellier.lib_cellier}
                         </MenuItem>
                     );
                 })}
