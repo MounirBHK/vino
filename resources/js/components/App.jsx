@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { CelliersProvider } from "../context/celliersContext";
 import { BouteillesProvider } from "../context/bouteillesContext";
 import { UserProvider } from "../context/userContext";
@@ -16,6 +16,7 @@ function App() {
     const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+    const navigate = useNavigate();
 
     const getCelliers = async (userId) => {
         return await axios.get(hostOriginURL + "/api/celliers/user/" + userId, {
@@ -77,6 +78,8 @@ function App() {
         //Réinitialise le user dans le cas d'un rafraichissement forcé de la page
         if (userLoggedIn) {
             setUser(userLoggedIn);
+            if (!window.location.href.includes("dashboard"))
+                navigate("/dashboard", {});
         }
     }, []);
 

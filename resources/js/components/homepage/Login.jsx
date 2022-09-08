@@ -3,14 +3,18 @@ import { useState, useContext } from "react";
 import "./Login.scss";
 import { Grid, TextField, Button, Alert, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../context/userContext";
 
 function Login() {
+    const { state: stateSignupConfMsg } = useLocation();
     const { user } = useContext(UserContext);
     const [userState, setUser] = user;
     const [loginErrorMsg, setLoginErrorMsg] = useState(null);
+    const [signupSuccessMsg, setSignupSuccesMsg] = useState(
+        stateSignupConfMsg || null
+    );
     const [formValues, setFormValues] = useState({
         courriel: "",
         motDePasse: "",
@@ -31,14 +35,12 @@ function Login() {
 
     function gereConnexion(e) {
         e.preventDefault();
-        console.log("login");
         envoieIdentifiants(formValues)
             .then((response) => {
                 const UserLoggedIn = response.data;
                 localStorage.setItem("user", JSON.stringify(UserLoggedIn));
                 setUser(UserLoggedIn);
                 navigate("/dashboard", {});
-                console.log(UserLoggedIn);
             })
             .catch((error) => {
                 if (error.response.status === 401) {
@@ -65,6 +67,26 @@ function Login() {
                     }
                 >
                     {loginErrorMsg.data}
+                </Alert>
+            )}
+            {signupSuccessMsg && (
+                <Alert
+                    severity="success"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                window.history.replaceState({}, "/login");
+                                setSignupSuccesMsg(null);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                >
+                    {signupSuccessMsg.success_message}
                 </Alert>
             )}
             <form onSubmit={gereConnexion}>

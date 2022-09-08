@@ -28385,6 +28385,7 @@ function App() {
 
   var hostOriginURL = window.location.origin;
   var userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useNavigate)();
 
   var getCelliers = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(userId) {
@@ -28521,6 +28522,7 @@ function App() {
     //Réinitialise le user dans le cas d'un rafraichissement forcé de la page
     if (userLoggedIn) {
       setUser(userLoggedIn);
+      if (!window.location.href.includes("dashboard")) navigate("/dashboard", {});
     }
   }, []);
 
@@ -28890,6 +28892,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Login() {
+  var _useLocation = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)(),
+      stateSignupConfMsg = _useLocation.state;
+
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_userContext__WEBPACK_IMPORTED_MODULE_3__["default"]),
       user = _useContext.user;
 
@@ -28902,13 +28907,18 @@ function Login() {
       loginErrorMsg = _useState2[0],
       setLoginErrorMsg = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(stateSignupConfMsg || null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      signupSuccessMsg = _useState4[0],
+      setSignupSuccesMsg = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     courriel: "",
     motDePasse: ""
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      formValues = _useState4[0],
-      setFormValues = _useState4[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      formValues = _useState6[0],
+      setFormValues = _useState6[1];
 
   var hostOriginURL = window.location.origin;
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
@@ -28947,13 +28957,11 @@ function Login() {
 
   function gereConnexion(e) {
     e.preventDefault();
-    console.log("login");
     envoieIdentifiants(formValues).then(function (response) {
       var UserLoggedIn = response.data;
       localStorage.setItem("user", JSON.stringify(UserLoggedIn));
       setUser(UserLoggedIn);
       navigate("/dashboard", {});
-      console.log(UserLoggedIn);
     })["catch"](function (error) {
       if (error.response.status === 401) {
         setLoginErrorMsg(error.response);
@@ -28976,6 +28984,21 @@ function Login() {
         })
       }),
       children: loginErrorMsg.data
+    }), signupSuccessMsg && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      severity: "success",
+      action: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        "aria-label": "close",
+        color: "inherit",
+        size: "small",
+        onClick: function onClick() {
+          window.history.replaceState({}, "/login");
+          setSignupSuccesMsg(null);
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_icons_material_Close__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          fontSize: "inherit"
+        })
+      }),
+      children: signupSuccessMsg.success_message
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("form", {
       onSubmit: gereConnexion,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -29163,7 +29186,11 @@ function Signup() {
     e.preventDefault();
     envoieDonneesForm(formValues).then(function (response) {
       console.log(response);
-      if (response.status === 201 && response.statusText === "Created") navigate("/login", {});
+      if (response.status === 201 && response.statusText === "Created") navigate("/login", {
+        state: {
+          success_message: "Votre compte a été créé avec succes, connectez-vous!"
+        }
+      });
     });
   }
 
