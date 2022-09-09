@@ -7,22 +7,37 @@ import {
     CreateButton,
     DateField,
     BooleanField,
+    useResourceDefinition,
+    useRefresh,
+    useNotify,
 } from "react-admin";
 import ListeActionsBouteilles from "./ListeActionsBouteilles";
 
 function Bouteilles() {
+    const { options } = useResourceDefinition();
+    const refresh = useRefresh();
+    const notify = useNotify();
     const hostOriginURL = window.location.origin;
-
     const importSAQ = async () => {
         return await axios.get(hostOriginURL + "/api/saq");
     };
 
     function gereImportSAQ() {
-        console.log("ouais!");
         importSAQ().then((response) => {
-            console.log(response);
+            const bouteillesInserees =
+                response.data["resultatInsertion"]["inserees"];
+            const bouteillesRejetees =
+                response.data["resultatInsertion"]["rejetees"];
+            console.log(response.data);
+            options.setBouteilles(response.data["bouteilles"]);
+            refresh();
+            notify(
+                `Importation: ${bouteillesInserees} bouteille(s) insérée(s) et ${bouteillesRejetees} bouteille(s) rejetée(s)`
+            );
         });
     }
+
+    console.log(options);
     return (
         <React.Fragment>
             <List

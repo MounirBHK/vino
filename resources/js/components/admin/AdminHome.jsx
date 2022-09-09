@@ -9,7 +9,7 @@ import Users from "./Users";
 import authProvider from "./authProvider";
 import simpleRestProvider from "ra-data-simple-rest";
 
-function AdminHome() {
+function AdminHome({ setBouteilles, bouteilles }) {
     const navigate = useNavigate();
     const dataProvider = simpleRestProvider(window.location.origin + "/api");
 
@@ -26,7 +26,14 @@ function AdminHome() {
             authProvider={authProvider}
             basename="/admin"
         >
-            <Resource name="bouteilles" list={Bouteilles} />
+            <Resource
+                name="bouteilles"
+                list={Bouteilles}
+                options={{
+                    setBouteilles: setBouteilles,
+                    bouteilles: bouteilles,
+                }}
+            />
             <Resource name="users" list={Users} />
         </Admin>
     );

@@ -28,12 +28,16 @@ function App() {
         });
     };
 
-    const getBouteilles = async (idCellier) => {
+    const getBouteillesCelliers = async (idCellier) => {
         return await axios.get(hostOriginURL + "/api/cellier/" + idCellier, {
             headers: {
                 Authorization: "Bearer " + userLoggedIn.access_token,
             },
         });
+    };
+
+    const getAllBouteilles = async () => {
+        return await axios.get(hostOriginURL + "/api/bouteilles");
     };
 
     const changeQuantite = async (
@@ -85,6 +89,10 @@ function App() {
         }
         if (adminUser && window.location.pathname.includes("admin"))
             navigate("/admin", {});
+
+        getAllBouteilles().then((bouteilles) => {
+            setBouteilles(bouteilles.data);
+        });
     }, []);
 
     function gereDeconnexion(userLoggedIn) {
@@ -100,7 +108,7 @@ function App() {
     }
 
     function gereSelectCellier(idCellier) {
-        getBouteilles(idCellier).then((bouteillesData) => {
+        getBouteillesCelliers(idCellier).then((bouteillesData) => {
             setBouteilles(bouteillesData.data);
         });
     }
@@ -159,7 +167,15 @@ function App() {
                     </UserProvider>
                 }
             ></Route>
-            <Route path="/admin/*" element={<AdminHome />}></Route>
+            <Route
+                path="/admin/*"
+                element={
+                    <AdminHome
+                        setBouteilles={setBouteilles}
+                        bouteilles={bouteilles}
+                    />
+                }
+            ></Route>
             <Route path="*" element={<Page404 />}></Route>
         </Routes>
     );

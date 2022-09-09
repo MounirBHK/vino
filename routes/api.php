@@ -5,7 +5,9 @@ use App\Http\Controllers\CellierController;
 use App\Http\Controllers\CellierBoutController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\BouteilleController;
+use App\Http\Controllers\SAQController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 });
 
 Route::get('bouteilles', [BouteilleController::class, 'index'])->name('bouteilles');
-Route::get('saq', [BouteilleController::class, 'create'])->name('saq');
+Route::get('saq', [SAQController::class, 'index'])->name('import-saq');
 Route::get('users', [UserController::class, 'index'])->name('users');
 
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
