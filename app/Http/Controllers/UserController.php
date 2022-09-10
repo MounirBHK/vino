@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::select()->where('name', '!=', 'Admin')->get();
         return response($users
         )->header('Content-range', 'users : 0-9/10');
  

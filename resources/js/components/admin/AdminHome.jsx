@@ -5,7 +5,7 @@ import { Admin, Resource, fetchUtils } from "react-admin";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Bouteilles from "./bouteilles/Bouteilles";
-import Users from "./Users";
+import Users from "./users/Users";
 import authProvider from "./authProvider";
 import simpleRestProvider from "ra-data-simple-rest";
 
