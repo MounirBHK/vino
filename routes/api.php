@@ -28,13 +28,14 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('celliers/user/{userId}', [CellierController::class, 'index'])->name('celliers');
     Route::get('cellier/{idCellier}', [CellierBoutController::class, 'index'])->name('cellier-bouteilles');
     Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-quantite-bouteille');
+    Route::get('bouteilles', [BouteilleController::class, 'index'])->name('bouteilles');
+    Route::delete('bouteilles/{bouteille}', [BouteilleController::class, 'destroy'])->name('bouteille-delete');
+    Route::get('users', [UserController::class, 'index'])->name('users');
+    Route::get('saq', [SAQController::class, 'index'])->name('import-saq');
     Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');
 });
 
-Route::get('bouteilles', [BouteilleController::class, 'index'])->name('bouteilles');
-Route::delete('bouteilles/{bouteille}', [BouteilleController::class, 'destroy'])->name('bouteille-delete');
-Route::get('saq', [SAQController::class, 'index'])->name('import-saq');
-Route::get('users', [UserController::class, 'index'])->name('users');
+
 
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
 Route::post('custom-auth/signup', [CustomAuthController::class, 'customSignup'])->name('custom-signup');

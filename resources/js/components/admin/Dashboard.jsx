@@ -6,8 +6,10 @@ import CardHeader from "@mui/material/CardHeader";
 function Dashboard() {
     return (
         <Card>
-            <CardHeader title="Welcome to the administration" />
-            <CardContent>Lorem ipsum sic dolor amet...</CardContent>
+            <CardHeader title="Vino" />
+            <CardContent>
+                Bienvenue dans l'interface d'administration
+            </CardContent>
         </Card>
     );
 }

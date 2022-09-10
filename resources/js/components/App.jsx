@@ -37,7 +37,11 @@ function App() {
     };
 
     const getAllBouteilles = async () => {
-        return await axios.get(hostOriginURL + "/api/bouteilles");
+        return await axios.get(hostOriginURL + "/api/bouteilles", {
+            headers: {
+                Authorization: "Bearer " + userLoggedIn.access_token,
+            },
+        });
     };
 
     const changeQuantite = async (
@@ -89,10 +93,6 @@ function App() {
         }
         if (adminUser && window.location.pathname.includes("admin"))
             navigate("/admin", {});
-
-        getAllBouteilles().then((bouteilles) => {
-            setBouteilles(bouteilles.data);
-        });
     }, []);
 
     function gereDeconnexion(userLoggedIn) {

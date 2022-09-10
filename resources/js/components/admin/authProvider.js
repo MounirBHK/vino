@@ -1,11 +1,20 @@
+import axios from "axios";
+const hostOriginURL = window.location.origin;
+const envoieIdentifiants = async (identifiants) => {
+    return await axios.post(
+        hostOriginURL + "/api/custom-auth/login",
+        identifiants
+    );
+};
+
 export default {
     // called when the user attempts to log in
     login: ({ username, password }) => {
-        if (username === "admin" && password === "admin") {
-            localStorage.setItem("adminUser", username);
+        const credentials = { courriel: username, motDePasse: password };
+        return envoieIdentifiants(credentials).then((response) => {
+            localStorage.setItem("adminUser", JSON.stringify(response.data));
             return Promise.resolve({ redirectTo: "/admin/" });
-        }
-        return Promise.reject();
+        });
         // accept all username/password combinations
     },
     // called when the user clicks on the logout button

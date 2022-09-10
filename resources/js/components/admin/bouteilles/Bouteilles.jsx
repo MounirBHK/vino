@@ -20,7 +20,11 @@ function Bouteilles() {
     const notify = useNotify();
     const hostOriginURL = window.location.origin;
     const importSAQ = async () => {
-        return await axios.get(hostOriginURL + "/api/saq");
+        return await axios.get(hostOriginURL + "/api/saq", {
+            headers: {
+                Authorization: "Bearer " + options.userAdmin["access_token"],
+            },
+        });
     };
 
     function gereImportSAQ() {
@@ -36,7 +40,6 @@ function Bouteilles() {
             );
         });
     }
-    console.log(options);
     return (
         <React.Fragment>
             <List

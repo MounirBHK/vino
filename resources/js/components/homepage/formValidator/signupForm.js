@@ -11,11 +11,11 @@ export function getInputError(name, value) {
             break;
         case "nom_utilisateur":
             regex = new RegExp(
-                /^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/
+                /^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/
             );
             if (!regex.test(value.trim()))
                 errorMsg =
-                    "Doit comporter entre 6 et 30 caractères alphanumériques";
+                    "Doit comporter entre 5 et 30 caractères alphanumériques";
             break;
         case "courriel":
             regex = new RegExp(

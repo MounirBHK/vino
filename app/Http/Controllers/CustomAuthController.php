@@ -58,7 +58,7 @@ class CustomAuthController extends Controller
     public function customSignup(Request $request){
         $request->validate([
             'courriel'              => 'required|email',
-            'nom_utilisateur'       => 'required|string|min:6|max:30',
+            'nom_utilisateur'       => 'required|string|min:5|max:30',
             'prenom'                => 'required|alpha|min:2|max:30',
             'nom'                   => 'required|alpha|min:2|max:30',
             'motDePasse'            => 'required',
