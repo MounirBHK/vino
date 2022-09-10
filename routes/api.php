@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 });
 
 Route::get('bouteilles', [BouteilleController::class, 'index'])->name('bouteilles');
+Route::delete('bouteilles/{bouteille}', [BouteilleController::class, 'destroy'])->name('bouteille-delete');
 Route::get('saq', [SAQController::class, 'index'])->name('import-saq');
 Route::get('users', [UserController::class, 'index'])->name('users');
 

@@ -84,6 +84,7 @@ class BouteilleController extends Controller
      */
     public function destroy(Bouteille $bouteille)
     {
-        //
+        $bouteille->delete();
+        return response($bouteille->id);
     }
 }

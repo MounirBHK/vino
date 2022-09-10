@@ -4,7 +4,7 @@ import "./AdminHome.scss";
 import { Admin, Resource } from "react-admin";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import Bouteilles from "./Bouteilles";
+import Bouteilles from "./bouteilles/Bouteilles";
 import Users from "./Users";
 import authProvider from "./authProvider";
 import simpleRestProvider from "ra-data-simple-rest";
