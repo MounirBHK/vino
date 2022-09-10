@@ -6,6 +6,14 @@ const envoieIdentifiants = async (identifiants) => {
         identifiants
     );
 };
+const deconnecteUser = async () => {
+    const userAdmin = JSON.parse(localStorage.getItem("adminUser"));
+    return await axios.get(hostOriginURL + "/api/custom-auth/logout", {
+        headers: {
+            Authorization: "Bearer " + userAdmin.access_token,
+        },
+    });
+};
 
 export default {
     // called when the user attempts to log in
@@ -19,8 +27,12 @@ export default {
     },
     // called when the user clicks on the logout button
     logout: () => {
-        localStorage.removeItem("adminUser");
-        return Promise.resolve();
+        return deconnecteUser().then((response) => {
+            if (response.data === 1) {
+                localStorage.removeItem("adminUser");
+                return Promise.resolve();
+            }
+        });
     },
     // called when the API returns an error
     checkError: ({ status }) => {
