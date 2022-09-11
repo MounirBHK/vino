@@ -26,7 +26,6 @@ function Bouteilles() {
             },
         });
     };
-
     function gereImportSAQ() {
         importSAQ().then((response) => {
             const bouteillesInserees =

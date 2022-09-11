@@ -46,6 +46,7 @@ function AdminHome({ setBouteilles, bouteilles }) {
                 options={{
                     setBouteilles: setBouteilles,
                     bouteilles: bouteilles,
+                    userAdmin: userAdmin,
                 }}
             />
             <Resource name="users" list={Users} />
