@@ -4,7 +4,6 @@ import CarteBouteille from "./CarteBouteille";
 import "./Cellier.scss";
 
 function Cellier({ gereQuantite, bouteillesCellier }) {
-    console.log(bouteillesCellier);
     return (
         <Grid container spacing={4}>
             {bouteillesCellier.map((bouteille) => (

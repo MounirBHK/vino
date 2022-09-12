@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('cellier/{idCellier}', [CellierBoutController::class, 'index'])->name('cellier-bouteilles');
     Route::put('changeQuantiteBouteille', [CellierBoutController::class, 'change'])->name('change-quantite-bouteille');
     Route::post('ajouterBouteilleCellier', [CellierBoutController::class, 'store'])->name('add-bouteilleCellier');
+    Route::post('ajouterCellier', [CellierController::class, 'create'])->name('cellier-create');
     Route::get('bouteilles', [BouteilleController::class, 'index'])->name('bouteilles');
     Route::delete('bouteilles/{bouteille}', [BouteilleController::class, 'destroy'])->name('bouteille-delete');
     Route::get('users', [UserController::class, 'index'])->name('users');
