@@ -24,9 +24,29 @@ class CellierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            "id_user" => 'required',
+            "lib_cellier"=> 'required',
+            "nbr_colonne"=> 'between:1,20',
+            "nbr_ligne"=> 'between:1,20',
+            "capacite"=> 'between:2,400',
+        ]);
+
+        $newCellier = new Cellier;
+        // $newCellier->fill($request->all());
+        $newCellier->fill([
+            "id_user" => $request->id_user,
+            "lib_cellier"=> $request->lib_cellier,
+            "nbr_colonne"=> $request->nbr_colonne,
+            "nbr_ligne"=> $request->nbr_ligne,
+            "capacite"=> $request->capacite,
+        ]);
+
+        $newCellier->save();
+
+        return $newCellier;
     }
 
     /**

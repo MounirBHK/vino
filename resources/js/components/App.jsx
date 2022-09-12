@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { CelliersProvider } from "../context/celliersContext";
 import { BouteillesProvider } from "../context/bouteillesContext";
 import { UserProvider } from "../context/userContext";
@@ -8,14 +8,19 @@ import Entete from "./entete/Entete";
 import Main from "./main/Main";
 import NavBottom from "./navigation/NavBottom";
 import Homepage from "./homepage/Homepage";
+import AdminHome from "./admin/AdminHome";
 import Page404 from "./Page404";
 
 function App() {
     const [bouteilles, setBouteilles] = useState([]);
+    const [bouteillesCellier, setBouteillesCellier] = useState([]);
     const [celliers, setCelliers] = useState([]);
+    const [idCellierEnCours, setIdCellierEnCours] = useState("");
     const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+    const adminUser = localStorage.getItem("adminUser") || null;
+    const navigate = useNavigate();
 
     const getCelliers = async (userId) => {
         return await axios.get(hostOriginURL + "/api/celliers/user/" + userId, {
@@ -25,7 +30,7 @@ function App() {
         });
     };
 
-    const getBouteilles = async (idCellier) => {
+    const getBouteillesCellier = async (idCellier) => {
         return await axios.get(hostOriginURL + "/api/cellier/" + idCellier, {
             headers: {
                 Authorization: "Bearer " + userLoggedIn.access_token,
@@ -77,7 +82,11 @@ function App() {
         //Réinitialise le user dans le cas d'un rafraichissement forcé de la page
         if (userLoggedIn) {
             setUser(userLoggedIn);
+            if (!window.location.pathname.includes("dashboard"))
+                navigate("/dashboard", {});
         }
+        if (adminUser && window.location.pathname.includes("admin"))
+            navigate("/admin", {});
     }, []);
 
     function gereDeconnexion(userLoggedIn) {
@@ -93,8 +102,9 @@ function App() {
     }
 
     function gereSelectCellier(idCellier) {
-        getBouteilles(idCellier).then((bouteillesData) => {
-            setBouteilles(bouteillesData.data);
+        getBouteillesCellier(idCellier).then((bouteillesData) => {
+            setBouteillesCellier(bouteillesData.data);
+            setIdCellierEnCours(idCellier);
         });
     }
 
@@ -131,6 +141,10 @@ function App() {
                                     gereDeconnexion={gereDeconnexion}
                                 />
                                 <Main
+                                    idCellierEnCours={idCellierEnCours}
+                                    setBouteilles={setBouteilles}
+                                    bouteillesCellier={bouteillesCellier}
+                                    setBouteillesCellier={setBouteillesCellier}
                                     gereQuantite={gereQuantite}
                                     gereSelectCellier={gereSelectCellier}
                                 />
@@ -150,6 +164,15 @@ function App() {
                     <UserProvider value={{ user: [user, setUser] }}>
                         <Homepage />
                     </UserProvider>
+                }
+            ></Route>
+            <Route
+                path="/admin/*"
+                element={
+                    <AdminHome
+                        setBouteilles={setBouteilles}
+                        bouteilles={bouteilles}
+                    />
                 }
             ></Route>
             <Route path="*" element={<Page404 />}></Route>

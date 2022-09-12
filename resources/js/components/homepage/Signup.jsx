@@ -46,7 +46,12 @@ function Signup() {
         envoieDonneesForm(formValues).then((response) => {
             console.log(response);
             if (response.status === 201 && response.statusText === "Created")
-                navigate("/login", {});
+                navigate("/login", {
+                    state: {
+                        success_message:
+                            "Votre compte a été créé avec succes, connectez-vous!",
+                    },
+                });
         });
     }
 

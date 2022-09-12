@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import "./Main.scss";
 import Cellier from "./Cellier";
 import SelectCellier from "./SelectCellier";
@@ -8,9 +9,33 @@ import FormAjoutBouteille from "./FormAjoutBouteille";
 import { Route, Routes, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
+import axios from "axios";
 
-function Main({ gereQuantite, gereSelectCellier }) {
+function Main({
+    gereQuantite,
+    gereSelectCellier,
+    idCellierEnCours,
+    setBouteilles,
+    bouteillesCellier,
+    setBouteillesCellier,
+}) {
     const { state: stateBouteille } = useLocation();
+    const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+    const hostOriginURL = window.location.origin;
+
+    const getAllBouteilles = async () => {
+        return await axios.get(hostOriginURL + "/api/bouteilles", {
+            headers: {
+                Authorization: "Bearer " + userLoggedIn.access_token,
+            },
+        });
+    };
+
+    useEffect(() => {
+        getAllBouteilles().then((response) => {
+            setBouteilles(response.data);
+        });
+    }, []);
     return (
         <div className="Main">
             <div className="Recherche">
@@ -32,7 +57,12 @@ function Main({ gereQuantite, gereSelectCellier }) {
                                                 gereSelectCellier
                                             }
                                         />
-                                        <Cellier gereQuantite={gereQuantite} />
+                                        <Cellier
+                                            gereQuantite={gereQuantite}
+                                            bouteillesCellier={
+                                                bouteillesCellier
+                                            }
+                                        />
                                     </React.Fragment>
                                 }
                             ></Route>
@@ -50,7 +80,15 @@ function Main({ gereQuantite, gereSelectCellier }) {
                             ></Route>
                             <Route
                                 path="/ajoutBouteille"
-                                element={<FormAjoutBouteille />}
+                                element={
+                                    <FormAjoutBouteille
+                                        idCellierEnCours={idCellierEnCours}
+                                        bouteillesCellier={bouteillesCellier}
+                                        setBouteillesCellier={
+                                            setBouteillesCellier
+                                        }
+                                    />
+                                }
                             ></Route>
                         </Routes>
                     }
