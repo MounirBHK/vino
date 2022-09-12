@@ -239,8 +239,6 @@ function FormAjoutBouteille({
                         </Box>
                     </Box>
                 </label>
-
-                <button>Ajouter la bouteille au cellier</button>
             </form>
         </div>
     );

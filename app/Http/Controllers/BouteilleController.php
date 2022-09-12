@@ -15,7 +15,7 @@ class BouteilleController extends Controller
      */
     public function index()
     {
-        $bouteilles = Bouteille::all();
+        $bouteilles = Bouteille::select()->where('listed', '=', 'Y')->get();
         return response($bouteilles
         )->header('Content-range', 'bouteilles : 0-9/10');
  
