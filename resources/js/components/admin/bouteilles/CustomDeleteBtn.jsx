@@ -1,5 +1,5 @@
 import React from "react";
-import { BulkDeleteButton, useDeleteMany } from "react-admin";
+import { BulkDeleteButton } from "react-admin";
 
 function CustomDeleteBtn({ setBouteilles, bouteilles, selectedIds }) {
     return (

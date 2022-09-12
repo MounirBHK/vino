@@ -13,7 +13,9 @@ import Page404 from "./Page404";
 
 function App() {
     const [bouteilles, setBouteilles] = useState([]);
+    const [bouteillesCellier, setBouteillesCellier] = useState([]);
     const [celliers, setCelliers] = useState([]);
+    const [idCellierEnCours, setIdCellierEnCours] = useState("");
     const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
@@ -28,16 +30,8 @@ function App() {
         });
     };
 
-    const getBouteillesCelliers = async (idCellier) => {
+    const getBouteillesCellier = async (idCellier) => {
         return await axios.get(hostOriginURL + "/api/cellier/" + idCellier, {
-            headers: {
-                Authorization: "Bearer " + userLoggedIn.access_token,
-            },
-        });
-    };
-
-    const getAllBouteilles = async () => {
-        return await axios.get(hostOriginURL + "/api/bouteilles", {
             headers: {
                 Authorization: "Bearer " + userLoggedIn.access_token,
             },
@@ -108,8 +102,9 @@ function App() {
     }
 
     function gereSelectCellier(idCellier) {
-        getBouteillesCelliers(idCellier).then((bouteillesData) => {
-            setBouteilles(bouteillesData.data);
+        getBouteillesCellier(idCellier).then((bouteillesData) => {
+            setBouteillesCellier(bouteillesData.data);
+            setIdCellierEnCours(idCellier);
         });
     }
 
@@ -146,6 +141,10 @@ function App() {
                                     gereDeconnexion={gereDeconnexion}
                                 />
                                 <Main
+                                    idCellierEnCours={idCellierEnCours}
+                                    setBouteilles={setBouteilles}
+                                    bouteillesCellier={bouteillesCellier}
+                                    setBouteillesCellier={setBouteillesCellier}
                                     gereQuantite={gereQuantite}
                                     gereSelectCellier={gereSelectCellier}
                                 />
