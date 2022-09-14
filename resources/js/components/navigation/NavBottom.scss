@@ -1,14 +1,55 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
-.MuiBottomNavigation-root {
+
+.NavBottom {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80px !important;
+    height: 60px !important;
     max-width: 1000px;
     background-color: #6a3352 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .MuiSpeedDial-root {
+        position: absolute;
+        bottom: 10.5em;
+        right: 7.5em;
+    }
+
+    .svg-inline--fa {
+        font-size: large;
+        color: white;
+    }
+
+    .fa-wine-bottle {
+        transform: rotate(-35deg);
+    }
+
+    #Ajouter-actions {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .MuiSpeedDial-fab:hover {
+        background-color: #c07a71;
+    }
+
+    .MuiSpeedDialAction-fab {
+        height: 56px;
+        width: 56px;
+    }
+
+    .MuiFab-root {
+        background-color: #c07a71;
+    }
+
+    .MuiBottomNavigation-root {
+        background-color: #6a3352 !important;
+        width: 100%;
 
     .MuiBottomNavigationAction-root {
         color: #ffe599;
@@ -21,15 +62,5 @@
     .MuiBottomNavigationAction-root.Mui-selected {
         color: #c07a71;
     }
-
-    .MuiFab-root {
-        position: absolute;
-        bottom: 55px;
-        color: white !important;
-        background-color: #c07a71 !important;
-
-        .MuiSvgIcon-root {
-            font-size: 2rem;
-        }
-    }
+}
 }

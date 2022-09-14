@@ -9,82 +9,64 @@ html {
 
 .App-header {
     width: 100%;
-    height: 200px;
+    height: 35vw;
     background-color: #6a3352;
-    color: #ffe599;
     font-family: "Open Sans", sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
+    padding: 10px !important;
 
     h2 {
         text-transform: capitalize;
     }
 
     .actions {
+        width: 100%;
         display: flex;
-    }
-
-    .image {
-        height: 20%;
-        width: 30%;
-        max-height: 75px;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
     }
 
     img {
-        box-sizing: border-box;
-        max-height: 75px;
+        position: absolute;
+        top: 7vw;
+        left: 36vw;
+        max-width: 30vw;
     }
 
-    .utilisateur {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        .logout-icon {
-            width: 3rem;
-        }
-    }
-
-    .h1 {
-        align-items: center;
-        font-size: 1.3em;
-        font-family: "EB Garamond", serif;
-        display: flex;
-        justify-content: center;
-    }
-
-    a {
+    .App-header,
+    .MuiSvgIcon-root,
+    .svg-inline--fa,
+    p {
         color: #ffe599;
-    }
-
-    .profil {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 15px 5px 15px !important;
-        gap: 15px;
-    }
-
-    .MuiDialog-paper,
-    .MuiDialog-container {
-        padding: 10px !important;
-        width: 300px;
-        max-width: 75%;
     }
 
     p {
         text-align: right;
-        padding-right: 5px;
+    }
+
+    .profil {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+
+        .utilisateur {
+        display: flex;
+        align-items: center;
+        }
     }
 
     .MuiFab-root {
         position: absolute;
         bottom: 10px;
+        left: 10px;
         width: 40% !important;
-        height: 15%;
-        margin: 0 10px 0 10px !important;
+        height: 1.5em;
         font-family: "Open Sans", sans-serif;
         font-weight: 600;
         font-size: medium;
@@ -93,7 +75,15 @@ html {
     }
 
     .MuiSvgIcon-root {
-        font-size: 3rem;
-        color: #ffe599 !important;
+        font-size: 2.5rem;
+        position: absolute;
+        top: 1vw;
+        right: 1vw;
     }
+
+    .svg-inline--fa {
+        height: 1.5em;
+    }
+
+
 }
