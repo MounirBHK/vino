@@ -1,39 +1,36 @@
-import React from "react";
+import { React, useContext } from "react";
 import CelliersContext from "../../context/celliersContext";
-import { useContext } from "react";
 import "./SelectCellier.scss";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import { FormControl } from "@mui/material";
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
+import { Link } from "react-router-dom";
 
-function SelectCellier({ gereSelectCellier }) {
+function SelectCellier() {
     const celliers = useContext(CelliersContext);
     return (
-        <FormControl className="selectCellier" sx={{ m: 1, minWidth: 250 }}>
-            <Select
-                className="selectBar"
-                defaultValue={"default"}
-                name="celliers"
-                id="celliers"
-                onChange={(e) => gereSelectCellier(e.target.value)}
-            >
-                <MenuItem className="selectItem" disabled value={"default"}>
-                    Sélectionner un cellier
-                </MenuItem>
-                {celliers.map((cellier) => {
-                    return (
-                        <MenuItem
-                            className="selectItem"
-                            key={cellier.id}
-                            value={cellier.id}
-                        >
-                            {cellier.id} - {cellier.lib_cellier}
-                        </MenuItem>
-                    );
-                })}
-            </Select>
-        </FormControl>
+            <Box>
+                <List component="nav">
+                    {celliers.map((cellier) => {
+                        return (
+                            <Link key={cellier.id} to={`/dashboard/celliers/${cellier.id}`}>
+                                <ListItemButton
+                            >
+                                <ListItemIcon>
+                                    <DiamondOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={cellier.lib_cellier} />
+                            </ListItemButton>
+                            </Link>
+                        );
+                    })}
+                </List>
+            </Box>
     );
+
 }
 
 export default SelectCellier;

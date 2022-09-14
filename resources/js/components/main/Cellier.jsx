@@ -1,21 +1,34 @@
-import React from "react";
-import { Grid } from "@mui/material";
+import { React, useEffect } from "react";
+import { Button } from "@mui/material";
 import CarteBouteille from "./CarteBouteille";
+import { useParams, useNavigate } from "react-router-dom";
 import "./Cellier.scss";
 
-function Cellier({ gereQuantite, bouteillesCellier }) {
+function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier}) {
+    const navigate = useNavigate();
+    let route = useParams();
+    let {idCellier} = route;
+
+    useEffect(() => {
+        gereSelectCellier(idCellier)},
+        []);
+
     return (
-        <Grid container spacing={4}>
+        <div className="listeBouteilles">
             {bouteillesCellier.map((bouteille) => (
-                <Grid key={bouteille.id} item xs={12}>
+
+                <Button className="listItemButton" key={bouteille.id} onClick={() => navigate(`/dashboard/celliers/${idCellier}/${bouteille.id_bouteille}`,
+                    {state:bouteille})}>
+
                     <CarteBouteille
                         bouteille={bouteille}
                         gereQuantite={gereQuantite}
                     />
-                </Grid>
+                </Button>
             ))}
-        </Grid>
+        </div>
     );
 }
 
 export default Cellier;
+

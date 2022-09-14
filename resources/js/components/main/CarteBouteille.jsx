@@ -1,63 +1,31 @@
 import React from "react";
 import "./CarteBouteille.scss";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Button from "@mui/material/Button";
 import { Card } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import CircleIcon from '@mui/icons-material/Circle';
 
-function CarteBouteille({ bouteille, gereQuantite }) {
-    const navigate = useNavigate();
+function CarteBouteille({ bouteille }) {
+    const url = bouteille.url_img;
+    const urlNoParam = url.split('?')[0];
     return (
-        <Card className="Carte-bouteille">
-            <div className="bouteille-img">
-                <img src={bouteille.url_img} alt="#" />
-            </div>
-            <div className="description">
-                <p className="nom">Nom: {bouteille.nom_bouteille}</p>
-                <p className="quantite">Quantité: {bouteille.quantite}</p>
-                <p className="pays">Pays: {bouteille.pays}</p>
-                <p className="type">Type: {bouteille.type}</p>
-                <p className="millesime">Millésime: {bouteille.millesime}</p>
-                <p className="prix">Prix: {bouteille.prix_saq}</p>
-            </div>
-            <ButtonGroup className="options">
-                <Button
-                    onClick={() =>
-                        navigate("/dashboard/modifierBouteille", {
-                            state: bouteille,
-                        })
-                    }
-                >
-                    Modifier
-                </Button>
-                <Button
-                    value={1}
-                    onClick={(e) =>
-                        gereQuantite(
-                            bouteille.id_cellier,
-                            bouteille.id_bouteille,
-                            bouteille.quantite,
-                            e.target.value
-                        )
-                    }
-                >
-                    Ajouter
-                </Button>
-                <Button
-                    value={-1}
-                    onClick={(e) =>
-                        gereQuantite(
-                            bouteille.id_cellier,
-                            bouteille.id_bouteille,
-                            bouteille.quantite,
-                            e.target.value
-                        )
-                    }
-                >
-                    Boire
-                </Button>
-            </ButtonGroup>
+        <React.Fragment>
+            <Card className="Carte-bouteille">
+                <div className="couleur">
+                    <p className={bouteille.type}><CircleIcon sx={{ fontSize: 100, top: -40, left: 200 }} /></p>
+                    <p className={bouteille.type}><CircleIcon sx={{ fontSize: 50, top: 0, left: 325 }} /></p>
+                    <p className={bouteille.type}><CircleIcon sx={{ fontSize: 150, top: 10, left: 250 }} /></p>
+                    <p className={bouteille.type}><CircleIcon sx={{ fontSize: 25, top: 0, left: 125 }} /></p>
+                    <p className={bouteille.type}><CircleIcon sx={{ fontSize: 50, top: 40, left: 150 }} /></p>
+                    <p className={bouteille.type}><CircleIcon sx={{ fontSize: 15, top: 75, left: 100 }} /></p>
+                </div>
+                <div className="info">
+                    <h3 className="nom">{bouteille.nom_bouteille}</h3>
+                    <p className="pays">{bouteille.description}</p>
+                </div>
         </Card>
+        <div className="bouteille-img">
+            <img className="img-rotate" src={urlNoParam} alt="bouteille" />
+        </div>
+        </React.Fragment>
     );
 }
 

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "./Main.scss";
 import Cellier from "./Cellier";
 import SelectCellier from "./SelectCellier";
+import CarteUneBouteille from "./CarteUneBouteille";
 import FormModifierBouteille from "./FormModifierBouteille";
 import FormAjoutCellier from "./FormAjoutCellier";
 import FormAjoutBouteille from "./FormAjoutBouteille";
@@ -44,36 +45,31 @@ function Main({
                 <TuneIcon />
             </div>
             <Routes>
-                <Route
-                    path="/*"
-                    element={
+                <Route path="/*" element={
                         <Routes>
-                            <Route
-                                path="/celliers"
-                                element={
+                            <Route path="/celliers" element={
+                                <React.Fragment>
+                                    <SelectCellier />
+                                </React.Fragment>}>
+                            </Route>
+                            <Route path="/celliers/:idCellier" element={
+                                <React.Fragment>
+                                    <Cellier gereQuantite={gereQuantite}
+                                            gereSelectCellier={gereSelectCellier}
+                                            bouteillesCellier={bouteillesCellier}/>
+                                </React.Fragment>}>
+                            </Route>
+                                <Route path="/celliers/:idCellier/:idBouteille" element={
                                     <React.Fragment>
-                                        <SelectCellier
-                                            gereSelectCellier={
-                                                gereSelectCellier
-                                            }
-                                        />
-                                        <Cellier
-                                            gereQuantite={gereQuantite}
-                                            bouteillesCellier={
-                                                bouteillesCellier
-                                            }
-                                        />
-                                    </React.Fragment>
-                                }
-                            ></Route>
-                            <Route
-                                path="/modifierBouteille"
-                                element={
-                                    <FormModifierBouteille
-                                        bouteille={stateBouteille}
-                                    />
-                                }
-                            ></Route>
+                                        <CarteUneBouteille gereQuantite={gereQuantite}
+                                                        bouteille={stateBouteille}/>
+                                    </React.Fragment>}>
+                            </Route>
+                            <Route path="/modifierBouteille" element={
+                                <FormModifierBouteille
+                                    bouteille={stateBouteille}
+                                />}>
+                            </Route>
                             <Route
                                 path="/ajoutCellier"
                                 element={<FormAjoutCellier />}
@@ -84,9 +80,7 @@ function Main({
                                     <FormAjoutBouteille
                                         idCellierEnCours={idCellierEnCours}
                                         bouteillesCellier={bouteillesCellier}
-                                        setBouteillesCellier={
-                                            setBouteillesCellier
-                                        }
+                                        setBouteillesCellier={setBouteillesCellier}
                                     />
                                 }
                             ></Route>

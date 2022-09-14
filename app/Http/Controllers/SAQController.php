@@ -106,13 +106,13 @@ class SAQController extends Controller
 		return preg_replace('/\s+/', ' ',$chaine);
 	}
 	private function recupereInfo($noeud) {
-		
+
 		$info = new stdClass();
 		$info -> img = $noeud -> getElementsByTagName("img") -> item(0) -> getAttribute('src'); //TODO : Nettoyer le lien
-		;
+        parse_url($info -> img, PHP_URL_PATH);
 		$a_titre = $noeud -> getElementsByTagName("a") -> item(0);
 		$info -> url = $a_titre->getAttribute('href');
-		
+
         //var_dump($noeud -> getElementsByTagName("a")->item(1)->textContent);
         $nom = $noeud -> getElementsByTagName("a")->item(1)->textContent;
         //var_dump($a_titre);
@@ -127,12 +127,12 @@ class SAQController extends Controller
 				$info->desc->texte = self::nettoyerEspace($info->desc->texte);
 				$aDesc = explode("|", $info->desc->texte); // Type, Format, Pays
 				if (count ($aDesc) == 3) {
-					
+
 					$info -> desc -> type = trim($aDesc[0]);
 					$info -> desc -> format = trim($aDesc[1]);
 					$info -> desc -> pays = trim($aDesc[2]);
 				}
-				
+
 				$info -> desc -> texte = trim($info -> desc -> texte);
 			}
 		}
@@ -145,9 +145,9 @@ class SAQController extends Controller
 				{
 					$info -> desc -> code_SAQ = trim($aRes[0]);
 				}
-				
-				
-				
+
+
+
 			}
 		}
 
@@ -188,7 +188,7 @@ class SAQController extends Controller
 					'url_saq'     			=> $bte -> url,
 					'url_img'     			=> $bte -> img,
 					'format'     			=> $bte -> desc -> format,
-				]); 
+				]);
 				$bouteille->save();
 				// $this -> stmt -> bind_param("sissssdsss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);
 				// $retour -> succes = $this -> stmt -> execute();

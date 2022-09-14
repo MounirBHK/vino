@@ -111,10 +111,11 @@ function App() {
     function gereQuantite(idCellier, idBouteille, quantite, operation) {
         changeQuantite(idCellier, idBouteille, quantite, operation).then(
             (response) => {
+                console.log(bouteillesCellier);
                 const idCellier = response.data[0].id_cellier;
                 const idBouteille = response.data[0].id_bouteille;
                 const quantite = response.data[0].quantite;
-                const newBouteilles = bouteilles.map((bouteille) => {
+                const newBouteilles = bouteillesCellier.map((bouteille) => {
                     if (
                         bouteille.id_bouteille === idBouteille &&
                         bouteille.id_cellier === idCellier
@@ -123,7 +124,7 @@ function App() {
                     }
                     return bouteille;
                 });
-                setBouteilles(newBouteilles);
+                setBouteillesCellier(newBouteilles);
             }
         );
     }
