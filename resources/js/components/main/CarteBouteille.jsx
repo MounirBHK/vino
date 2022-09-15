@@ -6,6 +6,9 @@ import CircleIcon from '@mui/icons-material/Circle';
 function CarteBouteille({ bouteille }) {
     const url = bouteille.url_img;
     const urlNoParam = url.split('?')[0];
+    const stringNom = bouteille.description;
+    const bouteilleInfo = stringNom.split(" ");
+    console.log(bouteilleInfo);
     return (
         <React.Fragment>
             <Card className="Carte-bouteille">
@@ -23,7 +26,7 @@ function CarteBouteille({ bouteille }) {
                 </div>
         </Card>
         <div className="bouteille-img">
-            <img className="img-rotate" src={urlNoParam} alt="bouteille" />
+            <img className="img-rotate" srcset={urlNoParam} alt="bouteille" />
         </div>
         </React.Fragment>
     );

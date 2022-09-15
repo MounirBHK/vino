@@ -13,18 +13,28 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import CircularProgress from '@mui/material/CircularProgress';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEarthAmerica, faWineBottle } from "@fortawesome/free-solid-svg-icons";
+import { faEarthAmerica, faWineBottle, faDungeon } from "@fortawesome/free-solid-svg-icons";
 
 export default function SimpleBottomNavigation() {
     const [value, setValue] = React.useState(0);
     const navigate = useNavigate();
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClosed = () => setOpen(false);
+
+    function handleClose(name) {
+        handleClosed();
+        navigate(`/dashboard/ajout${name}`, {})
+    }
+
     const actions = [
         {icon: <FontAwesomeIcon icon={faWineBottle} />,
-        name: 'Bouteille'},
-        {icon: <FontAwesomeIcon icon={faEarthAmerica} />,
-        name: 'Cellier'}
+        name: 'Bouteille', titre: 'Ajouter bouteille'},
+        {icon: <FontAwesomeIcon icon={faDungeon} />,
+        name: 'Cellier', titre: 'Ajouter cellier'}
     ];
 
     return (
@@ -55,24 +65,32 @@ export default function SimpleBottomNavigation() {
                 icon={<AccountCircleOutlinedIcon />}
             />
         </BottomNavigation>
-        <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
+            <Backdrop
+                sx={{ color: '#fff' }}
+                open={open}
+                onClick={handleClosed}
+                >
+            </Backdrop>
             <SpeedDial
             role="menu"
             ariaLabel="Ajouter"
             icon={<SpeedDialIcon />}
+            onClose={handleClosed}
+            onOpen={handleOpen}
+            open={open}
         >
                 {actions.map((action) => (
                     <SpeedDialAction
                         key={action.name}
                         icon={action.icon}
-                        tooltipTitle={action.name}
+                        tooltipTitle={action.titre}
+                        tooltipPlacement="bottom"
                         role="menuitem"
-                        onClick={() => navigate(`/dashboard/ajout${action.name}`,
-                                {})}
+                        tooltipOpen
+                        onClick={() => handleClose(action.name)}
                     />
             ))}
         </SpeedDial>
-        </Box>
         </div>
 
     );
