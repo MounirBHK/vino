@@ -4,22 +4,28 @@ import CarteBouteille from "./CarteBouteille";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Cellier.scss";
 
-function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier}) {
+function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     const navigate = useNavigate();
     let route = useParams();
-    let {idCellier} = route;
+    let { idCellier } = route;
 
     useEffect(() => {
-        gereSelectCellier(idCellier)},
-        []);
-
+        gereSelectCellier(idCellier);
+    }, []);
+    console.log(bouteillesCellier);
     return (
         <div className="listeBouteilles">
             {bouteillesCellier.map((bouteille) => (
-
-                <Button className="listItemButton" key={bouteille.id} onClick={() => navigate(`/dashboard/celliers/${idCellier}/${bouteille.id_bouteille}`,
-                    {state:bouteille})}>
-
+                <Button
+                    className="listItemButton"
+                    key={bouteille.id}
+                    onClick={() =>
+                        navigate(
+                            `/dashboard/celliers/${idCellier}/${bouteille.id_bouteille}`,
+                            { state: bouteille }
+                        )
+                    }
+                >
                     <CarteBouteille
                         bouteille={bouteille}
                         gereQuantite={gereQuantite}
@@ -31,4 +37,3 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier}) {
 }
 
 export default Cellier;
-

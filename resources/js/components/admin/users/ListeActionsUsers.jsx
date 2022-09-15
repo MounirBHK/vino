@@ -3,10 +3,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const ListeActionsUsers = () => (
     <TopToolbar>
-        <CreateButton />
+        {/* <CreateButton />
         <Button label="Supprimer">
             <DeleteIcon />
-        </Button>
+        </Button> */}
     </TopToolbar>
 );
 

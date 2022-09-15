@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import BouteillesContext from "../../context/bouteillesContext";
+import { useNavigate } from "react-router-dom";
 import Log from "laravel-mix/src/Log";
 
 function FormAjoutBouteille({
@@ -23,7 +24,7 @@ function FormAjoutBouteille({
 }) {
     let vi = idCellierEnCours ? idCellierEnCours : "default";
     const [idCell, setIdCell] = useState(vi);
-
+    const navigate = useNavigate();
     const bouteilles = useContext(BouteillesContext);
     const [bouteillesCopie, setBouteillesCopie] = useState([]);
 
@@ -104,16 +105,21 @@ function FormAjoutBouteille({
         setBouteillesCopie([]);
         let boutsRef = bouteilles;
         let res;
-        if (!codesaq && !libelle) res = [];
+        if (!libelle) res = [];
         else
             res = boutsRef.filter(
                 (bout) =>
-                    bout.code_saq.includes(codesaq) &&
-                    bout.nom_bouteille.includes(libelle)
+                    bout.code_saq.includes(libelle) ||
+                    bout.nom_bouteille
+                        .toUpperCase()
+                        .includes(libelle.toUpperCase()) ||
+                    bout.description
+                        .toUpperCase()
+                        .includes(libelle.toUpperCase())
             );
 
         setBouteillesCopie(res);
-    }, [codesaq, libelle]);
+    }, [libelle]);
 
     const handleBoutCell = (bouteille) => {
         if (idCell !== "default") {
@@ -126,6 +132,7 @@ function FormAjoutBouteille({
             // console.log(refBout);
             putBoutCell(refBout).then((response) => {
                 console.log("response ", response);
+                navigate(`/dashboard/celliers/${idCell}`);
                 // setCelliers(response);
             });
         } else alert("Vous n'avez pas sélectionné de cellier...");
@@ -162,30 +169,18 @@ function FormAjoutBouteille({
 
             <form action="submit" onSubmit={handleSubmit}>
                 <label htmlFor="libelle">
-                    Libellé bouteille :
+                    Recherche :
                     <input
                         type="text"
                         name="libelle"
                         id="libelle"
-                        placeholder="Saisir un libellé..."
+                        placeholder="Mots-clés..."
                         value={libelle}
                         onChange={(e) => setLibelle(e.target.value)}
                     />
                 </label>
                 <br></br>
                 <br></br>
-
-                <label htmlFor="codesaq">
-                    Code SAQ :
-                    <input
-                        type="text"
-                        name="codesaq"
-                        id="codesaq"
-                        placeholder="Saisir le code SAQ..."
-                        value={codesaq}
-                        onChange={(e) => setCodesaq(e.target.value)}
-                    />
-                </label>
 
                 <br></br>
                 <br></br>
