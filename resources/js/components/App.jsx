@@ -108,26 +108,44 @@ function App() {
         });
     }
 
-    function gereQuantite(idCellier, idBouteille, quantite, operation) {
-        changeQuantite(idCellier, idBouteille, quantite, operation).then(
-            (response) => {
-                console.log(bouteillesCellier);
-                const idCellier = response.data[0].id_cellier;
-                const idBouteille = response.data[0].id_bouteille;
-                const quantite = response.data[0].quantite;
-                const newBouteilles = bouteillesCellier.map((bouteille) => {
-                    if (
-                        bouteille.id_bouteille === idBouteille &&
-                        bouteille.id_cellier === idCellier
-                    ) {
-                        bouteille.quantite = quantite;
-                    }
-                    return bouteille;
-                });
-                setBouteillesCellier(newBouteilles);
-            }
-        );
+    function gereQuantite(
+        idCellier,
+        idBouteille,
+        quantite,
+        operation,
+        bouteille
+    ) {
+
+        let bouteilleChangee;
+
+        changeQuantite(
+            idCellier,
+            idBouteille,
+            quantite,
+            operation,
+            bouteille
+        ).then((response) => {
+            const idCellier = response.data[0].id_cellier;
+            const idBouteille = response.data[0].id_bouteille;
+            const quantite = response.data[0].quantite;
+            const newBouteilles = bouteillesCellier.map((bouteille) => {
+                if (
+                    bouteille.id_bouteille === idBouteille &&
+                    bouteille.id_cellier === idCellier
+                ) {
+                    bouteille.quantite = quantite;
+                    bouteilleChangee = bouteille;
+                }
+                return bouteille;
+            });
+            setBouteillesCellier(newBouteilles);
+            navigate(`/dashboard/celliers/${idCellier}/${idBouteille}`, {
+                state: bouteilleChangee,
+            });
+        });
     }
+
+
 
     return userLoggedIn ? (
         <Routes>

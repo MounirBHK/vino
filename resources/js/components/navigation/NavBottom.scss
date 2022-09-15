@@ -13,25 +13,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 
     .MuiSpeedDial-root {
         position: absolute;
-        bottom: 10.5em;
-        right: 7.5em;
+        bottom: 2.5em;
+    }
+
+    .MuiBackdrop-root {
+        z-index: 100;
     }
 
     .svg-inline--fa {
-        font-size: large;
+        font-size: 8vw;
         color: white;
     }
 
     .fa-wine-bottle {
-        transform: rotate(-35deg);
+        transform: rotate(-45deg);
     }
 
     #Ajouter-actions {
         display: flex;
         flex-direction: row;
+        gap: 20vw;
+        padding-bottom: 10px;
     }
 
     .MuiSpeedDial-fab:hover {
@@ -43,6 +49,24 @@
         width: 56px;
     }
 
+    .MuiSpeedDialAction-staticTooltip,
+    .MuiSpeedDialAction-staticTooltip,
+    .MuiSpeedDialAction-staticTooltipClosed,
+    .MuiSpeedDialAction-staticTooltipLabel {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        border: none !important;
+        box-shadow: none;
+        background-color: transparent;
+        color: white;
+        font-size: 0.9em;
+        letter-spacing: 1px;
+        max-width: 50px;
+    }
+
     .MuiFab-root {
         background-color: #c07a71;
     }
@@ -50,13 +74,14 @@
     .MuiBottomNavigation-root {
         background-color: #6a3352 !important;
         width: 100%;
+        opacity: 0;
 
     .MuiBottomNavigationAction-root {
         color: #ffe599;
     }
 
     .MuiSvgIcon-root {
-        font-size: 1.8rem;
+        font-size: 1.8rem !important;
     }
 
     .MuiBottomNavigationAction-root.Mui-selected {
