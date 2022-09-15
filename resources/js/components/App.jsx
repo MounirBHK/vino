@@ -144,9 +144,12 @@ function App() {
             });
         });
     }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> c96477b (Résolution de bugs)
     return userLoggedIn ? (
         <Routes>
             <Route
@@ -162,6 +165,7 @@ function App() {
                                 <Main
                                     idCellierEnCours={idCellierEnCours}
                                     setBouteilles={setBouteilles}
+                                    setCelliers={setCelliers}
                                     bouteillesCellier={bouteillesCellier}
                                     setBouteillesCellier={setBouteillesCellier}
                                     gereQuantite={gereQuantite}

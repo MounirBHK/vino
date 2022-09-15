@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Cellier extends Model
 {
     use HasFactory;
-    protected $fillable = ['id_user', 'lib_cellier', 'nbr_colonne', 'nbr_ligne', 'capacite'];
+    protected $fillable = ['id_user', 'lib_cellier', 'capacite'];
 }

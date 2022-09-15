@@ -14,11 +14,12 @@ class CellierBoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($idCellier)
+
     {
-        $bouteilles = CellierBout::select()->where('id_cellier', '=', $idCellier)
-            ->JOIN('bouteilles', 'bouteilles.id', '=', 'cellier_bouts.id_bouteille')
-            ->JOIN('types', 'bouteilles.id_type', '=', 'types.id')
-            ->get();
+        $bouteilles = CellierBout::select('bouteilles.*', 'cellier_bouts.*', 'types.id as id_type', 'types.type')->where('id_cellier', '=', $idCellier)
+        ->JOIN('bouteilles', 'bouteilles.id', '=', 'cellier_bouts.id_bouteille')
+        ->JOIN('types', 'bouteilles.id_type', '=', 'types.id')
+        ->get();
         return $bouteilles;
     }
     /**
@@ -28,8 +29,10 @@ class CellierBoutController extends Controller
      */
     public function change(Request $request)
     {
-        $request->quantite += $request->operation;
-        DB::table('cellier_bouts')->where('id_cellier', $request->idCellier)->where('id_bouteille', $request->idBouteille)->update(['quantite' => $request->quantite]);
+        $resultat = $request->quantite += $request->operation;
+        if($resultat >= 0){
+            DB::table('cellier_bouts')->where('id_cellier', $request->idCellier)->where('id_bouteille', $request->idBouteille)->update(['quantite' => $request->quantite]);
+        }
         $bouteille = DB::table('cellier_bouts')->where('id_cellier', $request->idCellier)->where('id_bouteille', $request->idBouteille)->get();
         return $bouteille;
     }
@@ -69,7 +72,7 @@ class CellierBoutController extends Controller
             $newBoutCell = new CellierBout;
             $newBoutCell->fill($request->all());
             $newBoutCell->save();
-            return $newBoutCell;
+            return $request->all();
         }
     }
 

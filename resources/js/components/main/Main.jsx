@@ -19,6 +19,7 @@ function Main({
     setBouteilles,
     bouteillesCellier,
     setBouteillesCellier,
+    setCelliers,
 }) {
     const { state: stateBouteille } = useLocation();
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
@@ -37,6 +38,7 @@ function Main({
             setBouteilles(response.data);
         });
     }, []);
+
     return (
         <div className="Main">
             <div className="Recherche">
@@ -72,7 +74,11 @@ function Main({
                             </Route>
                             <Route
                                 path="/ajoutCellier"
-                                element={<FormAjoutCellier />}
+                                element={
+                                    <FormAjoutCellier
+                                        setCelliers={setCelliers}
+                                    />
+                                }
                             ></Route>
                             <Route
                                 path="/ajoutBouteille"
