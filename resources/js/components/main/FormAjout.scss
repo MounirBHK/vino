@@ -1,0 +1,71 @@
+.FormAjout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    color: #6a3352 !important;
+    border-color: #6a3352 !important;
+    background-color: transparent !important;
+
+    .bouteilles {
+        margin-top: 20px;
+    }
+
+    .MuiOutlinedInput-root {
+        background-color: transparent !important;
+        border-color: #6a3352 !important;
+        border: 1px solid #6a3352;
+        border-radius: 24px;
+        color: #6a3352 !important;
+        background-color: transparent;
+
+    }
+
+    .MuiGrid-root {
+        flex-direction: column;
+    }
+
+    .MuiGrid-item {
+        justify-items: stretch;
+    }
+
+    .Mui-focused {
+        color: #6a3352 !important;
+    }
+
+    .MuiInputBase-input {
+        background-color: transparent;
+    }
+
+    .MuiInputLabel-root {
+        color: #6a3352;
+        opacity: 50%;
+        font-family: "Open Sans", sans-serif;
+        padding-bottom: 10px;
+        line-height: 1em;
+    }
+
+    .MuiOutlinedInput-root {
+        color: #6a3352;
+    }
+
+    .validerAjout {
+        margin: 20px;
+        width: 100%;
+        font-weight: bold;
+        background-color: #6a3352;
+        color: #ffe599 !important;
+        margin: 10px 0 8px 0;
+        font-weight: bold;
+        letter-spacing: 0.2em;
+        border-radius: 24px;
+    }
+
+    a {
+        font-size: small !important;
+    }
+
+    span {
+        text-decoration: underline;
+    }
+}

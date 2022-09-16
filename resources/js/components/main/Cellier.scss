@@ -1,0 +1,17 @@
+.listeBouteilles {
+
+        .MuiButton-root {
+        border-radius: none !important;
+        border: none !important;
+        color: white;
+    }
+
+    .MuiListItemButton-root,
+    .MuiButtonBase-root,
+    .MuiButton-root {
+        width: 100%;
+        max-width: 500px;
+        text-transform: none !important;
+        line-height: normal !important;
+    }
+}
