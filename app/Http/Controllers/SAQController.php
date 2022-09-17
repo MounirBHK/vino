@@ -28,11 +28,17 @@ class SAQController extends Controller
     function index() {
 		$rejetees = 0;
 		$inserees = 0;
-		for($i = 1; $i < 4; $i++) {
-			$resultat = self::getProduits(24, $i);
-			$rejetees += $resultat['rejetees'];
-			$inserees += $resultat['inserees'];
-		}
+		$resultat = self::getProduits(24, 1,"rouge");
+		$rejetees += $resultat['rejetees'];
+		$inserees += $resultat['inserees'];
+		$resultat = self::getProduits(24, 1,"blanc");
+		$rejetees += $resultat['rejetees'];
+		$inserees += $resultat['inserees'];
+		$resultat = self::getProduits(24, 1,"rose");
+		$rejetees += $resultat['rejetees'];
+		$inserees += $resultat['inserees'];
+
+
 		$resultat['inserees'] = $inserees;
 		$resultat['rejetees'] = $rejetees;
         $bouteilles = Bouteille::all();
@@ -44,9 +50,9 @@ class SAQController extends Controller
 	 * @param int $nombre
 	 * @param int $debut
 	 */
-	private function getProduits($nombre, $debut) {
+	private function getProduits($nombre, $debut, $type) {
 		$s = curl_init();
-		$url = "https://www.saq.com/fr/produits/vin/vin-rouge?p=" . $debut . "&product_list_limit=" . $nombre . "&product_list_order=name_asc";
+		$url = "https://www.saq.com/fr/produits/vin/vin-".$type."?p=" . $debut . "&product_list_limit=" . $nombre . "&product_list_order=name_asc";
 		// curl_setopt($s, CURLOPT_URL, "http://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?searchType=&orderBy=&categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=".$debut."&tri=&metaData=YWRpX2YxOjA8TVRAU1A%2BYWRpX2Y5OjE%3D&pageSize=". $nombre ."&catalogId=50000&searchTerm=*&sensTri=&pageView=&facet=&categoryId=39919&storeId=20002");
 		// curl_setopt($s, CURLOPT_URL, "https://www.saq.com/webapp/wcs/stores/servlet/SearchDisplay?categoryIdentifier=06&showOnly=product&langId=-2&beginIndex=" . $debut . "&pageSize=" . $nombre . "&catalogId=50000&searchTerm=*&categoryId=39919&storeId=20002");
 		// curl_setopt($s, CURLOPT_URL, $url);

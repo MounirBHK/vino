@@ -41,11 +41,6 @@ function Main({
 
     return (
         <div className="Main">
-            <div className="Recherche">
-                <SearchIcon />
-                <input type="text" placeholder="Recherche..." />
-                <TuneIcon />
-            </div>
             <Routes>
                 <Route path="/*" element={
                         <Routes>
@@ -99,3 +94,11 @@ function Main({
 }
 
 export default Main;
+
+/*
+<div className="Recherche">
+    <SearchIcon />
+    <input type="text" placeholder="Recherche..." />
+    <TuneIcon />
+</div>
+*/

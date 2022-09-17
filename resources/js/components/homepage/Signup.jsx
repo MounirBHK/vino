@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./Signup.scss";
-import { Grid, TextField, Button } from "@mui/material";
+import "./Form.scss";
+import { TextField, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { getInputError } from "./formValidator/signupForm";
 
@@ -44,7 +44,7 @@ function Signup() {
     function soumetFormulaire(e) {
         e.preventDefault();
         envoieDonneesForm(formValues).then((response) => {
-            console.log(response);
+            // console.log(response);
             if (response.status === 201 && response.statusText === "Created")
                 navigate("/login", {
                     state: {
@@ -76,130 +76,125 @@ function Signup() {
     }, [formErrors, formValues]);
 
     return (
-        <form onSubmit={soumetFormulaire}>
-            <Grid className="Login">
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        type="email"
-                        id="courriel"
-                        name="courriel"
-                        variant="filled"
-                        label="Courriel"
-                        margin="dense"
-                        value={formValues.courriel}
-                        onBlur={gereChangementInput}
-                        onChange={gereChangementInputValue}
-                        error={formErrors.courriel ? true : false}
-                        helperText={formErrors.courriel}
-                    >
-                        Courriel
-                    </TextField>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        type="text"
-                        id="nom_utilisateur"
-                        name="nom_utilisateur"
-                        variant="filled"
-                        label="Nom Utilisateur"
-                        margin="dense"
-                        value={formValues.nom_utilisateur}
-                        onBlur={gereChangementInput}
-                        onChange={gereChangementInputValue}
-                        error={formErrors.nom_utilisateur ? true : false}
-                        helperText={formErrors.nom_utilisateur}
-                    >
-                        Nom Utilisateur
-                    </TextField>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        type="text"
-                        id="prenom"
-                        name="prenom"
-                        variant="filled"
-                        label="Prénom"
-                        margin="dense"
-                        value={formValues.prenom}
-                        onBlur={gereChangementInput}
-                        onChange={gereChangementInputValue}
-                        error={formErrors.prenom ? true : false}
-                        helperText={formErrors.prenom}
-                    >
-                        Prénom
-                    </TextField>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        type="text"
-                        id="nom"
-                        name="nom"
-                        variant="filled"
-                        label="Nom"
-                        margin="dense"
-                        value={formValues.nom}
-                        onBlur={gereChangementInput}
-                        onChange={gereChangementInputValue}
-                        error={formErrors.nom ? true : false}
-                        helperText={formErrors.nom}
-                    >
-                        Nom
-                    </TextField>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        type="password"
-                        id="motDePasse"
-                        name="motDePasse"
-                        variant="filled"
-                        label="Mot de passe"
-                        margin="dense"
-                        value={formValues.motDePasse}
-                        onBlur={gereChangementInput}
-                        onChange={gereChangementInputValue}
-                        error={formErrors.motDePasse ? true : false}
-                        helperText={formErrors.motDePasse}
-                    >
-                        Mot de passe
-                    </TextField>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        type="password"
-                        id="motDePasse_confirme"
-                        name="motDePasse_confirme"
-                        variant="filled"
-                        label="Confirmer Mot de passe"
-                        margin="dense"
-                        value={formValues.motDePasse_confirme}
-                        onBlur={gereChangementInput}
-                        onChange={gereChangementInputValue}
-                        error={formErrors.motDePasse_confirme ? true : false}
-                        helperText={formErrors.motDePasse_confirme}
-                    >
-                        Confirmer Mot de passe
-                    </TextField>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button
-                        variant="contained"
-                        type="submit"
-                        disabled={!formIsValid}
-                    >
-                        Valider
-                    </Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Link to={"/login"}>Déjà Membre? Connectez-vous ici!</Link>
-                </Grid>
-            </Grid>
-        </form>
+        <div className="Form">
+            <h2>INSCRIPTION</h2>
+            <form className="Form" onSubmit={soumetFormulaire}>
+                <TextField
+                    className="textField"
+                    required
+                    type="email"
+                    id="courriel"
+                    name="courriel"
+                    variant="outlined"
+                    label="Courriel"
+                    margin="dense"
+                    InputProps="outlined"
+                    value={formValues.courriel}
+                    onBlur={gereChangementInput}
+                    onChange={gereChangementInputValue}
+                    error={formErrors.courriel ? true : false}
+                    helperText={formErrors.courriel}
+                >
+                    Courriel
+                </TextField>
+                <TextField
+                    className="textField"
+                    required
+                    type="text"
+                    id="nom_utilisateur"
+                    name="nom_utilisateur"
+                    variant="outlined"
+                    label="Nom Utilisateur"
+                    margin="dense"
+                    value={formValues.nom_utilisateur}
+                    onBlur={gereChangementInput}
+                    onChange={gereChangementInputValue}
+                    error={formErrors.nom_utilisateur ? true : false}
+                    helperText={formErrors.nom_utilisateur}
+                >
+                    Nom Utilisateur
+                </TextField>
+                <TextField
+                    className="textField"
+                    required
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    variant="outlined"
+                    label="Prénom"
+                    margin="dense"
+                    value={formValues.prenom}
+                    onBlur={gereChangementInput}
+                    onChange={gereChangementInputValue}
+                    error={formErrors.prenom ? true : false}
+                    helperText={formErrors.prenom}
+                >
+                    Prénom
+                </TextField>
+                <TextField
+                    className="textField"
+                    required
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    variant="outlined"
+                    label="Nom"
+                    margin="dense"
+                    value={formValues.nom}
+                    onBlur={gereChangementInput}
+                    onChange={gereChangementInputValue}
+                    error={formErrors.nom ? true : false}
+                    helperText={formErrors.nom}
+                >
+                    Nom
+                </TextField>
+                <TextField
+                    className="textField"
+                    required
+                    type="password"
+                    id="motDePasse"
+                    name="motDePasse"
+                    variant="outlined"
+                    label="Mot de passe"
+                    margin="dense"
+                    value={formValues.motDePasse}
+                    onBlur={gereChangementInput}
+                    onChange={gereChangementInputValue}
+                    error={formErrors.motDePasse ? true : false}
+                    helperText={formErrors.motDePasse}
+                >
+                    Mot de passe
+                </TextField>
+                <TextField
+                    className="textField"
+                    required
+                    type="password"
+                    id="motDePasse_confirme"
+                    name="motDePasse_confirme"
+                    variant="outlined"
+                    label="Confirmer Mot de passe"
+                    margin="dense"
+                    value={formValues.motDePasse_confirme}
+                    onBlur={gereChangementInput}
+                    onChange={gereChangementInputValue}
+                    error={formErrors.motDePasse_confirme ? true : false}
+                    helperText={formErrors.motDePasse_confirme}
+                >
+                    Confirmer Mot de passe
+                </TextField>
+                <Button
+                    className="valider"
+                    variant="contained"
+                    type="submit"
+                    disabled={!formIsValid}
+                >
+                    Valider
+                </Button>
+                <Link to={"/login"}>
+                    Déjà Membre?<span> Connectez-vous ici!</span>
+                </Link>
+            </form>
+        </div>
     );
 }
 

@@ -18,11 +18,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 function CarteUneBouteille({ bouteille, gereQuantite }) {
-    console.log("bouteille:", bouteille);
+    // console.log("bouteille:", bouteille);
     const navigate = useNavigate();
     const { state: stateBouteille } = useLocation();
     const bouteilleReceived = bouteille || stateBouteille;
-    console.log("state:", stateBouteille);
+    // console.log("state:", stateBouteille);
     const url = bouteilleReceived.url_img;
     const urlNoParam = url.split("?")[0];
 
@@ -102,7 +102,9 @@ function CarteUneBouteille({ bouteille, gereQuantite }) {
             </div>
             <div className="quantite icon">
                 <h3>Qté</h3>
-                <p>{bouteilleReceived.quantite}</p>
+                <p>
+                    <span>{bouteilleReceived.quantite}</span>
+                </p>
             </div>
             <ButtonGroup variant="text" className="options">
                 <Button

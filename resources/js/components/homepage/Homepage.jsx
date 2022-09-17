@@ -9,7 +9,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 function Homepage() {
     return (
         <div className="Homepage">
-            <img className="homepage-logo" src={logoJaune} alt="logo" />
+            <div className="logo">
+                <img className="homepage-logo" src={logoJaune} alt="logo" />
+                <h1>vino.</h1>
+            </div>
             <Routes>
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/signup" element={<Signup />}></Route>

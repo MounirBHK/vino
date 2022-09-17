@@ -115,7 +115,6 @@ function App() {
         operation,
         bouteille
     ) {
-
         let bouteilleChangee;
 
         changeQuantite(
@@ -144,12 +143,7 @@ function App() {
             });
         });
     }
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> c96477b (Résolution de bugs)
     return userLoggedIn ? (
         <Routes>
             <Route
@@ -158,10 +152,7 @@ function App() {
                     <UserProvider value={user}>
                         <CelliersProvider value={celliers}>
                             <BouteillesProvider value={bouteilles}>
-                                <Entete
-                                    userLoggedIn={userLoggedIn}
-                                    gereDeconnexion={gereDeconnexion}
-                                />
+                                <Entete userLoggedIn={userLoggedIn} />
                                 <Main
                                     idCellierEnCours={idCellierEnCours}
                                     setBouteilles={setBouteilles}
@@ -171,7 +162,10 @@ function App() {
                                     gereQuantite={gereQuantite}
                                     gereSelectCellier={gereSelectCellier}
                                 />
-                                <NavBottom />
+                                <NavBottom
+                                    gereDeconnexion={gereDeconnexion}
+                                    userLoggedIn={userLoggedIn}
+                                />
                             </BouteillesProvider>
                         </CelliersProvider>
                     </UserProvider>

@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 
 function HomepageActions() {
     return (
-        <React.Fragment>
-            <Fab variant="extended">
+        <div className="accueil">
+            <Fab variant="extended" className="login">
                 {" "}
                 <Link to="/login">Connexion</Link>
             </Fab>
-            <Fab variant="extended">
+            <Fab variant="extended" className="signup">
                 {" "}
                 <Link to="/signup">Souscription</Link>
             </Fab>
-        </React.Fragment>
+        </div>
     );
 }
 

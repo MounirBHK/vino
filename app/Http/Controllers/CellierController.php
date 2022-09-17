@@ -29,7 +29,7 @@ class CellierController extends Controller
         $request->validate([
             "id_user" => 'required',
             "lib_cellier"=> 'required',
-            "capacite"=> 'number|required',
+            "capacite"=> 'required',
         ]);
 
         $newCellier = new Cellier;

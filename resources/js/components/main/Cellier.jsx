@@ -12,7 +12,7 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     useEffect(() => {
         gereSelectCellier(idCellier);
     }, []);
-    console.log(bouteillesCellier);
+    // console.log(bouteillesCellier);
     return (
         <div className="listeBouteilles">
             {bouteillesCellier.map((bouteille) => (

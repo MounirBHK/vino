@@ -1,30 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoJaune from "../../../images/logoJaune.png";
-import Fab from "@mui/material/Fab";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import "./Entete.scss";
 
 function Entete({ userLoggedIn, gereDeconnexion }) {
     return (
         <div className="App-header">
-            <div className="profil">
-                <FontAwesomeIcon icon={faPowerOff} onClick={() => gereDeconnexion(userLoggedIn)} />
-            </div>
-            <img src={logoJaune} alt="logo" />
-            <div className="actions">
-                <Fab variant="extended">
-                    <Link to="/dashboard/celliers">Vos celliers</Link>
-                </Fab>
-                <div className="utilisateur">
+            <Link to={"/dashboard"}>
+                <img src={logoJaune} alt="logo" />
+            </Link>
                     <p>
-                        Bonjour <br /> {userLoggedIn.user.name}
+                        Bonjour {userLoggedIn.user.name}
                     </p>
-                </div>
-            </div>
-
-
         </div>
     );
 }

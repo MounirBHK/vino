@@ -1,7 +1,6 @@
-import React from "react";
-import { useState, useContext } from "react";
-import "./Login.scss";
-import { Grid, TextField, Button, Alert, IconButton } from "@mui/material";
+import { React, useState, useContext } from "react";
+import "./Form.scss";
+import { TextField, Button, Alert, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -49,7 +48,7 @@ function Login() {
             });
     }
     return (
-        <React.Fragment>
+        <div className="Form">
             {loginErrorMsg && (
                 <Alert
                     severity="error"
@@ -89,51 +88,44 @@ function Login() {
                     {signupSuccessMsg.success_message}
                 </Alert>
             )}
-            <form onSubmit={gereConnexion}>
-                <Grid className="Login">
-                    <Grid item xs={12}>
-                        <TextField
-                            required
-                            type="email"
-                            name="courriel"
-                            id="courriel"
-                            label="Courriel"
-                            variant="filled"
-                            margin="dense"
-                            value={formValues.courriel}
-                            onChange={gereChangementInput}
-                        >
-                            Courriel
-                        </TextField>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            required
-                            type="password"
-                            id="motDePasse"
-                            name="motDePasse"
-                            label="Mot de passe"
-                            variant="filled"
-                            margin="dense"
-                            value={formValues.motDePasse}
-                            onChange={gereChangementInput}
-                        >
-                            Mot de passe
-                        </TextField>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button variant="contained" type="submit">
-                            Valider
-                        </Button>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Link to={"/signup"}>
-                            Pas encore Membre? Inscrivez-vous ici!
-                        </Link>
-                    </Grid>
-                </Grid>
+            <h2>CONNEXION</h2>
+            <form className="Form" onSubmit={gereConnexion}>
+                <TextField
+                    className="textField"
+                    required
+                    type="email"
+                    name="courriel"
+                    id="courriel"
+                    label="Courriel"
+                    variant="outlined"
+                    margin="dense"
+                    value={formValues.courriel}
+                    onChange={gereChangementInput}
+                >
+                    Courriel
+                </TextField>
+                <TextField
+                    className="textField"
+                    required
+                    type="password"
+                    id="motDePasse"
+                    name="motDePasse"
+                    label="Mot de passe"
+                    variant="outlined"
+                    margin="dense"
+                    value={formValues.motDePasse}
+                    onChange={gereChangementInput}
+                >
+                    Mot de passe
+                </TextField>
+                <Button className="valider" variant="contained" type="submit">
+                    Valider
+                </Button>
+                <Link to={"/signup"}>
+                    Pas encore Membre? <span>Inscrivez-vous ici!</span>
+                </Link>
             </form>
-        </React.Fragment>
+        </div>
     );
 }
 

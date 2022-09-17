@@ -1,27 +1,23 @@
 import React from "react";
 import axios from "axios";
-import { useState, useRef, useEffect, useContext } from "react";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Input from "@mui/material";
+import { useState, useEffect, useContext } from "react";
+import {
+    Grid,
+    TextField,
+    Select,
+    MenuItem,
+    FormControl,
+    ListItem,
+    Box,
+    List,
+    Divider,
+} from "@mui/material";
 import Bouteille from "./Bouteille";
-import ListItem from "@mui/material/ListItem";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import DeleteForever from "@mui/icons-material/DeleteForever";
 import BouteillesContext from "../../context/bouteillesContext";
 import { useNavigate } from "react-router-dom";
-import Log from "laravel-mix/src/Log";
+import "./FormAjout.scss";
 
-function FormAjoutBouteille({
-    idCellierEnCours,
-    bouteillesCellier,
-    setBouteillesCellier,
-}) {
+function FormAjoutBouteille({ idCellierEnCours }) {
     let vi = idCellierEnCours ? idCellierEnCours : "default";
     const [idCell, setIdCell] = useState(vi);
     const navigate = useNavigate();
@@ -131,7 +127,7 @@ function FormAjoutBouteille({
             };
             // console.log(refBout);
             putBoutCell(refBout).then((response) => {
-                console.log("response ", response);
+                // console.log("response ", response);
                 navigate(`/dashboard/celliers/${idCell}`);
                 // setCelliers(response);
             });
@@ -139,18 +135,25 @@ function FormAjoutBouteille({
     };
 
     return (
-        <div>
-            <h1>Formulaire ajout bouteille</h1>
+        <div className="FormAjout">
+            <h2>NOUVELLE BOUTEILLE</h2>
 
-            <FormControl className="choixCellier" sx={{ m: 1, minWidth: 250 }}>
+            <FormControl className="FormAjout">
                 <Select
                     className="selectBar"
                     defaultValue={vi}
+                    label="Selectionnez un cellier"
                     name="moncellier"
                     id="moncellier"
+                    variant="outlined"
                     onChange={(e) => choixCellier(e.target.value)}
                 >
-                    <MenuItem className="selectItem" disabled value={vi}>
+                    <MenuItem
+                        variant="outlined"
+                        className="selectItem"
+                        disabled
+                        value={vi}
+                    >
                         Sélectionner un cellier
                     </MenuItem>
                     {celliers.map((cellier) => {
@@ -167,52 +170,44 @@ function FormAjoutBouteille({
                 </Select>
             </FormControl>
 
-            <form action="submit" onSubmit={handleSubmit}>
-                <label htmlFor="libelle">
-                    Recherche :
-                    <input
-                        type="text"
-                        name="libelle"
-                        id="libelle"
-                        placeholder="Mots-clés..."
-                        value={libelle}
-                        onChange={(e) => setLibelle(e.target.value)}
-                    />
-                </label>
-                <br></br>
-                <br></br>
-
-                <br></br>
-                <br></br>
-                <label htmlFor="quantite">
-                    Quantité :
-                    <input
-                        type="number"
-                        min={1}
-                        name="quantite"
-                        id="quantite"
-                        placeholder="Saisir la quantité..."
-                        value={quantite}
-                        onChange={(e) => setQuantite(e.target.value)}
-                    />
-                </label>
-                <br></br>
-                <br></br>
+            <form className="FormAjout" action="submit" onSubmit={handleSubmit}>
+                <Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            required
+                            type="text"
+                            name="libelle"
+                            id="libelle"
+                            label="Mots-clés..."
+                            variant="outlined"
+                            margin="dense"
+                            value={libelle}
+                            onChange={(e) => setLibelle(e.target.value)}
+                        >
+                            Recherche
+                        </TextField>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            required
+                            type="number"
+                            id="quantite"
+                            name="quantite"
+                            label="Quantité"
+                            variant="outlined"
+                            margin="dense"
+                            onChange={() => setQuantite(quantite)}
+                        >
+                            Quantité
+                        </TextField>
+                    </Grid>
+                </Grid>
 
                 <label htmlFor="liste">
-                    <Box
-                        className="bouteilles"
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            width: "100%",
-                        }}
-                    >
-                        <Box sx={{ width: "100%", maxWidth: 500 }}>
+                    <Box className="bouteilles">
+                        <Box>
                             <Divider>Liste des Bouteilles</Divider>
-
-                            <List>
+                            <List className="recherche">
                                 {bouteillesCopie.map((bouteille) => (
                                     <ListItem
                                         divider
@@ -229,8 +224,6 @@ function FormAjoutBouteille({
                                     </ListItem>
                                 ))}
                             </List>
-
-                            <Divider variant="fullWidth" />
                         </Box>
                     </Box>
                 </label>

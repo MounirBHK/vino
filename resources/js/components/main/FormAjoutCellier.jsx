@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CelliersContext from "../../context/celliersContext";
+import { Grid, TextField, Button } from "@mui/material";
+import "./FormAjout.scss";
 
 function FormAjoutCellier({ setCelliers }) {
     const celliers = useContext(CelliersContext);
@@ -45,35 +47,50 @@ function FormAjoutCellier({ setCelliers }) {
     };
 
     return (
-        <div>
-            <h1>Formulaire ajout cellier</h1>
-            <form action="submit" onSubmit={handleSubmit}>
-                <label htmlFor="libelle">
-                    Libellé :
-                    <input
-                        required
-                        type="text"
-                        name="libelle"
-                        id="libelle"
-                        placeholder="Saisir un libellé"
-                        value={libelle}
-                        onChange={(e) => setLibelle(e.target.value)}
-                    />
-                </label>
-                <label htmlFor="capacite">
-                    Capacité :
-                    <input
-                        required
-                        type="number"
-                        name="capacite"
-                        id="capacite"
-                        placeholder="Saisir la capacite"
-                        value={capacite}
-                        onChange={(e) => setCapacite(e.target.value)}
-                    />
-                </label>
-
-                <button>Ajouter Cellier</button>
+        <div className="FormAjout">
+            <h2>NOUVEAU CELLIER</h2>
+            <form className="FormAjout" onSubmit={handleSubmit}>
+                <Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            className="textFieldAjout"
+                            required
+                            type="text"
+                            name="libelle"
+                            id="libelle"
+                            label="Nom du cellier"
+                            variant="outlined"
+                            margin="dense"
+                            value={libelle}
+                            onChange={(e) => setLibelle(e.target.value)}
+                        >
+                            Recherche
+                        </TextField>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            className="textFieldAjout"
+                            required
+                            type="number"
+                            id="capacite"
+                            name="capacite"
+                            label="Capacité"
+                            variant="outlined"
+                            margin="dense"
+                            value={capacite}
+                            onChange={(e) => setCapacite(e.target.value)}
+                        >
+                            Capacité
+                        </TextField>
+                    </Grid>
+                </Grid>
+                <Button
+                    className="validerAjout"
+                    variant="contained"
+                    type="submit"
+                >
+                    Valider
+                </Button>
             </form>
         </div>
     );
