@@ -8,7 +8,7 @@ function CarteBouteille({ bouteille }) {
     const urlNoParam = url.split("?")[0];
     const stringNom = bouteille.description;
     const bouteilleInfo = stringNom.split(" ");
-    console.log(bouteilleInfo);
+    // console.log(bouteilleInfo);
     return (
         <React.Fragment>
             <Card className="Carte-bouteille">
@@ -40,14 +40,14 @@ function CarteBouteille({ bouteille }) {
                     <h3 className="nom">{bouteille.nom_bouteille}</h3>
                     <p className="pays">{bouteille.description}</p>
                 </div>
+                <div className="bouteille-img">
+                    <img
+                        className="img-rotate"
+                        srcSet={urlNoParam}
+                        alt="bouteille"
+                    />
+                </div>
             </Card>
-            <div className="bouteille-img">
-                <img
-                    className="img-rotate"
-                    srcSet={urlNoParam}
-                    alt="bouteille"
-                />
-            </div>
         </React.Fragment>
     );
 }

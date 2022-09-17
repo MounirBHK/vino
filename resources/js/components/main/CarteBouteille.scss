@@ -1,36 +1,42 @@
-.bouteille-img {
-        display: flex;
-        align-items: flex-start;
-        max-height: 20vw;
-
-        .img-rotate {
-            position: absolute;
-            width: 100%;
-            max-width: 22vw;
-            transform: rotate(90deg);
-            top: -10px;
-            right: 45px;
-        }
-}
-
 .Carte-bouteille {
     position: relative;
     display: flex;
     align-items: center;
-    flex: auto !important;
+    justify-content: flex-start;
+    gap: 1vw;
+    flex: 1;
     font-family: 'Open Sans', sans-serif;
-    height: 25vw;
-    width: 85%;
+    height: 15vh;
+    text-align: start;
+    width: 100%;
+
+    .bouteille-img {
+        display: flex;
+        flex: 1;
+
+        .img-rotate {
+            width: 100%;
+            max-width: 20vw;
+            transform: rotate(90deg);
+        }
+    }
 
     h3 {
-        text-align: start;
-        text-transform: uppercase;
+        font-size: 1em;
+    }
+
+    li {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    p {
         font-size: small;
     }
 
     .info {
-        max-width: 70%;
         display: flex;
+        flex: 2;
         flex-direction: column;
         align-items: flex-start;
         padding: 1em;
@@ -38,27 +44,28 @@
     }
 
     .MuiSvgIcon-root {
-        opacity: 10%;
+        opacity: 15%;
         position: absolute;
     }
 
-    .rouge {
+    .Rouge {
         .MuiSvgIcon-root {
             color: #6A3352 !important;
         }
     }
 
-    .blanc {
+    .Blanc {
         .MuiSvgIcon-root {
             color: #FFE599 !important;
-            opacity: 50%;
+            opacity: 20%;
         }
     }
 
-    .rose {
+    .Rose {
         .MuiSvgIcon-root {
             color: #c07a71 !important;
         }
     }
+
 
 }

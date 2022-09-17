@@ -2,70 +2,57 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 75%;
+    width: 100%;
     color: #6a3352 !important;
     border-color: #6a3352 !important;
     background-color: transparent !important;
+    width: 100%;
 
-    .bouteilles {
-        margin-top: 20px;
+    form {
+        padding-top: 2vh;
     }
 
-    .MuiOutlinedInput-root {
-        background-color: transparent !important;
-        border-color: #6a3352 !important;
-        border: 1px solid #6a3352;
-        border-radius: 24px;
-        color: #6a3352 !important;
-        background-color: transparent;
-
-    }
-
-    .MuiGrid-root {
-        flex-direction: column;
-    }
-
-    .MuiGrid-item {
-        justify-items: stretch;
-    }
-
-    .Mui-focused {
+    label {
+        left: 2vw;
+        top: -0.5vh;
         color: #6a3352 !important;
     }
 
-    .MuiInputBase-input {
-        background-color: transparent;
+    .selectBar {
+        margin-top: 3vh !important;
+        padding: 10px 20px;
+        div {
+            padding: 0;
+        }
     }
 
-    .MuiInputLabel-root {
-        color: #6a3352;
-        opacity: 50%;
-        font-family: "Open Sans", sans-serif;
-        padding-bottom: 10px;
-        line-height: 1em;
+    input,
+    .selectBar {
+        border: 2px solid #6a3352;
+        border-radius: 24px !important;
+        color: #6a3352 !important;
+        background-color: #6a33520e !important;
+        margin-bottom: 1vh;
     }
 
-    .MuiOutlinedInput-root {
-        color: #6a3352;
+    fieldset,
+    fieldset {
+        border: none;
     }
 
     .validerAjout {
-        margin: 20px;
-        width: 100%;
-        font-weight: bold;
-        background-color: #6a3352;
-        color: #ffe599 !important;
-        margin: 10px 0 8px 0;
-        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
         letter-spacing: 0.2em;
+        background-color: #6a3352;
+        color: #ffe599;
+        font-weight: bold;
+        width: 75%;
         border-radius: 24px;
-    }
-
-    a {
-        font-size: small !important;
-    }
-
-    span {
-        text-decoration: underline;
+        margin-top: 1vh;
     }
 }

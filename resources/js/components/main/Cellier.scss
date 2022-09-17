@@ -1,4 +1,6 @@
 .listeBouteilles {
+    width: 100%;
+    color: #6a3352;
 
         .MuiButton-root {
         border-radius: none !important;
@@ -10,7 +12,6 @@
     .MuiButtonBase-root,
     .MuiButton-root {
         width: 100%;
-        max-width: 500px;
         text-transform: none !important;
         line-height: normal !important;
     }

@@ -1,15 +1,12 @@
 
 
 .Carte-une-bouteille {
-    max-width: 100%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
     font-family: 'Open Sans', sans-serif;
     border: none;
-    position: relative;
-    height: 100vh;
 
     p {
         font-size: smaller;
@@ -18,32 +15,31 @@
 
     .grid {
         display: grid;
-        grid-template-columns: 1fr 35vw 1fr;
+        grid-template-columns: 1fr 30vw 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
         justify-items: center;
-        align-items: center;
-        width: 100%;
-        padding-top: 4vw;
-        height: 0vh;
-        gap: 20px;
+        justify-content: center;
+        align-items: start;
+        min-width: 90vw;
+        max-height: 60vh;
+        padding: 3vh 0 1vh 0;
     }
 
     .bouteille-img {
         grid-column: 2 / 2;
         grid-row: 1 / 4;
         display: flex;
+        max-height: 40vh;
     }
 
     img {
-        top: 20vw;
-        right: 22vw;
-        max-height: 75vw;
+        max-height: 35vh;
         z-index: 10;
     }
 
     .nom {
         width: 75%;
         line-height: 1.5em;
-        padding-top: 1em;
     }
 
     .nom,
@@ -58,14 +54,20 @@
     }
 
     .icon {
-        width: 40%;
+        padding-bottom: 2vh;
 
         .MuiSvgIcon-root,
         .svg-inline--fa,
         h3 {
             font-weight: bold;
-            font-size: 2rem;
+            font-size: 5vh;
+            text-transform: none;
             }
+    }
+
+    .quantite {
+        grid-column: 2 / 3;
+        grid-row: 4;
     }
 
     h3 {
@@ -80,19 +82,19 @@
                 opacity: 15%;
             }
 
-        .rouge {
+        .Rouge {
             .MuiSvgIcon-root {
                 color: #6A3352 !important;
             }
         }
 
-            .blanc {
+            .Blanc {
                 .MuiSvgIcon-root {
                     color: #FFE599 !important;
                 }
             }
 
-            .rose {
+            .Rose {
                 .MuiSvgIcon-root {
                     color: #c07a71 !important;
                 }
@@ -118,8 +120,8 @@
     }
 
     .MuiButtonGroup-root {
-        position: fixed;
-        bottom: 28vw;
+        grid-column: 2 / 3;
+        grid-row: 5;
         background-color: #c07a71;
         padding: 5px 10px !important;
         border-radius: 25px !important;

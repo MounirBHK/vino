@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./CarteUneBouteille.scss";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
@@ -8,21 +7,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faEarthAmerica,
     faCalendar,
-    faFlag,
     faMap,
     faSackDollar,
     faTractor,
     faDroplet,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
 
 function CarteUneBouteille({ bouteille, gereQuantite }) {
-    console.log("bouteille:", bouteille);
+    //console.log("bouteille:", bouteille);
     const navigate = useNavigate();
     const { state: stateBouteille } = useLocation();
     const bouteilleReceived = bouteille || stateBouteille;
-    console.log("state:", stateBouteille);
+    //console.log("state:", stateBouteille);
     const url = bouteilleReceived.url_img;
     const urlNoParam = url.split("?")[0];
 

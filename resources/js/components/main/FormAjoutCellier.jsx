@@ -59,7 +59,7 @@ function FormAjoutCellier({ setCelliers }) {
                             name="libelle"
                             id="libelle"
                             label="Nom du cellier"
-                            variant="filled"
+                            variant="outlined"
                             margin="dense"
                             value={libelle}
                             onChange={(e) => setLibelle(e.target.value)}
@@ -75,7 +75,7 @@ function FormAjoutCellier({ setCelliers }) {
                             id="capacite"
                             name="capacite"
                             label="Capacité"
-                            variant="filled"
+                            variant="outlined"
                             margin="dense"
                             value={capacite}
                             onChange={(e) => setCapacite(e.target.value)}
@@ -83,14 +83,15 @@ function FormAjoutCellier({ setCelliers }) {
                             Capacité
                         </TextField>
                     </Grid>
+                    <Grid className="validerAjout">
+                        <Button
+                            variant="contained"
+                            type="submit"
+                        >
+                            Valider
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Button
-                    className="validerAjout"
-                    variant="contained"
-                    type="submit"
-                >
-                    Valider
-                </Button>
             </form>
         </div>
     );

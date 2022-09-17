@@ -1,14 +1,29 @@
 .selectCellier {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 50px;
+    color: #6a3352;
+    font-weight: bold;
 
-    .selectBar {
-        padding: 15px !important;
-        height: 100%;
-
-        .MuiMenuItem-root {
-            padding: 15px !important;
-        }
+    .MuiListItemIcon-root {
+        color: #6a3352;
+        font-size: 1.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
+
+    h2 {
+        text-align: center;
+        padding-bottom: 2vh !important;
+    }
+
+    hr {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
 }
