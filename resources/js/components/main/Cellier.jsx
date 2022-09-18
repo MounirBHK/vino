@@ -2,7 +2,6 @@ import { React, useEffect } from "react";
 import { Button } from "@mui/material";
 import CarteBouteille from "./CarteBouteille";
 import { useParams, useNavigate } from "react-router-dom";
-import CelliersContext from "../../context/CelliersContext";
 import "./Cellier.scss";
 
 function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
@@ -11,10 +10,9 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     let { idCellier } = route;
 
     useEffect(() => {
-        const cellier = gereSelectCellier(idCellier);
-        console.log(cellier);
+        gereSelectCellier(idCellier);
     }, []);
-    //console.log(bouteillesCellier);
+    // console.log(bouteillesCellier);
     return (
         <div className="listeBouteilles">
             {bouteillesCellier.map((bouteille) => (

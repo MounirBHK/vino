@@ -97,8 +97,8 @@ export default Main;
 
 /*
 <div className="Recherche">
-                <SearchIcon />
-                <input type="text" placeholder="Recherche..." />
-                <TuneIcon />
+    <SearchIcon />
+    <input type="text" placeholder="Recherche..." />
+    <TuneIcon />
 </div>
 */
