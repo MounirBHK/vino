@@ -72,6 +72,7 @@ function CarteUneBouteille({ bouteille, gereQuantite }) {
                         {bouteilleReceived.region}
                     </p>
                 </div>
+
                 <div className="alcool icon">
                     <FontAwesomeIcon icon={faDroplet} />
                     <p>

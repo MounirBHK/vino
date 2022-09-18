@@ -88,7 +88,6 @@ function Signup() {
                     variant="outlined"
                     label="Courriel"
                     margin="dense"
-                    InputProps="outlined"
                     value={formValues.courriel}
                     onBlur={gereChangementInput}
                     onChange={gereChangementInputValue}
