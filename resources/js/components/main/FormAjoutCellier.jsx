@@ -83,14 +83,15 @@ function FormAjoutCellier({ setCelliers }) {
                             Capacité
                         </TextField>
                     </Grid>
+                    <Grid className="validerAjout">
+                        <Button
+                            variant="contained"
+                            type="submit"
+                        >
+                            Valider
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Button
-                    className="validerAjout"
-                    variant="contained"
-                    type="submit"
-                >
-                    Valider
-                </Button>
             </form>
         </div>
     );

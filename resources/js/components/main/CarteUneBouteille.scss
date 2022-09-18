@@ -1,31 +1,55 @@
 
 
 .Carte-une-bouteille {
-    max-width: 100%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
     font-family: 'Open Sans', sans-serif;
     border: none;
-    position: relative;
-    height: 100vh;
 
     p {
         font-size: smaller;
         text-align: center;
     }
 
+    .background {
+        position: absolute;
+        top: 25vh;
+        max-height: 40vh;
+    }
+
+    .Blanc {
+        circle {
+            fill: #ffe599;
+            opacity: 30%;
+        }
+    }
+
+    .Rouge {
+        circle {
+            fill: #6A3352;
+            opacity: 10%;
+        }
+    }
+
+    .Rose {
+        circle {
+            fill: #c07a71;
+            opacity: 10%;
+        }
+
+    }
     .grid {
         display: grid;
-        grid-template-columns: 1fr 20vw 1fr;
+        grid-template-columns: 1fr 30vw 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
         justify-items: center;
+        justify-content: center;
         align-items: start;
-        width: 100%;
-        height: 400px;
-        max-height: 44vh;
-        gap: 20px;
-        padding-top: 4vh;
+        min-width: 90vw;
+        max-height: 60vh;
+        padding: 5vh 0 1vh 0;
     }
 
     .bouteille-img {
@@ -36,12 +60,13 @@
     }
 
     img {
-        max-height: 40vh;
+        max-height: 35vh;
         z-index: 10;
     }
 
     .nom {
-        width: 75%;
+        width: 90%;
+        font-size: 0.7em;
         line-height: 1.5em;
     }
 
@@ -57,14 +82,20 @@
     }
 
     .icon {
-        width: 40%;
+        padding-bottom: 2vh;
 
         .MuiSvgIcon-root,
         .svg-inline--fa,
         h3 {
             font-weight: bold;
-            font-size: 2rem;
+            font-size: 5vh;
+            text-transform: none;
             }
+    }
+
+    .quantite {
+        grid-column: 2 / 3;
+        grid-row: 4;
     }
 
     h3 {
@@ -72,6 +103,8 @@
     }
 
     .couleur {
+        position: relative;
+        width: 100%;
 
         .MuiSvgIcon-root {
                 position: absolute;
@@ -79,19 +112,19 @@
                 opacity: 15%;
             }
 
-        .rouge {
+        .Rouge {
             .MuiSvgIcon-root {
                 color: #6A3352 !important;
             }
         }
 
-            .blanc {
+            .Blanc {
                 .MuiSvgIcon-root {
                     color: #FFE599 !important;
                 }
             }
 
-            .rose {
+            .Rose {
                 .MuiSvgIcon-root {
                     color: #c07a71 !important;
                 }
@@ -117,8 +150,8 @@
     }
 
     .MuiButtonGroup-root {
-        position: fixed;
-        bottom: 14vh;
+        grid-column: 2 / 3;
+        grid-row: 5;
         background-color: #c07a71;
         padding: 5px 10px !important;
         border-radius: 25px !important;

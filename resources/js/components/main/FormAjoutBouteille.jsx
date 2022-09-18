@@ -10,7 +10,7 @@ import {
     ListItem,
     Box,
     List,
-    Divider,
+    Divider
 } from "@mui/material";
 import Bouteille from "./Bouteille";
 import BouteillesContext from "../../context/bouteillesContext";
@@ -163,7 +163,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                                 key={cellier.id}
                                 value={cellier.id}
                             >
-                                {cellier.id} - {cellier.lib_cellier}
+                                {cellier.lib_cellier}
                             </MenuItem>
                         );
                     })}
@@ -181,7 +181,6 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                             label="Mots-clés..."
                             variant="outlined"
                             margin="dense"
-                            value={libelle}
                             onChange={(e) => setLibelle(e.target.value)}
                         >
                             Recherche
@@ -196,7 +195,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                             label="Quantité"
                             variant="outlined"
                             margin="dense"
-                            onChange={() => setQuantite(quantite)}
+                            onChange={(e) => setQuantite(e.target.value)}
                         >
                             Quantité
                         </TextField>
