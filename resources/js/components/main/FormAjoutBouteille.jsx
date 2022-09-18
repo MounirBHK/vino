@@ -27,7 +27,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
     const [celliers, setCelliers] = useState([]);
     const [libelle, setLibelle] = useState("");
     const [codesaq, setCodesaq] = useState("");
-    const [quantite, setQuantite] = useState(quantite);
+    const [quantite, setQuantite] = useState(1);
     const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;

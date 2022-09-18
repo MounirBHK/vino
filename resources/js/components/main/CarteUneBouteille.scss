@@ -13,6 +13,33 @@
         text-align: center;
     }
 
+    .background {
+        position: absolute;
+        top: 25vh;
+        max-height: 40vh;
+    }
+
+    .Blanc {
+        circle {
+            fill: #ffe599;
+            opacity: 30%;
+        }
+    }
+
+    .Rouge {
+        circle {
+            fill: #6A3352;
+            opacity: 10%;
+        }
+    }
+
+    .Rose {
+        circle {
+            fill: #c07a71;
+            opacity: 10%;
+        }
+
+    }
     .grid {
         display: grid;
         grid-template-columns: 1fr 30vw 1fr;
@@ -22,7 +49,7 @@
         align-items: start;
         min-width: 90vw;
         max-height: 60vh;
-        padding: 3vh 0 1vh 0;
+        padding: 5vh 0 1vh 0;
     }
 
     .bouteille-img {
@@ -76,6 +103,8 @@
     }
 
     .couleur {
+        position: relative;
+        width: 100%;
 
         .MuiSvgIcon-root {
                 position: absolute;

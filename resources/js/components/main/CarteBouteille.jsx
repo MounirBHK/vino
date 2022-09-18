@@ -36,11 +36,11 @@ function CarteBouteille({ bouteille }) {
                         <CircleIcon sx={{ fontSize: 15, top: 75, left: 100 }} />
                     </p>
                 </div>
-                <div className="info">
-                    <h3 className="nom">{bouteille.nom_bouteille}</h3>
-                    <p className="pays">{bouteille.description}</p>
-                </div>
-                <div className="bouteille-img">
+                <div className="wrapper">
+                    <div className="info">
+                        <h3 className="nom">{bouteille.nom_bouteille}</h3>
+                        <p className="pays">{bouteille.description}</p>
+                    </div>
                     <img
                         className="img-rotate"
                         srcSet={urlNoParam}
