@@ -46,7 +46,7 @@ function Signup() {
         envoieDonneesForm(formValues).then((response) => {
             // console.log(response);
             // && response.statusText === "Created"
-            if (response.status === 201 )
+            if (response.status === 201)
                 navigate("/login", {
                     state: {
                         success_message:

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Session;
-use Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+use Hash;
+use Session;
 
 class CustomAuthController extends Controller
 {
@@ -24,6 +24,7 @@ class CustomAuthController extends Controller
      * 
      *
      * @return \Illuminate\Http\jsonResponse 
+     * 
      */
     public function customLogin(Request $request)
     {
@@ -31,7 +32,7 @@ class CustomAuthController extends Controller
             'courriel' => 'required|email',
             'motDePasse' => 'required'
         ]);
-       
+
         $credentials = ['email' => $fields['courriel'], 'password' => $fields['motDePasse']];
         if(!Auth::validate($credentials)): 
             return response('Erreur de connexion: mauvais identifiants', 401);
