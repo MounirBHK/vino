@@ -68,6 +68,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                 quantite: quantite,
                 derniere_trans: today(),
             };
+            console.log("cellierSelected:", cellierSelected);
             putBoutCell(refBout).then((response) => {
                 navigate(`/dashboard/celliers/${idCell}`, {
                     state: cellierSelected[0],
@@ -84,12 +85,12 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         const userId = userLoggedIn.user.id;
         getCelliers(userId).then((response) => {
             setCellierSelected(
-                response.data.filter((cellier) => cellier.id === idCellier)
+                response.data.filter((cellier) => cellier.id == idCellier)
             );
             setIdCell(idCellier);
         });
     }
-
+    console.log("Dans module cellierSelected:", cellierSelected);
     useEffect(() => {
         if (userLoggedIn) {
             const userId = userLoggedIn.user.id;
