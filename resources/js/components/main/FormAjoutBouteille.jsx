@@ -10,7 +10,7 @@ import {
     ListItem,
     Box,
     List,
-    Divider
+    Divider,
 } from "@mui/material";
 import Bouteille from "./Bouteille";
 import BouteillesContext from "../../context/bouteillesContext";
@@ -23,14 +23,13 @@ function FormAjoutBouteille({ idCellierEnCours }) {
     const navigate = useNavigate();
     const bouteilles = useContext(BouteillesContext);
     const [bouteillesCopie, setBouteillesCopie] = useState([]);
-
     const [celliers, setCelliers] = useState([]);
     const [libelle, setLibelle] = useState("");
-    const [codesaq, setCodesaq] = useState("");
     const [quantite, setQuantite] = useState(1);
     const [user, setUser] = useState(null);
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+    const [cellierSelected, setCellierSelected] = useState(null);
 
     const today = () => {
         var d = new Date().getDate();
@@ -41,10 +40,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         return year + "-" + month + "-" + day;
     };
 
-    // const [toInsertBout, setToInsertBout] = useState(refBout);
-
     const putBoutCell = async (refBout) => {
-        // console.log(refBout);
         return await axios.post(
             hostOriginURL + "/api/ajouterBouteilleCellier",
             refBout,
@@ -64,14 +60,37 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         });
     };
 
-    const getBouteillesDB = async () => {
-        return await axios.get(hostOriginURL + "/api/bouteilles", {
-            headers: {
-                Authorization: "Bearer " + userLoggedIn.access_token,
-            },
-        });
+    const handleBoutCell = (bouteille) => {
+        if (idCell !== "default") {
+            const refBout = {
+                id_cellier: idCell,
+                id_bouteille: bouteille.id,
+                quantite: quantite,
+                derniere_trans: today(),
+            };
+            console.log("cellierSelected:", cellierSelected);
+            putBoutCell(refBout).then((response) => {
+                navigate(`/dashboard/celliers/${idCell}`, {
+                    state: cellierSelected[0],
+                });
+            });
+        } else alert("Vous n'avez pas sélectionné de cellier...");
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+
+    function choixCellier(idCellier) {
+        const userId = userLoggedIn.user.id;
+        getCelliers(userId).then((response) => {
+            setCellierSelected(
+                response.data.filter((cellier) => cellier.id == idCellier)
+            );
+            setIdCell(idCellier);
+        });
+    }
+    console.log("Dans module cellierSelected:", cellierSelected);
     useEffect(() => {
         if (userLoggedIn) {
             const userId = userLoggedIn.user.id;
@@ -81,21 +100,11 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         }
     }, [user]);
 
-    const getBouteillesCellier = async (idCellier) => {
-        return await axios.get(hostOriginURL + "/api/cellier/" + idCellier, {
-            headers: {
-                Authorization: "Bearer " + userLoggedIn.access_token,
-            },
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
-
-    function choixCellier(idCellier) {
-        setIdCell(idCellier);
-    }
+    useEffect(() => {
+        if (idCell !== "default") {
+            choixCellier(idCell);
+        }
+    }, []);
 
     useEffect(() => {
         setBouteillesCopie([]);
@@ -116,23 +125,6 @@ function FormAjoutBouteille({ idCellierEnCours }) {
 
         setBouteillesCopie(res);
     }, [libelle]);
-
-    const handleBoutCell = (bouteille) => {
-        if (idCell !== "default") {
-            const refBout = {
-                id_cellier: idCell,
-                id_bouteille: bouteille.id,
-                quantite: quantite,
-                derniere_trans: today(),
-            };
-            // console.log(refBout);
-            putBoutCell(refBout).then((response) => {
-                // console.log("response ", response);
-                navigate(`/dashboard/celliers/${idCell}`);
-                // setCelliers(response);
-            });
-        } else alert("Vous n'avez pas sélectionné de cellier...");
-    };
 
     return (
         <div className="FormAjout">

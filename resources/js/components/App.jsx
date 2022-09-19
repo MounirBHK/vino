@@ -114,7 +114,6 @@ function App() {
             setIdCellierEnCours(idCellier);
         });
     }
-
     function gereQuantite(
         idCellier,
         idBouteille,
@@ -144,7 +143,6 @@ function App() {
                 }
                 return bouteille;
             });
-            console.log("newBouteilles:", newBouteilles);
             setBouteillesCellier(newBouteilles);
             navigate(`/dashboard/celliers/${idCellier}/${idBouteille}`, {
                 state: bouteilleChangee,
