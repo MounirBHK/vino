@@ -14,14 +14,11 @@ import {
 import { useNavigate, useLocation } from "react-router-dom";
 
 function CarteUneBouteille({ bouteille, gereQuantite }) {
-    //console.log("bouteille:", bouteille);
     const navigate = useNavigate();
     const { state: stateBouteille } = useLocation();
     const bouteilleReceived = bouteille || stateBouteille;
-    //console.log("state:", stateBouteille);
     const url = bouteilleReceived.url_img;
     const urlNoParam = url.split("?")[0];
-    console.log("composant remounted");
     return (
         <div className="Carte-une-bouteille">
             <svg
