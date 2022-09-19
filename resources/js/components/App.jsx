@@ -114,7 +114,6 @@ function App() {
             setIdCellierEnCours(idCellier);
         });
     }
-
     function gereQuantite(
         idCellier,
         idBouteille,
