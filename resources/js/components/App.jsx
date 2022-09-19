@@ -144,7 +144,6 @@ function App() {
                 }
                 return bouteille;
             });
-            console.log("newBouteilles:", newBouteilles);
             setBouteillesCellier(newBouteilles);
             navigate(`/dashboard/celliers/${idCellier}/${idBouteille}`, {
                 state: bouteilleChangee,
