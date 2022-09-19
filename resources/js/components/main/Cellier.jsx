@@ -9,11 +9,10 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     const navigate = useNavigate();
     const { state: cellier } = useLocation();
     console.log(cellier);
-
     useEffect(() => {
         gereSelectCellier(cellier.id);
     }, []);
-    // console.log(bouteillesCellier);
+
     return (
         <div className="listeBouteilles">
             <h2>{cellier.lib_cellier}</h2>
