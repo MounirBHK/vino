@@ -36,6 +36,7 @@ function Login() {
         e.preventDefault();
         envoieIdentifiants(formValues)
             .then((response) => {
+                console.log(response.data);
                 const UserLoggedIn = response.data;
                 localStorage.setItem("user", JSON.stringify(UserLoggedIn));
                 setUser(UserLoggedIn);

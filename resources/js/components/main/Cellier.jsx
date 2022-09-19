@@ -2,28 +2,28 @@ import { React, useEffect } from "react";
 import { Button, Card } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import CarteBouteille from "./CarteBouteille";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import "./Cellier.scss";
-
 
 function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     const navigate = useNavigate();
-    let route = useParams();
-    let { idCellier } = route;
+    const { state: cellier } = useLocation();
+    console.log(cellier);
 
     useEffect(() => {
-        gereSelectCellier(idCellier);
+        gereSelectCellier(cellier.id);
     }, []);
     // console.log(bouteillesCellier);
     return (
         <div className="listeBouteilles">
+            <h2>{cellier.lib_cellier}</h2>
             {bouteillesCellier.map((bouteille) => (
                 <Button
                     className="listItemButton"
                     key={bouteille.id}
                     onClick={() =>
                         navigate(
-                            `/dashboard/celliers/${idCellier}/${bouteille.id_bouteille}`,
+                            `/dashboard/celliers/${cellier.id}/${bouteille.id_bouteille}`,
                             { state: bouteille }
                         )
                     }

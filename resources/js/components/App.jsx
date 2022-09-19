@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { CelliersProvider } from "../context/celliersContext";
 import { BouteillesProvider } from "../context/bouteillesContext";
 import { UserProvider } from "../context/userContext";
@@ -12,6 +12,7 @@ import AdminHome from "./admin/AdminHome";
 import Page404 from "./Page404";
 
 function App() {
+    const location = useLocation();
     const [bouteilles, setBouteilles] = useState([]);
     const [bouteillesCellier, setBouteillesCellier] = useState([]);
     const [celliers, setCelliers] = useState([]);
@@ -87,6 +88,12 @@ function App() {
         }
         if (adminUser && window.location.pathname.includes("admin"))
             navigate("/admin", {});
+        let arrayLocation;
+        if (location.pathname.includes("celliers")) {
+            arrayLocation = location.pathname.split("/");
+            const idCellier = arrayLocation[3];
+            gereSelectCellier(idCellier);
+        }
     }, []);
 
     function gereDeconnexion(userLoggedIn) {
@@ -137,6 +144,7 @@ function App() {
                 }
                 return bouteille;
             });
+            console.log("newBouteilles:", newBouteilles);
             setBouteillesCellier(newBouteilles);
             navigate(`/dashboard/celliers/${idCellier}/${idBouteille}`, {
                 state: bouteilleChangee,
