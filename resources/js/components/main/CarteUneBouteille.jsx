@@ -21,7 +21,7 @@ function CarteUneBouteille({ bouteille, gereQuantite }) {
     //console.log("state:", stateBouteille);
     const url = bouteilleReceived.url_img;
     const urlNoParam = url.split("?")[0];
-
+    console.log("composant remounted");
     return (
         <div className="Carte-une-bouteille">
             <svg
@@ -36,13 +36,38 @@ function CarteUneBouteille({ bouteille, gereQuantite }) {
                     id="Calque_1-2"
                     data-name="Calque 1"
                 >
-                    <circle className="cls-1" cx="105.42" cy="180.23" r="88.99" />
+                    <circle
+                        className="cls-1"
+                        cx="105.42"
+                        cy="180.23"
+                        r="88.99"
+                    />
                     <circle className="cls-1" cx="76.29" cy="146.52" r="24.4" />
                     <circle className="cls-1" cx="47.17" cy="68.21" r="24.4" />
-                    <circle className="cls-1" cx="154.66" cy="104.27" r="29.02" />
-                    <circle className="cls-1" cx="31.97" cy="205.04" r="31.97" />
-                    <circle className="cls-1" cx="138.86" cy="214.34" r="31.15" />
-                    <circle className="cls-1" cx="111.08" cy="63.01" r="14.56" />
+                    <circle
+                        className="cls-1"
+                        cx="154.66"
+                        cy="104.27"
+                        r="29.02"
+                    />
+                    <circle
+                        className="cls-1"
+                        cx="31.97"
+                        cy="205.04"
+                        r="31.97"
+                    />
+                    <circle
+                        className="cls-1"
+                        cx="138.86"
+                        cy="214.34"
+                        r="31.15"
+                    />
+                    <circle
+                        className="cls-1"
+                        cx="111.08"
+                        cy="63.01"
+                        r="14.56"
+                    />
                     <circle className="cls-1" cx="86.13" cy="14.56" r="14.56" />
                 </g>
             </svg>
