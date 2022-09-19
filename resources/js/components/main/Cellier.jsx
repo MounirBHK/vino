@@ -1,8 +1,9 @@
 import { React, useEffect } from "react";
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import CarteBouteille from "./CarteBouteille";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Cellier.scss";
+
 
 function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     const navigate = useNavigate();
@@ -32,6 +33,16 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
                     />
                 </Button>
             ))}
+            <Button onClick={() =>
+                        navigate(
+                            `/dashboard/ajoutBouteille`
+                        )}>
+                    <Card
+                        className="Carte-bouteille"
+                    >
+                        Ajouter bouteille...
+                    </Card>
+            </Button>
         </div>
     );
 }

@@ -45,7 +45,8 @@ function Signup() {
         e.preventDefault();
         envoieDonneesForm(formValues).then((response) => {
             // console.log(response);
-            if (response.status === 201 && response.statusText === "Created")
+            // && response.statusText === "Created"
+            if (response.status === 201 )
                 navigate("/login", {
                     state: {
                         success_message:
