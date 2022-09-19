@@ -1,5 +1,6 @@
 import { React, useEffect } from "react";
 import { Button, Card } from "@mui/material";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import CarteBouteille from "./CarteBouteille";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Cellier.scss";
@@ -33,15 +34,17 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
                     />
                 </Button>
             ))}
-            <Button onClick={() =>
-                        navigate(
-                            `/dashboard/ajoutBouteille`
-                        )}>
-                    <Card
-                        className="Carte-bouteille"
-                    >
-                        Ajouter bouteille...
-                    </Card>
+            <Button onClick={() => navigate(`/dashboard/ajoutBouteille`)}>
+                <Card className="Carte-bouteille">
+                    <div className="ajoutBouteille">
+                        <div>
+                            <h2>Ajouter une Bouteille</h2>
+                        </div>
+                        <div>
+                            <AddCircleRoundedIcon />
+                        </div>
+                    </div>
+                </Card>
             </Button>
         </div>
     );
