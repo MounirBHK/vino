@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import React, { useContext } from "react";
 import CelliersContext from "../../context/celliersContext";
 import "./SelectCellier.scss";
 import { Button } from "@mui/material";
@@ -22,9 +22,8 @@ function SelectCellier() {
             <List component="nav">
                 {celliers.map((cellier) => {
                     return (
-                        <React.fragment>
+                        <React.Fragment key={cellier.id}>
                             <ListItemButton
-                                key={cellier.id}
                                 onClick={() =>
                                     navigate(
                                         `/dashboard/celliers/${cellier.id}`,
@@ -42,7 +41,8 @@ function SelectCellier() {
                                 </ListItemIcon>
                                 <ListItemText primary={cellier.lib_cellier} />
                             </ListItemButton>
-                        </React.fragment>
+                            <Divider variant="middle" />
+                        </React.Fragment>
                     );
                 })}
             </List>
