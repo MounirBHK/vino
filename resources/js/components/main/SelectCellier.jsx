@@ -10,8 +10,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDungeon } from "@fortawesome/free-solid-svg-icons";
-import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SelectCellier() {
     const navigate = useNavigate();
@@ -23,15 +22,18 @@ function SelectCellier() {
             <List component="nav">
                 {celliers.map((cellier) => {
                     return (
-                        <Button
-                            key={cellier.id}
-                            onClick={() =>
-                                navigate(`/dashboard/celliers/${cellier.id}`, {
-                                    state: cellier,
-                                })
-                            }
-                        >
-                            <ListItemButton>
+                        <React.fragment>
+                            <ListItemButton
+                                key={cellier.id}
+                                onClick={() =>
+                                    navigate(
+                                        `/dashboard/celliers/${cellier.id}`,
+                                        {
+                                            state: cellier,
+                                        }
+                                    )
+                                }
+                            >
                                 <ListItemIcon>
                                     <FontAwesomeIcon
                                         className="navIcon"
@@ -40,8 +42,7 @@ function SelectCellier() {
                                 </ListItemIcon>
                                 <ListItemText primary={cellier.lib_cellier} />
                             </ListItemButton>
-                            <Divider variant="middle" />
-                        </Button>
+                        </React.fragment>
                     );
                 })}
             </List>
