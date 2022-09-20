@@ -68,7 +68,6 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                 quantite: quantite,
                 derniere_trans: today(),
             };
-            console.log("cellierSelected:", cellierSelected);
             putBoutCell(refBout).then((response) => {
                 navigate(`/dashboard/celliers/${idCell}`, {
                     state: cellierSelected[0],
@@ -90,7 +89,6 @@ function FormAjoutBouteille({ idCellierEnCours }) {
             setIdCell(idCellier);
         });
     }
-    console.log("Dans module cellierSelected:", cellierSelected);
     useEffect(() => {
         if (userLoggedIn) {
             const userId = userLoggedIn.user.id;

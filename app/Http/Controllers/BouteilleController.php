@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bouteille;
 use App\Http\SAQ\SAQ;
 use Illuminate\Http\Request;
+use App\Models\CellierBout;
 
 class BouteilleController extends Controller
 {
@@ -84,7 +85,13 @@ class BouteilleController extends Controller
      */
     public function destroy(Bouteille $bouteille)
     {
-        $bouteille->delete();
-        return response($bouteille->id);
+        $bouteilleDansCellier = CellierBout::select()->where('id_bouteille', '=', $bouteille->id)->get();
+        if(count($bouteilleDansCellier) < 1) {
+            $bouteille->delete();
+            return response($bouteille);
+        }
+        return response()->json('Impossible de supprimer la ressource: celle-ci est déjà utilisée par les utilisateurs', 405);
+        
+       
     }
 }
