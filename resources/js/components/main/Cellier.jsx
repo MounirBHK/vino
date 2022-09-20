@@ -8,7 +8,7 @@ import "./Cellier.scss";
 function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     const navigate = useNavigate();
     const { state: cellier } = useLocation();
-    console.log(cellier);
+    // console.log(cellier);
     useEffect(() => {
         gereSelectCellier(cellier.id);
     }, []);
