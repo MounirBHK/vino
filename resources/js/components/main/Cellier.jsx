@@ -1,14 +1,17 @@
 import { React, useEffect } from "react";
 import { Button, Card } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import ErrorIcon from '@mui/icons-material/Error';
+import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 import CarteBouteille from "./CarteBouteille";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Cellier.scss";
 
 function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
+    
     const navigate = useNavigate();
     const { state: cellier } = useLocation();
-    // console.log(cellier);
+
     useEffect(() => {
         gereSelectCellier(cellier.id);
     }, []);
@@ -45,6 +48,37 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
                     </div>
                 </Card>
             </Button>
+
+            {/* -------------- */}
+
+            <Button onClick={() => navigate(`/dashboard/retirerBoutsCell/${cellier.id}`)}>
+                <Card className="Carte-bouteille">
+                    <div className="ajoutBouteille">
+                        <div>
+                            <h2>Retirer Bouteilles</h2>
+                        </div>
+                        <div>
+                            <DoNotDisturbOnIcon />
+                        </div>
+                    </div>
+                </Card>
+            </Button>
+
+            <Button onClick={() => navigate(`/dashboard/suppCellier/${cellier.id}`)}>
+                <Card className="Carte-bouteille">
+                    <div className="ajoutBouteille">
+                        <div>
+                            <h2>Supprimer ce Cellier</h2>
+                        </div>
+                        <div>
+                            <ErrorIcon />
+                        </div>
+                    </div>
+                </Card>
+            </Button>
+
+
+            {/* -------------- */}
         </div>
     );
 }

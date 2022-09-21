@@ -9,6 +9,10 @@ import FormAjoutCellier from "./FormAjoutCellier";
 import FormAjoutBouteille from "./FormAjoutBouteille";
 import { Route, Routes, useLocation } from "react-router-dom";
 import axios from "axios";
+// -------------------
+import RetirerBouteillesCellier from "./RetirerBouteillesCellier";
+import SupprimerCellier from "./SupprimerCellier";
+// -------------------
 
 function Main({
     gereQuantite,
@@ -107,6 +111,36 @@ function Main({
                                     />
                                 }
                             ></Route>
+
+                            {/* ----------------- */}
+
+                            <Route
+                                path="/retirerBoutsCell/:idCellier"
+                                element={
+                                    <RetirerBouteillesCellier
+                                        idCellierEnCours={idCellierEnCours}
+                                        bouteillesCellier={bouteillesCellier}
+                                        setBouteillesCellier={setBouteillesCellier}
+                                        gereSelectCellier={gereSelectCellier}
+                                    />
+                                }
+                            >
+                            </Route>
+
+                            <Route
+                                path="/suppCellier/:idCellier"
+                                element={
+                                    <SupprimerCellier
+                                        idCellierEnCours={idCellierEnCours}
+                                        bouteillesCellier={bouteillesCellier}
+                                        setBouteillesCellier={setBouteillesCellier}
+                                        setCelliers={setCelliers}   
+                                    />
+                                }
+                            >
+                            </Route>
+
+                            {/* ----------------- */}
                         </Routes>
                     }
                 ></Route>

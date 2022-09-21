@@ -37,7 +37,10 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');
 });
 
-
+// route pour suppression cellier ett bouteilles de cellier
+Route::delete('deleteBoutCellier/{id_cellier}/{id_bouteille}', [CellierBoutController::class, 'destroy'])->name('destroy-cellier-bouteilles');
+Route::delete('deleteCellier/{id_cellier}', [CellierBoutController::class, 'destroyAll'])->name('destroy-cellier');
+// -----------------
 
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
 Route::post('custom-auth/signup', [CustomAuthController::class, 'customSignup'])->name('custom-signup');

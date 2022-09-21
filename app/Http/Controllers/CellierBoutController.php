@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cellier;
 use App\Models\CellierBout;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class CellierBoutController extends Controller
 {
@@ -109,15 +110,33 @@ class CellierBoutController extends Controller
     {
         //
     }
-
+    
     /**
-     * Remove the specified resource from storage.
+     * destroy
      *
-     * @param  \App\Models\CellierBout  $cellierBout
-     * @return \Illuminate\Http\Response
+     * @param  mixed $id_cellier
+     * @param  mixed $id_bouteille
+     * @return void
      */
-    public function destroy(CellierBout $cellierBout)
+    public function destroy($id_cellier, $id_bouteille )
     {
-        //
+        return CellierBout::where('id_cellier' , $id_cellier)->where('id_bouteille' , $id_bouteille)->delete();
+    }
+
+       
+    /**
+     * destroyAll
+     *
+     * @param  mixed $id_cellier
+     * @return void
+     */
+    public function destroyAll( $id_cellier )
+    {
+        CellierBout::where('id_cellier' , $id_cellier)->delete();
+        Cellier::where('id' , $id_cellier)->delete();
+        $celliers = Cellier::All(); 
+
+        return $celliers;
+        
     }
 }
