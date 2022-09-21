@@ -27,7 +27,7 @@ export default function SupprimerCellier({idCellierEnCours, bouteillesCellier, s
         // console.log("idCellierEnCours : ",idCellierEnCours);
         deleteCell(idCellierEnCours).then((response)=>{
             const newCelliers = response.data;
-            console.log("newCelliers : ", newCelliers);
+            // console.log("newCelliers : ", newCelliers);
 
             const user_id = userLoggedIn.user.id;
             let res = newCelliers.filter((cellier) => cellier.id_user === user_id);

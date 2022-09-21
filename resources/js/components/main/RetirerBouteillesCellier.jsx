@@ -36,9 +36,9 @@ export default function RetirerBouteillesCellier({idCellierEnCours, bouteillesCe
     };
 
     const deleteBoutCell = async(idRef, idBtSupp) => {
-        console.log("appel de la fonction delete bouteille...");
-        console.log("idRef : ",idRef);
-        console.log(idBtSupp);
+        // console.log("appel de la fonction delete bouteille...");
+        // console.log("idRef : ",idRef);
+        // console.log(idBtSupp);
         const cellBout = {id_cellier: idRef, id_bouteille: idBtSupp}
 
         return await axios.delete(

@@ -20,7 +20,7 @@ import "./FormAjout.scss";
 function FormAjoutBouteille({ idCellierEnCours }) {
     let vi = idCellierEnCours ? idCellierEnCours : "default";
     const [idCell, setIdCell] = useState(vi);
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
     const bouteilles = useContext(BouteillesContext);
     const [bouteillesCopie, setBouteillesCopie] = useState([]);
     const [celliers, setCelliers] = useState([]);
@@ -41,7 +41,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
     };
 
     const putBoutCell = async (refBout) => {
-        return await axios.post(
+        return await axios.post(       
             hostOriginURL + "/api/ajouterBouteilleCellier",
             refBout,
             {
@@ -108,7 +108,8 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         setBouteillesCopie([]);
         let boutsRef = bouteilles;
         let res;
-        if (!libelle) res = [];
+        // if (!libelle) res = [];
+        if (!libelle) res = [...boutsRef];
         else
             res = boutsRef.filter(
                 (bout) =>
