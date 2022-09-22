@@ -13,6 +13,7 @@ import axios from "axios";
 import RetirerBouteillesCellier from "./RetirerBouteillesCellier";
 import SupprimerCellier from "./SupprimerCellier";
 import Profil from "./Profil";
+import PasswordResetForm from "./PasswordResetForm";
 // -------------------
 
 function Main({
@@ -60,9 +61,15 @@ function Main({
                             ></Route>
                             <Route
                                 path="/profil"
+                                element={<Profil userLoggedIn={userLoggedIn} />}
+                            ></Route>
+                            <Route
+                                path="/passwordReset/*"
                                 element={
                                     <React.Fragment>
-                                        <Profil userLoggedIn={userLoggedIn} />
+                                        <PasswordResetForm
+                                            userLoggedIn={userLoggedIn}
+                                        />
                                     </React.Fragment>
                                 }
                             ></Route>

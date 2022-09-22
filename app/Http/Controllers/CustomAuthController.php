@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Auth;
 use Hash;
 use Session;
 use Validator;
+use Mail;
 
 class CustomAuthController extends Controller
 {
@@ -111,15 +113,46 @@ class CustomAuthController extends Controller
         return $user;
     }
 
-
+  /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function envoiEmail()
+    {
+        $user = Auth::user();
+        $to_name = 'Romain';
+        $to_email = 'romaindepret91@gmail.com';
+        $tempPassword = str::random(50);
+        $user->update(['temp_password' => $tempPassword]);
+        $body="<a href='http://127.0.0.1:8000/dashboard/passwordReset/" . $tempPassword . ">Cliquez ici pour réinitialiser votre mot de passe</a>";
+        Mail::send('resetPasswordEmail', $data =['name'=>$to_name,
+        'body' => $body
+        ],
+        function($message) use ($to_name, $to_email)
+        {
+            $message->to($to_email, $to_name)->subject('Réinitialisation de votre mot de passe');
+        });
+        return  $user;
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function resetPassword(Request $request)
     {
-        //
+        $user = Auth::user();
+        $request->validate([
+            'motDePasse'                => 'required',
+            'motDePasse_confirme'       => 'required|same:motDePasse',
+            'tempPassword'              => 'required',
+        ]);
+        if($request->tempPassword !== $user->temp_password) return response('Opération non autorisée', 405);
+        $user->update([
+            'password'      => Hash::make($request->motDePasse),
+        ]);
+        return $user;
     }
 
     /**

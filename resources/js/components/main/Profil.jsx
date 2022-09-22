@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
+import { useLocation } from "react-router-dom";
 import "./Profil.scss";
 import {
     Button,
@@ -18,6 +19,10 @@ import { getInputError } from "../homepage/formValidator/signupForm";
 import UserContext from "../../context/userContext";
 
 function Profil({ userLoggedIn }) {
+    const { state: stateUpdatePasswordSuccessMsg } = useLocation();
+    const [updatePasswordSuccessMsg, setUpdatePasswordSuccessMsg] = useState(
+        stateUpdatePasswordSuccessMsg || null
+    );
     const userContext = useContext(UserContext);
     const [user, setUser] = userContext;
     const [open, setOpen] = useState(false);
@@ -44,6 +49,20 @@ function Profil({ userLoggedIn }) {
             }
         );
     };
+
+    const envoiEmail = async () => {
+        return await axios.get(hostOriginURL + "/api/custom-auth/envoiEmail", {
+            headers: {
+                Authorization: "Bearer " + userLoggedIn.access_token,
+            },
+        });
+    };
+
+    function handleEnvoiEmail() {
+        envoiEmail().then((response) => {
+            console.log(response);
+        });
+    }
 
     function gereChangementInputValue(e) {
         const { name, value } = e.target;
@@ -106,6 +125,25 @@ function Profil({ userLoggedIn }) {
     return (
         <React.Fragment>
             <h2>Mon Profil</h2>
+            {updatePasswordSuccessMsg && (
+                <Alert
+                    severity="success"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setUpdatePasswordSuccessMsg(null);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                >
+                    {updatePasswordSuccessMsg.success_message}
+                </Alert>
+            )}
             {updateSuccessMsg && (
                 <Alert
                     severity="success"
@@ -151,6 +189,13 @@ function Profil({ userLoggedIn }) {
                 onClick={handleClickOpen}
             >
                 Modifier
+            </Button>
+            <Button
+                className="modifier"
+                variant="contained"
+                onClick={handleEnvoiEmail}
+            >
+                Réinitialiser le mot de passe
             </Button>
             <Dialog className="Profil-dialog" open={open} onClose={handleClose}>
                 <DialogTitle>Mes informations</DialogTitle>
