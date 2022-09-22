@@ -1,0 +1,45 @@
+.Profil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    padding: 30px 20px;
+    width: 90%;
+
+    .Profil-field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+
+        &:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        .Profil-field-label {
+            font-weight: 600;
+        }
+    }
+}
+
+.modifier {
+    margin-top: 20px !important;
+}
+
+.Profil-dialog {
+    .MuiPaper-root {
+        padding: 30px 0;
+    }
+
+    .MuiDialogContent-root {
+        margin-top: 10px;
+    }
+
+    .MuiFormControl-root {
+        margin-top: 20px !important;
+    }
+
+    .MuiDialogTitle-root {
+        text-align: center;
+    }
+}

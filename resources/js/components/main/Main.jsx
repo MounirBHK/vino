@@ -12,6 +12,7 @@ import axios from "axios";
 // -------------------
 import RetirerBouteillesCellier from "./RetirerBouteillesCellier";
 import SupprimerCellier from "./SupprimerCellier";
+import Profil from "./Profil";
 // -------------------
 
 function Main({
@@ -53,6 +54,14 @@ function Main({
                                 element={
                                     <React.Fragment>
                                         <SelectCellier />
+                                    </React.Fragment>
+                                }
+                            ></Route>
+                            <Route
+                                path="/profil"
+                                element={
+                                    <React.Fragment>
+                                        <Profil userLoggedIn={userLoggedIn} />
                                     </React.Fragment>
                                 }
                             ></Route>
@@ -120,12 +129,13 @@ function Main({
                                     <RetirerBouteillesCellier
                                         idCellierEnCours={idCellierEnCours}
                                         bouteillesCellier={bouteillesCellier}
-                                        setBouteillesCellier={setBouteillesCellier}
+                                        setBouteillesCellier={
+                                            setBouteillesCellier
+                                        }
                                         gereSelectCellier={gereSelectCellier}
                                     />
                                 }
-                            >
-                            </Route>
+                            ></Route>
 
                             <Route
                                 path="/suppCellier/:idCellier"
@@ -133,12 +143,13 @@ function Main({
                                     <SupprimerCellier
                                         idCellierEnCours={idCellierEnCours}
                                         bouteillesCellier={bouteillesCellier}
-                                        setBouteillesCellier={setBouteillesCellier}
-                                        setCelliers={setCelliers}   
+                                        setBouteillesCellier={
+                                            setBouteillesCellier
+                                        }
+                                        setCelliers={setCelliers}
                                     />
                                 }
-                            >
-                            </Route>
+                            ></Route>
 
                             {/* ----------------- */}
                         </Routes>

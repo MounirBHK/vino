@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('users', [UserController::class, 'index'])->name('users');
     Route::get('saq', [SAQController::class, 'index'])->name('import-saq');
     Route::get('custom-auth/logout', [CustomAuthController::class, 'customLogout'])->name('custom-logout');
+    Route::put('custom-auth/update', [CustomAuthController::class, 'customUpdate'])->name('custom-update');
 });
 
 // route pour suppression cellier ett bouteilles de cellier

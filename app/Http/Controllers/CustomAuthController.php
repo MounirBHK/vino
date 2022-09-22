@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use Session;
+use Validator;
 
 class CustomAuthController extends Controller
 {
@@ -57,8 +58,13 @@ class CustomAuthController extends Controller
     }
 
     public function customSignup(Request $request){
+
+        $emailValidation = Validator::make(['email' => $request->email], [
+            'email'                 => 'required|email|unique:users',]);
+
+        if($emailValidation->fails()) return response('Cet email est déjà utilisé', 405);
+
         $request->validate([
-            'courriel'              => 'required|email',
             'nom_utilisateur'       => 'required|string|min:5|max:30',
             'prenom'                => 'required|alpha|min:2|max:30',
             'nom'                   => 'required|alpha|min:2|max:30',
@@ -69,7 +75,7 @@ class CustomAuthController extends Controller
         $user = new User;
         $user->fill([
             'name'      => $request->nom_utilisateur,
-            'email'     => $request->courriel,
+            'email'     => $request->email,
             'password'  => Hash::make($request->motDePasse),
             'prenom'    => $request->prenom,
             'nom'       => $request->nom
@@ -77,6 +83,25 @@ class CustomAuthController extends Controller
         $user->save();
         return $user;
     }
+
+    public function customUpdate(Request $request){
+        $request->validate([
+            'courriel'              => 'required|email',
+            'nom_utilisateur'       => 'required|string|min:5|max:30',
+            'prenom'                => 'required|alpha|min:2|max:30',
+            'nom'                   => 'required|alpha|min:2|max:30',
+        ]);
+
+        // $user->update([
+        //     'name'      => $request->nom_utilisateur,
+        //     'email'     => $request->courriel,
+        //     'prenom'    => $request->prenom,
+        //     'nom'       => $request->nom
+        // ]);
+        // $user->save();
+        // return $user;
+    }
+
 
     /**
      * Show the form for creating a new resource.

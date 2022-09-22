@@ -1,13 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Form.scss";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Alert, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { Link, useNavigate } from "react-router-dom";
 import { getInputError } from "./formValidator/signupForm";
 
 function Signup() {
     const [formValues, setFormValues] = useState({
-        courriel: "",
+        email: "",
         nom_utilisateur: "",
         prenom: "",
         nom: "",
@@ -16,6 +17,7 @@ function Signup() {
     });
     const [formErrors, setFormErrors] = useState({});
     const [formIsValid, setFormIsValid] = useState(false);
+    const [signupErrorMsg, setSignupErrorMsg] = useState(null);
     const hostOriginURL = window.location.origin;
     const navigate = useNavigate();
 
@@ -25,7 +27,6 @@ function Signup() {
             donnees
         );
     };
-
     function gereChangementInputValue(e) {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
@@ -43,19 +44,21 @@ function Signup() {
 
     function soumetFormulaire(e) {
         e.preventDefault();
-        envoieDonneesForm(formValues).then((response) => {
-            // console.log(response);
-            // && response.statusText === "Created"
-            if (response.status === 201)
-                navigate("/login", {
-                    state: {
-                        success_message:
-                            "Votre compte a été créé avec succes, connectez-vous!",
-                    },
-                });
-        });
+        envoieDonneesForm(formValues)
+            .then((response) => {
+                if (response.status === 201)
+                    navigate("/login", {
+                        state: {
+                            success_message:
+                                "Votre compte a été créé avec succes, connectez-vous!",
+                        },
+                    });
+            })
+            .catch((error) => {
+                if (error.response.status === 405)
+                    setSignupErrorMsg(error.response);
+            });
     }
-
     useEffect(() => {
         let isFormFilled = true;
         let password;
@@ -84,16 +87,16 @@ function Signup() {
                     className="textField"
                     required
                     type="email"
-                    id="courriel"
-                    name="courriel"
+                    id="email"
+                    name="email"
                     variant="outlined"
                     label="Courriel"
                     margin="dense"
-                    value={formValues.courriel}
+                    value={formValues.email}
                     onBlur={gereChangementInput}
                     onChange={gereChangementInputValue}
-                    error={formErrors.courriel ? true : false}
-                    helperText={formErrors.courriel}
+                    error={formErrors.email ? true : false}
+                    helperText={formErrors.email}
                 >
                     Courriel
                 </TextField>
@@ -193,6 +196,25 @@ function Signup() {
                 <Link to={"/login"}>
                     Déjà Membre?<span> Connectez-vous ici!</span>
                 </Link>
+                {signupErrorMsg && (
+                    <Alert
+                        severity="error"
+                        action={
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                size="small"
+                                onClick={() => {
+                                    setSignupErrorMsg(null);
+                                }}
+                            >
+                                <CloseIcon fontSize="inherit" />
+                            </IconButton>
+                        }
+                    >
+                        {signupErrorMsg.data}
+                    </Alert>
+                )}
             </form>
         </div>
     );
