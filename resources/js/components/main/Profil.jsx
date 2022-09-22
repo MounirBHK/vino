@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./Profil.scss";
 import {
     Button,
@@ -10,24 +10,38 @@ import {
     DialogTitle,
     DialogActions,
     TextField,
+    Alert,
+    IconButton,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { getInputError } from "../homepage/formValidator/signupForm";
+import UserContext from "../../context/userContext";
 
 function Profil({ userLoggedIn }) {
+    const userContext = useContext(UserContext);
+    const [user, setUser] = userContext;
     const [open, setOpen] = useState(false);
     const [formValues, setFormValues] = useState({
         nom_utilisateur: userLoggedIn["user"].name,
-        courriel: userLoggedIn["user"].email,
+        email: userLoggedIn["user"].email,
         prenom: userLoggedIn["user"].prenom,
         nom: userLoggedIn["user"].nom,
     });
     const [formErrors, setFormErrors] = useState({});
     const [formIsValid, setFormIsValid] = useState(false);
+    const [updateErrorMsg, setUpdateErrorMsg] = useState(null);
+    const [updateSuccessMsg, setUpdateSuccessMsg] = useState(null);
+    const hostOriginURL = window.location.origin;
 
     const envoieDonneesForm = async (donnees) => {
-        return await axios.post(
-            hostOriginURL + "/api/custom-auth/signup",
-            donnees
+        return await axios.put(
+            hostOriginURL + "/api/custom-auth/update",
+            donnees,
+            {
+                headers: {
+                    Authorization: "Bearer " + userLoggedIn.access_token,
+                },
+            }
         );
     };
 
@@ -47,22 +61,23 @@ function Profil({ userLoggedIn }) {
     }
 
     function soumetFormulaire() {
-        console.log(formValues);
-        // envoieDonneesForm(formValues).then((response) => {
-        //     if (response.status === 201)
-        //         navigate("/login", {
-        //             state: {
-        //                 success_message:
-        //                     "Votre compte a été créé avec succes, connectez-vous!",
-        //             },
-        //         });
-        // });
+        envoieDonneesForm(formValues)
+            .then((response) => {
+                userLoggedIn.user = response.data;
+                localStorage.setItem("user", JSON.stringify(userLoggedIn));
+                setUser(userLoggedIn);
+                setUpdateSuccessMsg("Modifications effectuées avec succès");
+                setOpen(false);
+            })
+            .catch((error) => {
+                setUpdateErrorMsg(error.response);
+            });
     }
 
     const handleClose = () => {
         setFormValues({
             nom_utilisateur: userLoggedIn["user"].name,
-            courriel: userLoggedIn["user"].email,
+            email: userLoggedIn["user"].email,
             prenom: userLoggedIn["user"].prenom,
             nom: userLoggedIn["user"].nom,
         });
@@ -70,6 +85,7 @@ function Profil({ userLoggedIn }) {
     };
 
     const handleClickOpen = () => {
+        setUpdateSuccessMsg(false);
         setOpen(true);
     };
 
@@ -90,6 +106,25 @@ function Profil({ userLoggedIn }) {
     return (
         <React.Fragment>
             <h2>Mon Profil</h2>
+            {updateSuccessMsg && (
+                <Alert
+                    severity="success"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setUpdateSuccessMsg(null);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                >
+                    {updateSuccessMsg}
+                </Alert>
+            )}
             <Card className="Profil">
                 <div className="Profil-field">
                     <span className="Profil-field-label">
@@ -124,6 +159,25 @@ function Profil({ userLoggedIn }) {
                         Modifier vos informations personnelles puis cliquer sur
                         envoyer
                     </DialogContentText>
+                    {updateErrorMsg && (
+                        <Alert
+                            severity="error"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setUpdateErrorMsg(null);
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                        >
+                            {updateErrorMsg.data}
+                        </Alert>
+                    )}
                     <TextField
                         autoFocus
                         margin="dense"
@@ -142,17 +196,17 @@ function Profil({ userLoggedIn }) {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="courriel"
-                        name="courriel"
+                        id="email"
+                        name="email"
                         label="Courriel"
                         type="email"
                         fullWidth
                         variant="standard"
-                        value={formValues.courriel}
+                        value={formValues.email}
                         onBlur={gereChangementInput}
                         onChange={gereChangementInputValue}
-                        error={formErrors.courriel ? true : false}
-                        helperText={formErrors.courriel}
+                        error={formErrors.email ? true : false}
+                        helperText={formErrors.email}
                     />
                     <TextField
                         autoFocus

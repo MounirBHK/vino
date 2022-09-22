@@ -23,6 +23,7 @@ function Main({
     bouteillesCellier,
     setBouteillesCellier,
     setCelliers,
+    user,
 }) {
     const { state: stateBouteille } = useLocation();
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;

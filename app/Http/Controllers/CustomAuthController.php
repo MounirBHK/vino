@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Auth;
 use Hash;
 use Session;
@@ -60,7 +61,7 @@ class CustomAuthController extends Controller
     public function customSignup(Request $request){
 
         $emailValidation = Validator::make(['email' => $request->email], [
-            'email'                 => 'required|email|unique:users',]);
+            'email'                 => 'required|email|unique:users']);
 
         if($emailValidation->fails()) return response('Cet email est déjà utilisé', 405);
 
@@ -85,21 +86,29 @@ class CustomAuthController extends Controller
     }
 
     public function customUpdate(Request $request){
+        $user = Auth::user();
+        
+        $emailValidation = Validator::make(['email' => $request->email], [
+            'email'                 => [
+                'required',
+                Rule::unique('users')->ignore($user->id)]
+            ]);
+
+        if($emailValidation->fails()) return response('Cet email est déjà utilisé', 405);
+
         $request->validate([
-            'courriel'              => 'required|email',
             'nom_utilisateur'       => 'required|string|min:5|max:30',
             'prenom'                => 'required|alpha|min:2|max:30',
             'nom'                   => 'required|alpha|min:2|max:30',
         ]);
 
-        // $user->update([
-        //     'name'      => $request->nom_utilisateur,
-        //     'email'     => $request->courriel,
-        //     'prenom'    => $request->prenom,
-        //     'nom'       => $request->nom
-        // ]);
-        // $user->save();
-        // return $user;
+        $user->update([
+            'name'      => $request->nom_utilisateur,
+            'email'     => $request->email,
+            'prenom'    => $request->prenom,
+            'nom'       => $request->nom
+        ]);
+        return $user;
     }
 
 
