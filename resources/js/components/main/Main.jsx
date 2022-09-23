@@ -14,6 +14,7 @@ import RetirerBouteillesCellier from "./RetirerBouteillesCellier";
 import SupprimerCellier from "./SupprimerCellier";
 import Profil from "./Profil";
 import PasswordResetForm from "./PasswordResetForm";
+import Accueil from "./Accueil";
 // -------------------
 
 function Main({
@@ -47,6 +48,7 @@ function Main({
     return (
         <div className="Main">
             <Routes>
+                <Route path="" element={<Accueil />}></Route>
                 <Route
                     path="/*"
                     element={

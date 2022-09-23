@@ -38,11 +38,11 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::put('custom-auth/update', [CustomAuthController::class, 'customUpdate'])->name('custom-update');
     Route::get('custom-auth/envoiEmail', [CustomAuthController::class, 'envoiEmail'])->name('custom-envoiEmail');
     Route::put('custom-auth/resetPassword', [CustomAuthController::class, 'resetPassword'])->name('custom-resetPassword');
+    Route::delete('deleteBoutCellier/{id_cellier}/{id_bouteille}', [CellierBoutController::class, 'destroy'])->name('destroy-cellier-bouteilles');
+    Route::delete('deleteCellier/{id_cellier}', [CellierBoutController::class, 'destroyAll'])->name('destroy-cellier');
 });
 
 // route pour suppression cellier ett bouteilles de cellier
-Route::delete('deleteBoutCellier/{id_cellier}/{id_bouteille}', [CellierBoutController::class, 'destroy'])->name('destroy-cellier-bouteilles');
-Route::delete('deleteCellier/{id_cellier}', [CellierBoutController::class, 'destroyAll'])->name('destroy-cellier');
 // -----------------
 
 Route::post('custom-auth/login', [CustomAuthController::class, 'customLogin'])->name('custom-login');
