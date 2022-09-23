@@ -35,6 +35,7 @@ function Profil({ userLoggedIn }) {
     const [formErrors, setFormErrors] = useState({});
     const [formIsValid, setFormIsValid] = useState(false);
     const [updateErrorMsg, setUpdateErrorMsg] = useState(null);
+    const [emailSentSuccessMsg, setEmailSentSuccessMsg] = useState(null);
     const [updateSuccessMsg, setUpdateSuccessMsg] = useState(null);
     const hostOriginURL = window.location.origin;
 
@@ -60,7 +61,10 @@ function Profil({ userLoggedIn }) {
 
     function handleEnvoiEmail() {
         envoiEmail().then((response) => {
-            console.log(response);
+            setEmailSentSuccessMsg(
+                `L'email de réinitialisation a bien été envoyé à l'adresse: ` +
+                    response.data.email
+            );
         });
     }
 
@@ -125,6 +129,25 @@ function Profil({ userLoggedIn }) {
     return (
         <React.Fragment>
             <h2>Mon Profil</h2>
+            {emailSentSuccessMsg && (
+                <Alert
+                    severity="success"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setEmailSentSuccessMsg(null);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                >
+                    {emailSentSuccessMsg}
+                </Alert>
+            )}
             {updatePasswordSuccessMsg && (
                 <Alert
                     severity="success"

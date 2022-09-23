@@ -125,7 +125,7 @@ class CustomAuthController extends Controller
         $to_email = 'romaindepret91@gmail.com';
         $tempPassword = str::random(50);
         $user->update(['temp_password' => $tempPassword]);
-        $body="<a href='http://127.0.0.1:8000/dashboard/passwordReset/" . $tempPassword . ">Cliquez ici pour réinitialiser votre mot de passe</a>";
+        $body="<a href='http://127.0.0.1:8000/dashboard/passwordReset/" . $tempPassword . "'>Cliquez ici pour réinitialiser votre mot de passe</a>";
         Mail::send('resetPasswordEmail', $data =['name'=>$to_name,
         'body' => $body
         ],
@@ -133,7 +133,7 @@ class CustomAuthController extends Controller
         {
             $message->to($to_email, $to_name)->subject('Réinitialisation de votre mot de passe');
         });
-        return  $user;
+        return $user;
     }
     /**
      * Show the form for creating a new resource.
