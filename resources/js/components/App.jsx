@@ -155,11 +155,12 @@ function App() {
             <Route
                 path="/dashboard/*"
                 element={
-                    <UserProvider value={user}>
+                    <UserProvider value={[user, setUser]}>
                         <CelliersProvider value={celliers}>
                             <BouteillesProvider value={bouteilles}>
                                 <Entete userLoggedIn={userLoggedIn} />
                                 <Main
+                                    user={user}
                                     idCellierEnCours={idCellierEnCours}
                                     setBouteilles={setBouteilles}
                                     setCelliers={setCelliers}

@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Auth;
 use Hash;
 use Session;
+use Validator;
+use Mail;
 
 class CustomAuthController extends Controller
 {
@@ -57,8 +61,13 @@ class CustomAuthController extends Controller
     }
 
     public function customSignup(Request $request){
+
+        $emailValidation = Validator::make(['email' => $request->email], [
+            'email'                 => 'required|email|unique:users']);
+
+        if($emailValidation->fails()) return response('Cet email est déjà utilisé', 405);
+
         $request->validate([
-            'courriel'              => 'required|email',
             'nom_utilisateur'       => 'required|string|min:5|max:30',
             'prenom'                => 'required|alpha|min:2|max:30',
             'nom'                   => 'required|alpha|min:2|max:30',
@@ -69,7 +78,7 @@ class CustomAuthController extends Controller
         $user = new User;
         $user->fill([
             'name'      => $request->nom_utilisateur,
-            'email'     => $request->courriel,
+            'email'     => $request->email,
             'password'  => Hash::make($request->motDePasse),
             'prenom'    => $request->prenom,
             'nom'       => $request->nom
@@ -78,14 +87,72 @@ class CustomAuthController extends Controller
         return $user;
     }
 
+    public function customUpdate(Request $request){
+        $user = Auth::user();
+        
+        $emailValidation = Validator::make(['email' => $request->email], [
+            'email'                 => [
+                'required',
+                Rule::unique('users')->ignore($user->id)]
+            ]);
+
+        if($emailValidation->fails()) return response('Cet email est déjà utilisé', 405);
+
+        $request->validate([
+            'nom_utilisateur'       => 'required|string|min:5|max:30',
+            'prenom'                => 'required|alpha|min:2|max:30',
+            'nom'                   => 'required|alpha|min:2|max:30',
+        ]);
+
+        $user->update([
+            'name'      => $request->nom_utilisateur,
+            'email'     => $request->email,
+            'prenom'    => $request->prenom,
+            'nom'       => $request->nom
+        ]);
+        return $user;
+    }
+
+  /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function envoiEmail()
+    {
+        $user = Auth::user();
+        $to_name = 'Romain';
+        $to_email = 'romaindepret91@gmail.com';
+        $tempPassword = str::random(50);
+        $user->update(['temp_password' => $tempPassword]);
+        $body="<a href='http://127.0.0.1:8000/dashboard/passwordReset/" . $tempPassword . "'>Cliquez ici pour réinitialiser votre mot de passe</a>";
+        Mail::send('resetPasswordEmail', $data =['name'=>$to_name,
+        'body' => $body
+        ],
+        function($message) use ($to_name, $to_email)
+        {
+            $message->to($to_email, $to_name)->subject('Réinitialisation de votre mot de passe');
+        });
+        return $user;
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function resetPassword(Request $request)
     {
-        //
+        $user = Auth::user();
+        $request->validate([
+            'motDePasse'                => 'required',
+            'motDePasse_confirme'       => 'required|same:motDePasse',
+            'tempPassword'              => 'required',
+        ]);
+        if($request->tempPassword !== $user->temp_password) return response('Opération non autorisée', 405);
+        $user->update([
+            'password'      => Hash::make($request->motDePasse),
+        ]);
+        return $user;
     }
 
     /**

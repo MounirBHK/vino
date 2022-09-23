@@ -16,7 +16,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import CircularProgress from "@mui/material/CircularProgress";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faEarthAmerica,
+    faUserCircle,
     faWineBottle,
     faDungeon,
     faPowerOff,
@@ -60,6 +60,18 @@ export default function SimpleBottomNavigation({
                     setValue(newValue);
                 }}
             >
+                <BottomNavigationAction
+                    label="Profil"
+                    icon={
+                        <FontAwesomeIcon
+                            className="navIcon"
+                            icon={faUserCircle}
+                        />
+                    }
+                    onClick={() => {
+                        navigate(`/dashboard/profil`, {});
+                    }}
+                />
                 <BottomNavigationAction
                     label="Celliers"
                     icon={

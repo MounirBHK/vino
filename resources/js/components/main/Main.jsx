@@ -12,6 +12,8 @@ import axios from "axios";
 // -------------------
 import RetirerBouteillesCellier from "./RetirerBouteillesCellier";
 import SupprimerCellier from "./SupprimerCellier";
+import Profil from "./Profil";
+import PasswordResetForm from "./PasswordResetForm";
 // -------------------
 
 function Main({
@@ -22,6 +24,7 @@ function Main({
     bouteillesCellier,
     setBouteillesCellier,
     setCelliers,
+    user,
 }) {
     const { state: stateBouteille } = useLocation();
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
@@ -53,6 +56,20 @@ function Main({
                                 element={
                                     <React.Fragment>
                                         <SelectCellier />
+                                    </React.Fragment>
+                                }
+                            ></Route>
+                            <Route
+                                path="/profil"
+                                element={<Profil userLoggedIn={userLoggedIn} />}
+                            ></Route>
+                            <Route
+                                path="/passwordReset/*"
+                                element={
+                                    <React.Fragment>
+                                        <PasswordResetForm
+                                            userLoggedIn={userLoggedIn}
+                                        />
                                     </React.Fragment>
                                 }
                             ></Route>
@@ -120,12 +137,13 @@ function Main({
                                     <RetirerBouteillesCellier
                                         idCellierEnCours={idCellierEnCours}
                                         bouteillesCellier={bouteillesCellier}
-                                        setBouteillesCellier={setBouteillesCellier}
+                                        setBouteillesCellier={
+                                            setBouteillesCellier
+                                        }
                                         gereSelectCellier={gereSelectCellier}
                                     />
                                 }
-                            >
-                            </Route>
+                            ></Route>
 
                             <Route
                                 path="/suppCellier/:idCellier"
@@ -133,12 +151,13 @@ function Main({
                                     <SupprimerCellier
                                         idCellierEnCours={idCellierEnCours}
                                         bouteillesCellier={bouteillesCellier}
-                                        setBouteillesCellier={setBouteillesCellier}
-                                        setCelliers={setCelliers}   
+                                        setBouteillesCellier={
+                                            setBouteillesCellier
+                                        }
+                                        setCelliers={setCelliers}
                                     />
                                 }
-                            >
-                            </Route>
+                            ></Route>
 
                             {/* ----------------- */}
                         </Routes>
