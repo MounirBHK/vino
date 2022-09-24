@@ -14,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 function SelectCellier() {
     const navigate = useNavigate();
-    const celliers = useContext(CelliersContext);
+    const celliersContext = useContext(CelliersContext);
+    const [celliers, setCelliers] = celliersContext;
     return (
         <Box className="selectCellier">
             <h2>Vos celliers</h2>
