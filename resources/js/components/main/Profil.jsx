@@ -128,7 +128,7 @@ function Profil({ userLoggedIn }) {
 
     return (
         <React.Fragment>
-            <h2>Mon Profil</h2>
+            <h2 className="Profil-title">Mon Profil</h2>
             {emailSentSuccessMsg && (
                 <Alert
                     severity="success"
@@ -207,14 +207,14 @@ function Profil({ userLoggedIn }) {
                 </div>
             </Card>
             <Button
-                className="modifier"
+                className="Profil-btn"
                 variant="contained"
                 onClick={handleClickOpen}
             >
                 Modifier
             </Button>
             <Button
-                className="modifier"
+                className="Profil-btn"
                 variant="contained"
                 onClick={handleEnvoiEmail}
             >
@@ -247,7 +247,6 @@ function Profil({ userLoggedIn }) {
                         </Alert>
                     )}
                     <TextField
-                        autoFocus
                         margin="dense"
                         id="nom_utilisateur"
                         name="nom_utilisateur"
@@ -260,9 +259,15 @@ function Profil({ userLoggedIn }) {
                         onChange={gereChangementInputValue}
                         error={formErrors.nom_utilisateur ? true : false}
                         helperText={formErrors.nom_utilisateur}
+                        sx={{
+                            "& label": {
+                                "&.Mui-focused": {
+                                    color: "#6a3352",
+                                },
+                            },
+                        }}
                     />
                     <TextField
-                        autoFocus
                         margin="dense"
                         id="email"
                         name="email"
@@ -275,9 +280,15 @@ function Profil({ userLoggedIn }) {
                         onChange={gereChangementInputValue}
                         error={formErrors.email ? true : false}
                         helperText={formErrors.email}
+                        sx={{
+                            "& label": {
+                                "&.Mui-focused": {
+                                    color: "#6a3352",
+                                },
+                            },
+                        }}
                     />
                     <TextField
-                        autoFocus
                         margin="dense"
                         id="prenom"
                         name="prenom"
@@ -290,9 +301,15 @@ function Profil({ userLoggedIn }) {
                         onChange={gereChangementInputValue}
                         error={formErrors.prenom ? true : false}
                         helperText={formErrors.prenom}
+                        sx={{
+                            "& label": {
+                                "&.Mui-focused": {
+                                    color: "#6a3352",
+                                },
+                            },
+                        }}
                     />
                     <TextField
-                        autoFocus
                         margin="dense"
                         id="nom"
                         name="nom"
@@ -305,11 +322,24 @@ function Profil({ userLoggedIn }) {
                         onChange={gereChangementInputValue}
                         error={formErrors.nom ? true : false}
                         helperText={formErrors.nom}
+                        sx={{
+                            "& label": {
+                                "&.Mui-focused": {
+                                    color: "#6a3352",
+                                },
+                            },
+                        }}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Annuler</Button>
-                    <Button onClick={soumetFormulaire} disabled={!formIsValid}>
+                    <Button style={{ color: "#6a3352" }} onClick={handleClose}>
+                        Annuler
+                    </Button>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={soumetFormulaire}
+                        disabled={!formIsValid}
+                    >
                         Envoyer
                     </Button>
                 </DialogActions>

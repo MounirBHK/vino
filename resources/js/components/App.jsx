@@ -156,7 +156,7 @@ function App() {
                 path="/dashboard/*"
                 element={
                     <UserProvider value={[user, setUser]}>
-                        <CelliersProvider value={celliers}>
+                        <CelliersProvider value={[celliers, setCelliers]}>
                             <BouteillesProvider value={bouteilles}>
                                 <Entete userLoggedIn={userLoggedIn} />
                                 <Main
