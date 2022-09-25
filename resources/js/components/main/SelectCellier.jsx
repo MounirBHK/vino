@@ -16,6 +16,7 @@ function SelectCellier() {
     const navigate = useNavigate();
     const celliersContext = useContext(CelliersContext);
     const [celliers, setCelliers] = celliersContext;
+    console.log(celliers);
     return (
         <Box className="selectCellier">
             <h2>Vos celliers</h2>

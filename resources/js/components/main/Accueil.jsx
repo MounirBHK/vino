@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import CelliersContext from "../../context/celliersContext";
 import BouteillesContext from "../../context/bouteillesContext";
 import "./Accueil.scss";
@@ -23,7 +24,7 @@ function Accueil() {
             {celliers.length === 0 && (
                 <React.Fragment>
                     <div className="Accueil-header">
-                        <p>Bienvenu dans votre espace!</p>{" "}
+                        <p>Bienvenue dans votre espace!</p>{" "}
                         <p>
                             Créez un cellier pour commencer à le remplir de vos
                             bouteilles préférées!
@@ -37,6 +38,29 @@ function Accueil() {
                                 </div>
                                 <div>
                                     <AddCircleRoundedIcon />
+                                </div>
+                            </div>
+                        </Card>
+                    </Button>
+                </React.Fragment>
+            )}
+            {celliers.length > 0 && (
+                <React.Fragment>
+                    <div className="Accueil-header">
+                        <p>Bienvenue dans votre espace!</p>{" "}
+                        <p>
+                            Commencer à remplir vos celliers avec vos bouteilles
+                            préférées!
+                        </p>
+                    </div>
+                    <Button onClick={() => navigate(`/dashboard/celliers`)}>
+                        <Card className="Carte-cellier">
+                            <div className="ajoutCellier">
+                                <div>
+                                    <h2>Accéder à mes celliers</h2>
+                                </div>
+                                <div>
+                                    <ArrowCircleRightIcon />
                                 </div>
                             </div>
                         </Card>
@@ -112,7 +136,9 @@ function Accueil() {
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
                             }}
                         >
-                            <p>Découvrez notre catalogue de vins</p>
+                            <p className="Carousel-title">
+                                Découvrez notre catalogue de vins
+                            </p>
                         </div>
                     </div>
                     {bouteillesToDisplay.map((bouteille) => (
@@ -124,23 +150,38 @@ function Accueil() {
                             }}
                             key={bouteille.id}
                         >
-                            <Card className="Carte-bouteille">
-                                <div className="wrapper">
-                                    <div className="info">
-                                        <h3 className="nom">
-                                            {bouteille.nom_bouteille}
-                                        </h3>
-                                        <p className="pays">
-                                            {bouteille.description}
-                                        </p>
+                            <Button
+                                onClick={() => {
+                                    navigate(`/dashboard/ajoutBouteille`, {
+                                        state: bouteille,
+                                    });
+                                }}
+                            >
+                                <Card className="Carte-bouteille">
+                                    <div className="wrapper">
+                                        <div className="info">
+                                            <h3 className="nom">
+                                                {bouteille.nom_bouteille}
+                                            </h3>
+                                            <p className="pays">
+                                                {bouteille.description}
+                                            </p>
+                                        </div>
+                                        <div className="carte-img">
+                                            <img
+                                                srcSet={
+                                                    bouteille.url_img.includes(
+                                                        "pastille_gout"
+                                                    )
+                                                        ? "https://www.saq.com/media/wysiwyg/placeholder/category/06.png"
+                                                        : bouteille.url_img
+                                                }
+                                                alt="bouteille"
+                                            />
+                                        </div>
                                     </div>
-                                    <img
-                                        className="carte-img"
-                                        srcSet={bouteille.url_img}
-                                        alt="bouteille"
-                                    />
-                                </div>
-                            </Card>
+                                </Card>
+                            </Button>
                         </div>
                     ))}
                 </ReactSimplyCarousel>

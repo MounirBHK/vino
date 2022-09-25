@@ -75,14 +75,25 @@
             flex-direction: column-reverse;
             justify-content: center;
             padding: 20px;
+            height: auto;
 
             .info {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
             }
+
+            .carte-img {
+                & > img {
+                    width: 111px;
+                }
+            }
         }
     }
+}
+
+.Carousel-title {
+    font-weight: 200;
 }
 
 .Carousel-main {

@@ -11,16 +11,23 @@ import {
     Box,
     List,
     Divider,
+    Dialog,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    DialogActions,
+    Button,
 } from "@mui/material";
 import Bouteille from "./Bouteille";
 import BouteillesContext from "../../context/bouteillesContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./FormAjout.scss";
 
 function FormAjoutBouteille({ idCellierEnCours }) {
     let vi = idCellierEnCours ? idCellierEnCours : "default";
     const [idCell, setIdCell] = useState(vi);
     const navigate = useNavigate();
+    const { state: bouteilleAccueil } = useLocation();
     const bouteilles = useContext(BouteillesContext);
     const [bouteillesCopie, setBouteillesCopie] = useState([]);
     const [celliers, setCelliers] = useState([]);
@@ -30,7 +37,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
     const [cellierSelected, setCellierSelected] = useState(null);
-
+    const [openCellierDialog, setOpenCellierDialog] = useState(false);
     const today = () => {
         var d = new Date().getDate();
         var day = d > 9 ? d : "0" + d;
@@ -39,7 +46,6 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         var year = new Date().getFullYear();
         return year + "-" + month + "-" + day;
     };
-
     const putBoutCell = async (refBout) => {
         return await axios.post(
             hostOriginURL + "/api/ajouterBouteilleCellier",
@@ -80,6 +86,11 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         e.preventDefault();
     };
 
+    const handleClose = (event, reason) => {
+        if (reason && reason == "backdropClick") return;
+        setOpenCellierDialog(false);
+    };
+
     function choixCellier(idCellier) {
         const userId = userLoggedIn.user.id;
         getCelliers(userId).then((response) => {
@@ -89,11 +100,13 @@ function FormAjoutBouteille({ idCellierEnCours }) {
             setIdCell(idCellier);
         });
     }
+
     useEffect(() => {
         if (userLoggedIn) {
             const userId = userLoggedIn.user.id;
             getCelliers(userId).then((celliersData) => {
                 setCelliers(celliersData.data);
+                if (celliersData.data.length == 0) setOpenCellierDialog(true);
             });
         }
     }, [user]);
@@ -127,6 +140,39 @@ function FormAjoutBouteille({ idCellierEnCours }) {
 
     return (
         <div className="FormAjout">
+            <Dialog
+                className="AjoutBouteilleNoCellier-dialog"
+                open={openCellierDialog}
+                onClose={handleClose}
+            >
+                <DialogTitle>Aucun cellier</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Créez votre premier cellier pour y ajouter des
+                        bouteilles{" "}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={() => {
+                            navigate(-1, { replace: true });
+                        }}
+                    >
+                        Retour
+                    </Button>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={() => {
+                            navigate(`/dashboard/ajoutCellier`, {
+                                state: { isOpen: false },
+                            });
+                        }}
+                    >
+                        Créer un cellier
+                    </Button>
+                </DialogActions>
+            </Dialog>
             <h2>NOUVELLE BOUTEILLE</h2>
 
             <FormControl className="FormAjout">
@@ -173,6 +219,11 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                             variant="outlined"
                             margin="dense"
                             onChange={(e) => setLibelle(e.target.value)}
+                            defaultValue={
+                                bouteilleAccueil
+                                    ? bouteilleAccueil.nom_bouteille
+                                    : ""
+                            }
                         >
                             Recherche
                         </TextField>
