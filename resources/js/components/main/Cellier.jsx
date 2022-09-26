@@ -1,14 +1,13 @@
 import { React, useEffect } from "react";
 import { Button, Card } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import ErrorIcon from '@mui/icons-material/Error';
-import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
+import ErrorIcon from "@mui/icons-material/Error";
+import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import CarteBouteille from "./CarteBouteille";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Cellier.scss";
 
 function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
-    
     const navigate = useNavigate();
     const { state: cellier } = useLocation();
 
@@ -51,7 +50,11 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
 
             {/* -------------- */}
 
-            <Button onClick={() => navigate(`/dashboard/retirerBoutsCell/${cellier.id}`)}>
+            <Button
+                onClick={() =>
+                    navigate(`/dashboard/retirerBoutsCell/${cellier.id}`)
+                }
+            >
                 <Card className="Carte-bouteille">
                     <div className="ajoutBouteille">
                         <div>
@@ -64,7 +67,9 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
                 </Card>
             </Button>
 
-            <Button onClick={() => navigate(`/dashboard/suppCellier/${cellier.id}`)}>
+            <Button
+                onClick={() => navigate(`/dashboard/suppCellier/${cellier.id}`)}
+            >
                 <Card className="Carte-bouteille">
                     <div className="ajoutBouteille">
                         <div>
@@ -76,7 +81,6 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
                     </div>
                 </Card>
             </Button>
-
 
             {/* -------------- */}
         </div>

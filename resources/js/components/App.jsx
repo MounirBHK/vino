@@ -147,6 +147,7 @@ function App() {
             setBouteillesCellier(newBouteilles);
             navigate(`/dashboard/celliers/${idCellier}/${idBouteille}`, {
                 state: bouteilleChangee,
+                replace: true,
             });
         });
     }

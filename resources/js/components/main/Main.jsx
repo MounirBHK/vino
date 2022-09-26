@@ -98,6 +98,9 @@ function Main({
                                         <CarteUneBouteille
                                             gereQuantite={gereQuantite}
                                             bouteille={stateBouteille}
+                                            gereSelectCellier={
+                                                gereSelectCellier
+                                            }
                                         />
                                     </React.Fragment>
                                 }
