@@ -2,6 +2,14 @@ import React from "react";
 import "./CarteUneBouteille.scss";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
+import {
+    Dialog,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    DialogActions,
+} from "@mui/material";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faEarthAmerica,
@@ -13,12 +21,53 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function CarteUneBouteille({ bouteille, gereQuantite }) {
+function CarteUneBouteille({ bouteille, gereQuantite, gereSelectCellier }) {
     const navigate = useNavigate();
     const { state: stateBouteille } = useLocation();
     const bouteilleReceived = bouteille || stateBouteille;
     const url = bouteilleReceived.url_img;
     const urlNoParam = url.split("?")[0];
+    const [openSuppDialog, setOpenSuppDialog] = useState(false);
+    const hostOriginURL = window.location.origin;
+    const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+
+    const deleteBoutCell = async (idRef, idBtSupp) => {
+        return await axios.delete(
+            hostOriginURL + `/api/deleteBoutCellier/${idRef}/${idBtSupp}`,
+            {
+                headers: {
+                    Authorization: "Bearer " + userLoggedIn.access_token,
+                },
+            }
+        );
+    };
+
+    const handleBoire = (value) => {
+        console.log(bouteilleReceived.quantite);
+        if (bouteilleReceived.quantite > 1)
+            gereQuantite(
+                bouteilleReceived.id_cellier,
+                bouteilleReceived.id_bouteille,
+                bouteilleReceived.quantite,
+                value,
+                bouteilleReceived
+            );
+        else setOpenSuppDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenSuppDialog(false);
+    };
+
+    const handleSuppBouteille = () => {
+        deleteBoutCell(
+            bouteilleReceived.id_cellier,
+            bouteilleReceived.id_bouteille
+        ).then(() => {
+            navigate(-1);
+        });
+    };
+
     return (
         <div className="Carte-une-bouteille">
             <svg
@@ -154,21 +203,33 @@ function CarteUneBouteille({ bouteille, gereQuantite }) {
                 >
                     Ajouter
                 </Button>
-                <Button
-                    value={-1}
-                    onClick={(e) =>
-                        gereQuantite(
-                            bouteilleReceived.id_cellier,
-                            bouteilleReceived.id_bouteille,
-                            bouteilleReceived.quantite,
-                            e.target.value,
-                            bouteilleReceived
-                        )
-                    }
-                >
+                <Button value={-1} onClick={(e) => handleBoire(e.target.value)}>
                     Boire
                 </Button>
             </ButtonGroup>
+            <Dialog open={openSuppDialog}>
+                <DialogContent>
+                    <DialogTitle id="attention">ATTENTION</DialogTitle>
+                    <DialogContentText id="alert-dialog-description">
+                        Voulez vous supprimer cette bouteille?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={handleCloseDialog}
+                        autoFocus
+                    >
+                        Annuler
+                    </Button>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={handleSuppBouteille}
+                    >
+                        Supprimer
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
