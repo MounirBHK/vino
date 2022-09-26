@@ -153,6 +153,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
 
         setBouteillesCopie(res);
     }, [libelle]);
+    window.scrollTo(0, 0);
     return (
         <div className="FormAjout">
             <Dialog
