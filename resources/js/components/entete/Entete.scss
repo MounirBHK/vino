@@ -19,10 +19,23 @@ html {
     padding: 10px !important;
     z-index: 10;
 
+    & > .MuiButtonBase-root {
+        display: flex;
+        flex-direction: column-reverse;
+
+        & > span {
+            color: #ffe599;
+            font-size: 0.3em;
+        }
+    }
+
     .back {
         position: absolute;
-        top: 4vh;
-        left: 5vw;
+        top: 6vh;
+        left: 3vw;
+        & > svg {
+            width: 7vw;
+        }
     }
 
     .App-header-logo {
