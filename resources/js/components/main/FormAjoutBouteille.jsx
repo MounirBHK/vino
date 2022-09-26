@@ -31,6 +31,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
     const { state: bouteilleAccueil } = useLocation();
     const bouteilles = useContext(BouteillesContext);
     const [bouteillesCopie, setBouteillesCopie] = useState([]);
+    const [bouteilleAjoutee, setBouteilleAjoutee] = useState(null);
     const [celliers, setCelliers] = useState([]);
     const [libelle, setLibelle] = useState("");
     const [quantite, setQuantite] = useState(1);
@@ -39,6 +40,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
     const [cellierSelected, setCellierSelected] = useState(null);
     const [openCellierDialog, setOpenCellierDialog] = useState(false);
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const today = () => {
         var d = new Date().getDate();
         var day = d > 9 ? d : "0" + d;
@@ -92,6 +94,18 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         setOpenCellierDialog(false);
     };
 
+    const handleCloseConfirmDialog = (event, reason) => {
+        if (reason && reason == "backdropClick") return;
+        setOpenConfirmDialog(false);
+    };
+
+    const handleOpenConfirmDialog = (bouteille) => {
+        if (idCell !== "default") {
+            setBouteilleAjoutee(bouteille);
+            setOpenConfirmDialog(true);
+        } else alert("Vous n'avez pas sélectionné de cellier...");
+    };
+
     function choixCellier(idCellier) {
         const userId = userLoggedIn.user.id;
         getCelliers(userId).then((response) => {
@@ -117,7 +131,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
             choixCellier(idCell);
         }
     }, []);
-
+    console.log(cellierSelected);
     useEffect(() => {
         setBouteillesCopie([]);
         let boutsRef = bouteilles;
@@ -138,7 +152,6 @@ function FormAjoutBouteille({ idCellierEnCours }) {
 
         setBouteillesCopie(res);
     }, [libelle]);
-
     return (
         <div className="FormAjout">
             <Dialog
@@ -174,7 +187,46 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                     </Button>
                 </DialogActions>
             </Dialog>
-            <h2>NOUVELLE BOUTEILLE</h2>
+            <Dialog
+                className="AjoutBouteilleConfirm-dialog"
+                open={openConfirmDialog}
+                onClose={handleCloseConfirmDialog}
+            >
+                <DialogContent>
+                    <DialogTitle>
+                        {bouteilleAjoutee
+                            ? bouteilleAjoutee.nom_bouteille
+                            : null}
+                    </DialogTitle>
+                    <DialogContentText>
+                        <strong>
+                            Confirmer l'ajout de cette bouteille au cellier?
+                        </strong>
+                    </DialogContentText>
+                    <DialogContentText className="quantite">
+                        <span>Quantité: {quantite ? quantite : null}</span>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={() => {
+                            handleCloseConfirmDialog();
+                        }}
+                    >
+                        Annuler
+                    </Button>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={() => {
+                            handleBoutCell(bouteilleAjoutee);
+                        }}
+                    >
+                        Confirmer
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <h2>AJOUT DE BOUTEILLES</h2>
 
             <FormControl className="FormAjout">
                 <Select
@@ -216,7 +268,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                             type="text"
                             name="libelle"
                             id="libelle"
-                            label="Mots-clés..."
+                            label="Recherche"
                             variant="outlined"
                             margin="dense"
                             onChange={(e) => setLibelle(e.target.value)}
@@ -256,7 +308,9 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                                               divider
                                               key={bouteille.id}
                                               onClick={(e) =>
-                                                  handleBoutCell(bouteille)
+                                                  handleOpenConfirmDialog(
+                                                      bouteille
+                                                  )
                                               }
                                           >
                                               <Bouteille
@@ -271,7 +325,9 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                                               divider
                                               key={bouteille.id}
                                               onClick={(e) =>
-                                                  handleBoutCell(bouteille)
+                                                  handleOpenConfirmDialog(
+                                                      bouteille
+                                                  )
                                               }
                                           >
                                               <Bouteille
