@@ -14,6 +14,7 @@ use Mail;
 
 class CustomAuthController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -121,8 +122,8 @@ class CustomAuthController extends Controller
     public function envoiEmail()
     {
         $user = Auth::user();
-        $to_name = 'Romain';
-        $to_email = 'romaindepret91@gmail.com';
+        $to_name = $user->prenom." ".$user->nom;
+        $to_email = $user->email;
         $tempPassword = str::random(50);
         $user->update(['temp_password' => $tempPassword]);
         $body="<a href='http://127.0.0.1:8000/dashboard/passwordReset/" . $tempPassword . "'>Cliquez ici pour réinitialiser votre mot de passe</a>";

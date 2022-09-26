@@ -12,7 +12,7 @@ function HomepageActions() {
             </Fab>
             <Fab variant="extended" className="signup">
                 {" "}
-                <Link to="/signup">Souscription</Link>
+                <Link to="/signup">Inscription</Link>
             </Fab>
         </div>
     );
