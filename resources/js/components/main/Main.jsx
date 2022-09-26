@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import "./Main.scss";
 import Cellier from "./Cellier";
@@ -7,7 +7,7 @@ import CarteUneBouteille from "./CarteUneBouteille";
 import FormModifierBouteille from "./FormModifierBouteille";
 import FormAjoutCellier from "./FormAjoutCellier";
 import FormAjoutBouteille from "./FormAjoutBouteille";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 // -------------------
 import RetirerBouteillesCellier from "./RetirerBouteillesCellier";
@@ -27,10 +27,10 @@ function Main({
     setCelliers,
     user,
 }) {
+    const navigate = useNavigate();
     const { state: stateBouteille } = useLocation();
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
     const hostOriginURL = window.location.origin;
-
     const getAllBouteilles = async () => {
         return await axios.get(hostOriginURL + "/api/bouteilles", {
             headers: {

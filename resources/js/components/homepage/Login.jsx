@@ -31,16 +31,14 @@ function Login() {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
     }
-
     function gereConnexion(e) {
         e.preventDefault();
         envoieIdentifiants(formValues)
             .then((response) => {
-                // console.log(response.data);
                 const UserLoggedIn = response.data;
                 localStorage.setItem("user", JSON.stringify(UserLoggedIn));
                 setUser(UserLoggedIn);
-                navigate("/dashboard", {});
+                navigate("/dashboard", { replace: true });
             })
             .catch((error) => {
                 if (error.response.status === 401) {

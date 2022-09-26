@@ -11,33 +11,33 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
-    height: 6.5vh;
+    height: 8vh !important;
 
     .MuiBottomNavigationAction-root,
+    .navIcon {
+        color: #ffe599;
+        font-size: 1.5rem !important;
+    }
+
+    .MuiBottomNavigationAction-label {
+        color: #ffe599;
+    }
+
+    button:hover,
+    button:active {
+        .MuiBottomNavigationAction-label,
         .navIcon {
-            color: #ffe599;
-            font-size: 1.5rem !important;
+            color: #c07a71;
         }
-
-        .MuiBottomNavigationAction-label {
-            color: #ffe599;
-        }
-
-        button:hover,
-        button:active {
-            .MuiBottomNavigationAction-label,
-            .navIcon{
-                color: #c07a71;
-            }
-        }
+    }
 
     .MuiSpeedDial-root {
         position: absolute;
-        bottom: 4vh;
+        bottom: 5vh;
 
         .svg-inline--fa {
-        font-size: 8vw;
-        color: white;
+            font-size: 8vw;
+            color: white;
         }
 
         .MuiFab-root {

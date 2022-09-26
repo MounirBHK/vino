@@ -20,6 +20,7 @@ import {
     faWineBottle,
     faDungeon,
     faPowerOff,
+    faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function SimpleBottomNavigation({
@@ -29,14 +30,11 @@ export default function SimpleBottomNavigation({
     const [value, setValue] = React.useState(0);
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
     const handleClosed = () => setOpen(false);
-
     function handleClose(name) {
         handleClosed();
         navigate(`/dashboard/ajout${name}`, {});
     }
-
     const actions = [
         {
             icon: <FontAwesomeIcon icon={faWineBottle} />,
@@ -49,7 +47,9 @@ export default function SimpleBottomNavigation({
             titre: "Ajouter cellier",
         },
     ];
-
+    const handleClick = () => {
+        setOpen(!open);
+    };
     return (
         <div className="NavBottom">
             <BottomNavigation
@@ -59,6 +59,13 @@ export default function SimpleBottomNavigation({
                     setValue(newValue);
                 }}
             >
+                <BottomNavigationAction
+                    label="Accueil"
+                    icon={<FontAwesomeIcon className="navIcon" icon={faHome} />}
+                    onClick={() => {
+                        navigate(`/dashboard`, {});
+                    }}
+                />
                 <BottomNavigationAction
                     label="Profil"
                     icon={
@@ -100,8 +107,7 @@ export default function SimpleBottomNavigation({
                 role="menu"
                 ariaLabel="Ajouter"
                 icon={<SpeedDialIcon />}
-                onClose={handleClosed}
-                onOpen={handleOpen}
+                onClick={handleClick}
                 open={open}
             >
                 {actions.map((action) => (

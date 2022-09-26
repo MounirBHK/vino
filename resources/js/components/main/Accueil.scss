@@ -67,6 +67,10 @@
         }
     }
 
+    .Carousel-btn {
+        height: 100% !important;
+    }
+
     .Carte-bouteille {
         height: 100%;
 
@@ -75,7 +79,8 @@
             flex-direction: column-reverse;
             justify-content: center;
             padding: 20px;
-            height: auto;
+            height: 100%;
+            max-width: 100%;
 
             .info {
                 display: flex;
@@ -85,7 +90,7 @@
 
             .carte-img {
                 & > img {
-                    width: 111px;
+                    width: 5.5em;
                 }
             }
         }

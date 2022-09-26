@@ -6,8 +6,9 @@ import CelliersContext from "../../context/celliersContext";
 import { Grid, TextField, Button } from "@mui/material";
 import "./FormAjout.scss";
 
-function FormAjoutCellier({ setCelliers }) {
-    const celliers = useContext(CelliersContext);
+function FormAjoutCellier() {
+    const celliersContext = useContext(CelliersContext);
+    const [celliers, setCelliers] = celliersContext;
     const navigate = useNavigate();
     const hostOriginURL = window.location.origin;
     const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
@@ -84,10 +85,7 @@ function FormAjoutCellier({ setCelliers }) {
                         </TextField>
                     </Grid>
                     <Grid className="validerAjout">
-                        <Button
-                            variant="contained"
-                            type="submit"
-                        >
+                        <Button variant="contained" type="submit">
                             Valider
                         </Button>
                     </Grid>

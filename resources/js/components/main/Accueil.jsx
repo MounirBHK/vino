@@ -151,6 +151,7 @@ function Accueil() {
                             key={bouteille.id}
                         >
                             <Button
+                                className="Carousel-btn"
                                 onClick={() => {
                                     navigate(`/dashboard/ajoutBouteille`, {
                                         state: bouteille,
