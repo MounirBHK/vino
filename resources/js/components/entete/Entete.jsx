@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logoJaune from "../../../images/logoJaune.png";
 import { IconButton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import "./Entete.scss";
 
 function Entete({ userLoggedIn, gereDeconnexion }) {
@@ -21,11 +21,12 @@ function Entete({ userLoggedIn, gereDeconnexion }) {
             {window.history.state.key !== pageKey && (
                 <IconButton
                     className="back"
-                    aria-label="retour"
+                    label="retour"
                     onClick={handleBack}
                     size="large"
                 >
-                    <FontAwesomeIcon icon={faArrowLeftLong} />
+                    <span>page précédente</span>
+                    <FontAwesomeIcon icon={faBackward} />
                 </IconButton>
             )}
             <div className="App-header-logo">
