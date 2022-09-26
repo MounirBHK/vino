@@ -1,7 +1,7 @@
 import * as React from "react";
 import NavBottom from "./NavBottom.scss";
 import Fab from "@mui/material/Fab";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import SpeedDial from "@mui/material/SpeedDial";
@@ -28,7 +28,6 @@ export default function SimpleBottomNavigation({
 }) {
     const [value, setValue] = React.useState(0);
     const navigate = useNavigate();
-
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClosed = () => setOpen(false);
