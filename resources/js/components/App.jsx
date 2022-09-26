@@ -102,6 +102,7 @@ function App() {
             deconnecteUser().then((response) => {
                 if (response.data === 1) {
                     localStorage.removeItem("user");
+                    sessionStorage.clear();
                     setUser(null);
                 }
             });

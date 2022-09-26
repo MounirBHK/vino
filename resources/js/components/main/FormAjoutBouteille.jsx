@@ -22,6 +22,7 @@ import Bouteille from "./Bouteille";
 import BouteillesContext from "../../context/bouteillesContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./FormAjout.scss";
+import { Refresh } from "@mui/icons-material";
 
 function FormAjoutBouteille({ idCellierEnCours }) {
     let vi = idCellierEnCours ? idCellierEnCours : "default";
@@ -86,7 +87,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         e.preventDefault();
     };
 
-    const handleClose = (event, reason) => {
+    const handleCloseDialog = (event, reason) => {
         if (reason && reason == "backdropClick") return;
         setOpenCellierDialog(false);
     };
@@ -143,7 +144,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
             <Dialog
                 className="AjoutBouteilleNoCellier-dialog"
                 open={openCellierDialog}
-                onClose={handleClose}
+                onClose={handleCloseDialog}
             >
                 <DialogTitle>Aucun cellier</DialogTitle>
                 <DialogContent>
@@ -156,7 +157,8 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                     <Button
                         style={{ color: "#6a3352" }}
                         onClick={() => {
-                            navigate(-1, { replace: true });
+                            handleCloseDialog();
+                            navigate(-1);
                         }}
                     >
                         Retour
@@ -164,9 +166,8 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                     <Button
                         style={{ color: "#6a3352" }}
                         onClick={() => {
-                            navigate(`/dashboard/ajoutCellier`, {
-                                state: { isOpen: false },
-                            });
+                            handleCloseDialog();
+                            navigate(`/dashboard/ajoutCellier`);
                         }}
                     >
                         Créer un cellier
@@ -249,21 +250,37 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                         <Box>
                             <Divider>Liste des Bouteilles</Divider>
                             <List className="recherche">
-                                {bouteillesCopie.map((bouteille) => (
-                                    <ListItem
-                                        divider
-                                        key={bouteille.id}
-                                        onClick={(e) =>
-                                            handleBoutCell(bouteille)
-                                        }
-                                    >
-                                        <Bouteille
-                                            idCell={idCell}
-                                            {...bouteille}
-                                            quantite={quantite}
-                                        />
-                                    </ListItem>
-                                ))}
+                                {bouteillesCopie.length !== 0
+                                    ? bouteillesCopie.map((bouteille) => (
+                                          <ListItem
+                                              divider
+                                              key={bouteille.id}
+                                              onClick={(e) =>
+                                                  handleBoutCell(bouteille)
+                                              }
+                                          >
+                                              <Bouteille
+                                                  idCell={idCell}
+                                                  {...bouteille}
+                                                  quantite={quantite}
+                                              />
+                                          </ListItem>
+                                      ))
+                                    : bouteilles.map((bouteille) => (
+                                          <ListItem
+                                              divider
+                                              key={bouteille.id}
+                                              onClick={(e) =>
+                                                  handleBoutCell(bouteille)
+                                              }
+                                          >
+                                              <Bouteille
+                                                  idCell={idCell}
+                                                  {...bouteille}
+                                                  quantite={quantite}
+                                              />
+                                          </ListItem>
+                                      ))}
                             </List>
                         </Box>
                     </Box>
