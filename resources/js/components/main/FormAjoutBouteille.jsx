@@ -130,8 +130,9 @@ function FormAjoutBouteille({ idCellierEnCours }) {
         if (idCell !== "default") {
             choixCellier(idCell);
         }
+        if (bouteilleAccueil) setBouteillesCopie(bouteilleAccueil);
     }, []);
-    console.log(cellierSelected);
+
     useEffect(() => {
         setBouteillesCopie([]);
         let boutsRef = bouteilles;
@@ -302,41 +303,61 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                         <Box>
                             <Divider>Liste des Bouteilles</Divider>
                             <List className="recherche">
-                                {bouteillesCopie.length !== 0
-                                    ? bouteillesCopie.map((bouteille) => (
-                                          <ListItem
-                                              divider
-                                              key={bouteille.id}
-                                              onClick={(e) =>
-                                                  handleOpenConfirmDialog(
-                                                      bouteille
-                                                  )
-                                              }
-                                          >
-                                              <Bouteille
-                                                  idCell={idCell}
-                                                  {...bouteille}
-                                                  quantite={quantite}
-                                              />
-                                          </ListItem>
-                                      ))
-                                    : bouteilles.map((bouteille) => (
-                                          <ListItem
-                                              divider
-                                              key={bouteille.id}
-                                              onClick={(e) =>
-                                                  handleOpenConfirmDialog(
-                                                      bouteille
-                                                  )
-                                              }
-                                          >
-                                              <Bouteille
-                                                  idCell={idCell}
-                                                  {...bouteille}
-                                                  quantite={quantite}
-                                              />
-                                          </ListItem>
-                                      ))}
+                                {!bouteilleAccueil ? (
+                                    bouteillesCopie.length !== 0 ? (
+                                        bouteillesCopie.map((bouteille) => (
+                                            <ListItem
+                                                divider
+                                                key={bouteille.id}
+                                                onClick={(e) =>
+                                                    handleOpenConfirmDialog(
+                                                        bouteille
+                                                    )
+                                                }
+                                            >
+                                                <Bouteille
+                                                    idCell={idCell}
+                                                    {...bouteille}
+                                                    quantite={quantite}
+                                                />
+                                            </ListItem>
+                                        ))
+                                    ) : (
+                                        bouteilles.map((bouteille) => (
+                                            <ListItem
+                                                divider
+                                                key={bouteille.id}
+                                                onClick={(e) =>
+                                                    handleOpenConfirmDialog(
+                                                        bouteille
+                                                    )
+                                                }
+                                            >
+                                                <Bouteille
+                                                    idCell={idCell}
+                                                    {...bouteille}
+                                                    quantite={quantite}
+                                                />
+                                            </ListItem>
+                                        ))
+                                    )
+                                ) : (
+                                    <ListItem
+                                        divider
+                                        key={bouteilleAccueil.id}
+                                        onClick={(e) =>
+                                            handleOpenConfirmDialog(
+                                                bouteilleAccueil
+                                            )
+                                        }
+                                    >
+                                        <Bouteille
+                                            idCell={idCell}
+                                            {...bouteilleAccueil}
+                                            quantite={quantite}
+                                        />
+                                    </ListItem>
+                                )}
                             </List>
                         </Box>
                     </Box>
