@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { Button } from "react-admin";
 import CarteBouteille from "./CarteBouteille";
 import {
     Grid,
@@ -9,7 +8,13 @@ import {
     Select,
     MenuItem,
     FormControl,
+    Dialog,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    DialogActions,
     ListItem,
+    Button,
     Box,
     List,
     Divider,
@@ -24,6 +29,8 @@ export default function RetirerBouteillesCellier({
     const hostOriginURL = window.location.origin;
     const [boutsCellRef, setBoutsCellRef] = useState([...bouteillesCellier]);
     const [idRef, setIdRef] = useState(idCellierEnCours);
+    const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+    const [bouteilleSupp, setBouteilleSupp] = useState(null);
 
     useEffect(() => {
         if (!idCellierEnCours) {
@@ -50,11 +57,6 @@ export default function RetirerBouteillesCellier({
     };
 
     const deleteBoutCell = async (idRef, idBtSupp) => {
-        // console.log("appel de la fonction delete bouteille...");
-        // console.log("idRef : ",idRef);
-        // console.log(idBtSupp);
-        const cellBout = { id_cellier: idRef, id_bouteille: idBtSupp };
-
         return await axios.delete(
             hostOriginURL + `/api/deleteBoutCellier/${idRef}/${idBtSupp}`,
             {
@@ -65,16 +67,24 @@ export default function RetirerBouteillesCellier({
         );
     };
 
-    const handleSuppBoutCell = (boutsCellRef, idRef, idBtSupp) => {
-        deleteBoutCell(idRef, idBtSupp).then((response) => {
-            // console.log(response);
-
+    const handleSuppBoutCell = (bouteille) => {
+        deleteBoutCell(idRef, bouteille.id_bouteille).then((response) => {
             let res = boutsCellRef.filter(
-                (bout) => bout.id_bouteille !== idBtSupp
+                (bout) => bout.id_bouteille !== bouteille.id_bouteille
             );
             setBoutsCellRef(res);
-            console.log(boutsCellRef);
         });
+        setOpenConfirmDialog(false);
+    };
+
+    const handleCloseConfirmDialog = (event, reason) => {
+        if (reason && reason == "backdropClick") return;
+        setOpenConfirmDialog(false);
+    };
+
+    const handleOpenConfirmDialog = (bouteille) => {
+        setBouteilleSupp(bouteille);
+        setOpenConfirmDialog(true);
     };
 
     return (
@@ -83,6 +93,35 @@ export default function RetirerBouteillesCellier({
 
             <label htmlFor="liste">
                 <Box className="bouteilles">
+                    <Dialog
+                        className="AjoutBouteilleConfirm-dialog"
+                        open={openConfirmDialog}
+                        onClose={handleCloseConfirmDialog}
+                    >
+                        <DialogContent>
+                            <DialogContentText>
+                                Supprimer cette bouteille du cellier?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button
+                                style={{ color: "#6a3352" }}
+                                onClick={() => {
+                                    handleCloseConfirmDialog();
+                                }}
+                            >
+                                Annuler
+                            </Button>
+                            <Button
+                                style={{ color: "#6a3352" }}
+                                onClick={() => {
+                                    handleSuppBoutCell(bouteilleSupp);
+                                }}
+                            >
+                                Confirmer
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                     <Box>
                         <Divider>Liste des Bouteilles</Divider>
                         <List className="recherche">
@@ -91,11 +130,7 @@ export default function RetirerBouteillesCellier({
                                     divider
                                     key={bouteille.id_bouteille}
                                     onClick={(e) =>
-                                        handleSuppBoutCell(
-                                            boutsCellRef,
-                                            idRef,
-                                            bouteille.id_bouteille
-                                        )
+                                        handleOpenConfirmDialog(bouteille)
                                     }
                                 >
                                     <Bouteille
