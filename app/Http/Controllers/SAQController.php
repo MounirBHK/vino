@@ -28,13 +28,13 @@ class SAQController extends Controller
     function index() {
 		$rejetees = 0;
 		$inserees = 0;
-		$resultat = self::getProduits(96, 1,"rouge");
+		$resultat = self::getProduits(48, 1,"rouge");
 		$rejetees += $resultat['rejetees'];
 		$inserees += $resultat['inserees'];
-		$resultat = self::getProduits(96, 1,"blanc");
+		$resultat = self::getProduits(48, 1,"blanc");
 		$rejetees += $resultat['rejetees'];
 		$inserees += $resultat['inserees'];
-		$resultat = self::getProduits(96, 1,"rose");
+		$resultat = self::getProduits(48, 1,"rose");
 		$rejetees += $resultat['rejetees'];
 		$inserees += $resultat['inserees'];
 
@@ -115,23 +115,95 @@ class SAQController extends Controller
 
 		return $innerHTML;
 	}
+
+	
+
 	private function nettoyerEspace($chaine)
 	{
 		return preg_replace('/\s+/', ' ',$chaine);
 	}
+
+	// fonction permettant de récupérer les détails
+	private function plusDeDetails($url){
+		$s = curl_init();
+        // Se prendre pour un navigateur pour berner le serveur de la saq...
+        curl_setopt_array($s,array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERAGENT=>'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0',
+            CURLOPT_ENCODING=>'gzip, deflate',
+            CURLOPT_HTTPHEADER=>array(
+                    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'Accept-Language: en-US,en;q=0.5',
+                    'Accept-Encoding: gzip, deflate',
+                    'Connection: keep-alive',
+                    'Upgrade-Insecure-Requests: 1',
+            ),
+    	));
+
+		self::$_webpage = curl_exec($s);
+		self::$_status = curl_getinfo($s, CURLINFO_HTTP_CODE);
+		curl_close($s);
+
+		
+		$doc2 = new DOMDocument();
+		$doc2 -> recover = true;
+		$doc2 -> strictErrorChecking = false;
+		@$doc2 -> loadHTML(self::$_webpage);
+		$elements = $doc2 -> getElementsByTagName("strong");
+		
+		$details = new stdClass();
+		$details->region=null;
+		$details->degre_alcool="";
+		$details->producteur="";
+
+		foreach ($elements as $key => $noeud) {
+			// degre_alcool, producteur, region, millesime
+			// list-attributs
+
+			if (strpos($noeud -> getAttribute('data-th'), "Degré") !== false) {
+				$details->degre_alcool = trim($noeud->nodeValue);
+			}
+			if (strpos($noeud -> getAttribute('data-th'), "Producteur") !== false) {
+				$details->producteur = trim($noeud->nodeValue);
+			}
+			if (strpos($noeud -> getAttribute('data-th'), "Région") !== false) {
+				$details->region = trim($noeud->nodeValue);
+			}
+		}
+		return $details ;
+	}
+
 	private function recupereInfo($noeud) {
 
 		$info = new stdClass();
+		
 		$info -> img = $noeud -> getElementsByTagName("img") -> item(0) -> getAttribute('src'); //TODO : Nettoyer le lien
         parse_url($info -> img, PHP_URL_PATH);
 		$a_titre = $noeud -> getElementsByTagName("a") -> item(0);
 		$info -> url = $a_titre->getAttribute('href');
+
+
+		// fonction pour récupérer plus de détails ++++++++++++++++++++ 
+		// $details = new stdClass();
+
+		$details = self::plusDeDetails($info -> url);
+		
+		$info -> region = $details -> region;
+		$info -> degre_alcool = $details->degre_alcool;
+		$info -> producteur = $details-> producteur;
 
         //var_dump($noeud -> getElementsByTagName("a")->item(1)->textContent);
         $nom = $noeud -> getElementsByTagName("a")->item(1)->textContent;
         //var_dump($a_titre);
 		$info -> nom = self::nettoyerEspace(trim($nom));
 		//var_dump($info -> nom);
+		
+		$info -> millesime = null;
+		$res = substr($info -> nom, -4);
+		if (is_numeric($res))
+			$info -> millesime = intval($res);
+
 		// Type, format et pays
 		$aElements = $noeud -> getElementsByTagName("strong");
 		foreach ($aElements as $node) {
@@ -159,9 +231,6 @@ class SAQController extends Controller
 				{
 					$info -> desc -> code_SAQ = trim($aRes[0]);
 				}
-
-
-
 			}
 		}
 
@@ -202,6 +271,10 @@ class SAQController extends Controller
 					'url_saq'     			=> $bte -> url,
 					'url_img'     			=> $bte -> img,
 					'format'     			=> $bte -> desc -> format,
+					'region'				=> $bte -> region,
+					'degre_alcool'			=> $bte -> degre_alcool,
+					'producteur'			=> $bte -> producteur,
+					'millesime'			    => $bte -> millesime
 				]);
 				$bouteille->save();
 				// $this -> stmt -> bind_param("sissssdsss", $bte -> nom, $type, $bte -> img, $bte -> desc -> code_SAQ, $bte -> desc -> pays, $bte -> desc -> texte, $bte -> prix, $bte -> url, $bte -> img, $bte -> desc -> format);

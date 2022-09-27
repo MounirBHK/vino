@@ -24,6 +24,7 @@ function Bouteilles() {
     };
     function gereImportSAQ() {
         importSAQ().then((response) => {
+            console.log("retour de la SAQ : ",response);
             const bouteillesInserees =
                 response.data["resultatInsertion"]["inserees"];
             const bouteillesRejetees =
