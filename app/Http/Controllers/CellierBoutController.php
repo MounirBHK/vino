@@ -106,11 +106,22 @@ class CellierBoutController extends Controller
      * @param  \App\Models\CellierBout  $cellierBout
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CellierBout $cellierBout)
+    public function update(Request $request)
     {
-        //
+        DB::table('cellier_bouts')->where('id_cellier', $request->id_cellier)->where('id_bouteille', $request->id_bouteille)
+        ->update(
+            [
+                'desc_bout' => $request->desc_bout,
+                'quantite'  => $request->quantite
+            ]);
+
+        $bouteille = DB::table('cellier_bouts')
+        ->where('id_cellier', $request->id_cellier)
+        ->where('id_bouteille', $request->id_bouteille)
+        ->get();
+
+        return $bouteille;
     }
-    
     /**
      * destroy
      *
