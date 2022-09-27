@@ -18,7 +18,10 @@ import {
     Box,
     List,
     Divider,
+    Alert,
+    IconButton,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import Bouteille from "./Bouteille";
 
 export default function RetirerBouteillesCellier({
@@ -31,7 +34,7 @@ export default function RetirerBouteillesCellier({
     const [idRef, setIdRef] = useState(idCellierEnCours);
     const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
     const [bouteilleSupp, setBouteilleSupp] = useState(null);
-
+    const [retourActionMsg, setRetourActionMsg] = useState(null);
     useEffect(() => {
         if (!idCellierEnCours) {
             const urlCourante = document.location.href;
@@ -44,6 +47,12 @@ export default function RetirerBouteillesCellier({
             });
         }
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setRetourActionMsg(null);
+        }, 2500);
+    }, [boutsCellRef]);
 
     const getBouteillesCellier = async (idCellierEnCours) => {
         return await axios.get(
@@ -75,6 +84,7 @@ export default function RetirerBouteillesCellier({
             setBoutsCellRef(res);
         });
         setOpenConfirmDialog(false);
+        setRetourActionMsg("Bouteille supprimée");
     };
 
     const handleCloseConfirmDialog = (event, reason) => {
@@ -124,6 +134,25 @@ export default function RetirerBouteillesCellier({
                     </Dialog>
                     <Box>
                         <Divider>Liste des Bouteilles</Divider>
+                        {retourActionMsg && (
+                            <Alert
+                                severity="success"
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setRetourActionMsg(null);
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                            >
+                                {retourActionMsg}
+                            </Alert>
+                        )}
                         <List className="recherche">
                             {boutsCellRef.map((bouteille) => (
                                 <ListItem

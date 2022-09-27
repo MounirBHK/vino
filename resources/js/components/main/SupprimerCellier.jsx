@@ -39,7 +39,9 @@ export default function SupprimerCellier({
                 (cellier) => cellier.id_user == user_id
             );
             setCelliers([...res]);
-            navigate(`/dashboard/celliers`);
+            navigate(`/dashboard/celliers`, {
+                state: { success_message: "Cellier supprimé!" },
+            });
         });
     };
 
