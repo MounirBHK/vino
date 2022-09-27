@@ -4,9 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect, useContext } from "react";
 import CelliersContext from "../../context/celliersContext";
 import "./SupprimerCellier.scss";
-import {
-    Button
-} from "@mui/material";
+import { Button } from "@mui/material";
 
 export default function SupprimerCellier({
     idCellierEnCours,
@@ -35,13 +33,11 @@ export default function SupprimerCellier({
         // console.log("idCellierEnCours : ",idCellierEnCours);
         deleteCell(idCellierEnCours).then((response) => {
             const newCelliers = response.data;
-            // console.log("newCelliers : ", newCelliers);
 
             const user_id = userLoggedIn.user.id;
             let res = newCelliers.filter(
-                (cellier) => cellier.id_user === user_id
+                (cellier) => cellier.id_user == user_id
             );
-            // console.log("res : ", res);
             setCelliers([...res]);
             navigate(`/dashboard/celliers`);
         });
@@ -60,7 +56,7 @@ export default function SupprimerCellier({
             >
                 Suppression
             </Button>
-            
+
             <Button
                 className="supprime-btn"
                 variant="contained"
@@ -70,7 +66,6 @@ export default function SupprimerCellier({
             >
                 Annuler
             </Button>
-
         </React.Fragment>
     );
 }

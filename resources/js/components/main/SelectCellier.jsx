@@ -18,10 +18,41 @@ function SelectCellier() {
     const celliersContext = useContext(CelliersContext);
     const [celliers, setCelliers] = celliersContext;
     return (
-        <Box className="selectCellier">
+        <div className="selectCellier">
             <h2>Vos celliers</h2>
-            <Divider variant="middle" />
             {celliers.length === 0 && (
+                <p className="noBouteille">Aucun cellier à afficher</p>
+            )}
+            <Box className="selectCellier-content">
+                <List component="nav">
+                    {celliers.map((cellier) => {
+                        return (
+                            <React.Fragment key={cellier.id}>
+                                <ListItemButton
+                                    onClick={() =>
+                                        navigate(
+                                            `/dashboard/celliers/${cellier.id}`,
+                                            {
+                                                state: cellier,
+                                            }
+                                        )
+                                    }
+                                >
+                                    <ListItemIcon>
+                                        <FontAwesomeIcon
+                                            className="navIcon"
+                                            icon={faDungeon}
+                                        />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={cellier.lib_cellier}
+                                    />
+                                </ListItemButton>
+                                <Divider variant="middle" />
+                            </React.Fragment>
+                        );
+                    })}
+                </List>
                 <React.Fragment>
                     <Button onClick={() => navigate(`/dashboard/ajoutCellier`)}>
                         <Card className="Carte-cellier">
@@ -36,35 +67,8 @@ function SelectCellier() {
                         </Card>
                     </Button>
                 </React.Fragment>
-            )}
-            <List component="nav">
-                {celliers.map((cellier) => {
-                    return (
-                        <React.Fragment key={cellier.id}>
-                            <ListItemButton
-                                onClick={() =>
-                                    navigate(
-                                        `/dashboard/celliers/${cellier.id}`,
-                                        {
-                                            state: cellier,
-                                        }
-                                    )
-                                }
-                            >
-                                <ListItemIcon>
-                                    <FontAwesomeIcon
-                                        className="navIcon"
-                                        icon={faDungeon}
-                                    />
-                                </ListItemIcon>
-                                <ListItemText primary={cellier.lib_cellier} />
-                            </ListItemButton>
-                            <Divider variant="middle" />
-                        </React.Fragment>
-                    );
-                })}
-            </List>
-        </Box>
+            </Box>
+        </div>
     );
 }
 

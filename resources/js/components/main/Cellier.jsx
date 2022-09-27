@@ -14,10 +14,12 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
     useEffect(() => {
         gereSelectCellier(cellier.id);
     }, []);
-
     return (
         <div className="listeBouteilles">
             <h2>{cellier.lib_cellier}</h2>
+            {bouteillesCellier.length === 0 && (
+                <p className="noBouteille">Aucune bouteille dans ce cellier</p>
+            )}
             {bouteillesCellier.map((bouteille) => (
                 <Button
                     className="listItemButton"
@@ -49,23 +51,24 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
             </Button>
 
             {/* -------------- */}
-
-            <Button
-                onClick={() =>
-                    navigate(`/dashboard/retirerBoutsCell/${cellier.id}`)
-                }
-            >
-                <Card className="Carte-bouteille">
-                    <div className="ajoutBouteille">
-                        <div>
-                            <h2>Retirer Bouteilles</h2>
+            {bouteillesCellier.length > 0 && (
+                <Button
+                    onClick={() =>
+                        navigate(`/dashboard/retirerBoutsCell/${cellier.id}`)
+                    }
+                >
+                    <Card className="Carte-bouteille">
+                        <div className="ajoutBouteille">
+                            <div>
+                                <h2>Retirer Bouteilles</h2>
+                            </div>
+                            <div>
+                                <DoNotDisturbOnIcon />
+                            </div>
                         </div>
-                        <div>
-                            <DoNotDisturbOnIcon />
-                        </div>
-                    </div>
-                </Card>
-            </Button>
+                    </Card>
+                </Button>
+            )}
 
             <Button
                 onClick={() => navigate(`/dashboard/suppCellier/${cellier.id}`)}
