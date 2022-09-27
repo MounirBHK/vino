@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : ven. 23 sep. 2022 à 09:09
+-- Généré le : lun. 26 sep. 2022 à 18:42
 -- Version du serveur :  5.7.34
 -- Version de PHP : 7.4.21
 
@@ -208,12 +208,12 @@ CREATE TABLE `celliers` (
 --
 
 INSERT INTO `celliers` (`id`, `id_user`, `lib_cellier`, `capacite`, `created_at`, `updated_at`) VALUES
-(11, 9, 'Cellier1', 200, '2022-09-15 22:07:27', '2022-09-15 22:07:27'),
 (12, 9, 'Cellier2', 100, '2022-09-15 22:08:44', '2022-09-15 22:08:44'),
 (13, 9, 'Cellier3', 500, '2022-09-15 22:24:21', '2022-09-15 22:24:21'),
 (14, 9, 'Cellier5', 500, '2022-09-15 22:25:28', '2022-09-15 22:25:28'),
 (15, 9, 'cellier6', 5000, '2022-09-15 22:25:51', '2022-09-15 22:25:51'),
-(16, 9, 'Cellier7', 300, '2022-09-16 19:08:46', '2022-09-16 19:08:46');
+(17, 12, 'Cellier1', 100, '2022-09-26 18:20:38', '2022-09-26 18:20:38'),
+(23, 11, 'Cellier1', 100, '2022-09-27 00:35:19', '2022-09-27 00:35:19');
 
 -- --------------------------------------------------------
 
@@ -225,6 +225,7 @@ CREATE TABLE `cellier_bouts` (
   `id_cellier` bigint(20) UNSIGNED NOT NULL,
   `id_bouteille` bigint(20) UNSIGNED NOT NULL,
   `quantite` smallint(6) DEFAULT NULL,
+  `desc_bout` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `derniere_trans` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -234,37 +235,20 @@ CREATE TABLE `cellier_bouts` (
 -- Déchargement des données de la table `cellier_bouts`
 --
 
-INSERT INTO `cellier_bouts` (`id_cellier`, `id_bouteille`, `quantite`, `derniere_trans`, `created_at`, `updated_at`) VALUES
-(11, 1035, 11, '2022-09-16', '2022-09-16 16:45:09', '2022-09-16 16:45:09'),
-(11, 1036, 8, '2022-09-19', '2022-09-19 17:25:27', '2022-09-19 17:25:27'),
-(11, 1043, 2, '2022-09-19', '2022-09-19 21:17:34', '2022-09-19 21:17:34'),
-(11, 1044, 1, '2022-09-19', '2022-09-19 23:31:45', '2022-09-19 23:31:45'),
-(11, 1049, 1, '2022-09-19', '2022-09-20 00:15:11', '2022-09-20 00:15:11'),
-(11, 1057, 1, '2022-09-20', '2022-09-20 17:31:28', '2022-09-20 17:31:28'),
-(11, 1059, 4, '2022-09-19', '2022-09-20 00:34:57', '2022-09-20 00:34:57'),
-(11, 1081, 1, '2022-09-19', '2022-09-20 00:35:02', '2022-09-20 00:35:02'),
-(11, 1084, 2, '2022-09-19', '2022-09-20 00:35:06', '2022-09-20 00:35:06'),
-(11, 1099, 1, '2022-09-19', '2022-09-19 23:35:46', '2022-09-19 23:35:46'),
-(12, 1035, 5, '2022-09-16', '2022-09-16 19:28:00', '2022-09-16 19:28:00'),
-(12, 1037, 2, '2022-09-19', '2022-09-19 23:59:04', '2022-09-19 23:59:04'),
-(12, 1044, 1, '2022-09-19', '2022-09-19 23:58:09', '2022-09-19 23:58:09'),
-(12, 1045, 1, '2022-09-19', '2022-09-20 00:00:20', '2022-09-20 00:00:20'),
-(13, 1104, 3, '2022-09-19', '2022-09-20 00:03:48', '2022-09-20 00:03:48'),
-(14, 1035, 1, '2022-09-19', '2022-09-19 22:43:27', '2022-09-19 22:43:27'),
-(14, 1036, 1, '2022-09-19', '2022-09-19 22:44:44', '2022-09-19 22:44:44'),
-(14, 1037, 1, '2022-09-19', '2022-09-19 22:52:19', '2022-09-19 22:52:19'),
-(15, 1036, 2, '2022-09-19', '2022-09-19 22:52:44', '2022-09-19 22:52:44'),
-(15, 1041, 1, '2022-09-19', '2022-09-19 23:03:18', '2022-09-19 23:03:18'),
-(15, 1043, 1, '2022-09-19', '2022-09-19 22:57:20', '2022-09-19 22:57:20'),
-(16, 1035, 1, '2022-09-19', '2022-09-19 22:59:26', '2022-09-19 22:59:26'),
-(16, 1036, 1, '2022-09-19', '2022-09-19 22:58:46', '2022-09-19 22:58:46'),
-(16, 1038, 1, '2022-09-19', '2022-09-19 23:05:16', '2022-09-19 23:05:16'),
-(16, 1039, 2, '2022-09-19', '2022-09-19 22:58:05', '2022-09-19 22:58:05'),
-(16, 1040, 1, '2022-09-19', '2022-09-19 23:23:10', '2022-09-19 23:23:10'),
-(16, 1044, 1, '2022-09-19', '2022-09-19 23:31:25', '2022-09-19 23:31:25'),
-(16, 1045, 1, '2022-09-19', '2022-09-19 23:13:46', '2022-09-19 23:13:46'),
-(16, 1058, 1, '2022-09-19', '2022-09-19 23:16:59', '2022-09-19 23:16:59'),
-(16, 1072, 1, '2022-09-19', '2022-09-19 23:24:15', '2022-09-19 23:24:15');
+INSERT INTO `cellier_bouts` (`id_cellier`, `id_bouteille`, `quantite`, `desc_bout`, `derniere_trans`, `created_at`, `updated_at`) VALUES
+(12, 1035, 5, NULL, '2022-09-16', '2022-09-16 19:28:00', '2022-09-16 19:28:00'),
+(12, 1037, 2, NULL, '2022-09-19', '2022-09-19 23:59:04', '2022-09-19 23:59:04'),
+(12, 1044, 1, NULL, '2022-09-19', '2022-09-19 23:58:09', '2022-09-19 23:58:09'),
+(12, 1045, 1, NULL, '2022-09-19', '2022-09-20 00:00:20', '2022-09-20 00:00:20'),
+(13, 1104, 3, NULL, '2022-09-19', '2022-09-20 00:03:48', '2022-09-20 00:03:48'),
+(14, 1035, 1, NULL, '2022-09-19', '2022-09-19 22:43:27', '2022-09-19 22:43:27'),
+(14, 1036, 1, NULL, '2022-09-19', '2022-09-19 22:44:44', '2022-09-19 22:44:44'),
+(14, 1037, 1, NULL, '2022-09-19', '2022-09-19 22:52:19', '2022-09-19 22:52:19'),
+(15, 1036, 2, NULL, '2022-09-19', '2022-09-19 22:52:44', '2022-09-19 22:52:44'),
+(15, 1041, 1, NULL, '2022-09-19', '2022-09-19 23:03:18', '2022-09-19 23:03:18'),
+(15, 1043, 1, NULL, '2022-09-19', '2022-09-19 22:57:20', '2022-09-19 22:57:20'),
+(23, 1035, 1, NULL, '2022-09-26', '2022-09-27 01:41:08', '2022-09-27 01:41:08'),
+(23, 1045, 1, NULL, '2022-09-26', '2022-09-27 00:51:23', '2022-09-27 00:51:23');
 
 -- --------------------------------------------------------
 
@@ -360,7 +344,7 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(14, 'App\\Models\\User', 9, 'auth_token', '186fa6b5cfd184c4ced4bb52df53963486323c68a5a943af373f9fb5cf17de2b', '[\"*\"]', '2022-09-23 17:06:11', '2022-09-23 02:37:23', '2022-09-23 17:06:11');
+(35, 'App\\Models\\User', 11, 'auth_token', '2bb9c2a247aeacaa1562dfa4554279200c656b780f4ef1ec5294e59b9a40615d', '[\"*\"]', '2022-09-27 02:34:31', '2022-09-26 21:58:59', '2022-09-27 02:34:31');
 
 -- --------------------------------------------------------
 
@@ -412,7 +396,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `te
 (6, 'Admin', 'admin@admin.com', NULL, '$2y$10$LAchjUWRx02IHMFTzqcwHeIzyBpizFTX.mXT466KgOhUSuGKTsxQO', NULL, 'Admin', 'Admin', 'nsl7tBasf37jtkAyH70Xzw5A9C8uZ9SMjNO8on1mBCtPS97x0FzNas8V5YT2', '2022-09-10 22:47:58', '2022-09-10 22:47:58'),
 (9, 'testssss', 'user1@vino.com', NULL, '$2y$10$AFiNyXfVCcaJkOrXMggxPeqNMLPrrirC2SNVDAHQeJyDS6lsJ4qc.', 'nDa1NGwxUtxtKro2rBdbzHbHtmRLAGERJxIOtzbJfWGijvR6FY', 'test', 'test', 'QUe9hKKkVNwuIFjogFNpfWq7iss6zd4Jg7UHrgP1Fy2Qmzbf4cmdug5kHAA3', '2022-09-15 21:14:21', '2022-09-23 17:05:06'),
 (10, 'test2', 'test@test.com', NULL, '$2y$10$xvFKQTDBzRJdfHPaKWeLdudscIrHvG1q5gHixuIUsZ1BFzXsXXpey', NULL, 'test', 'test', 'ekTbW8jdO0RXUyLNPVYM5I5Y48QiFgQWf6TyNl5VqQFkqD1qtFEjSEwhma5N', '2022-09-18 18:51:46', '2022-09-18 18:51:46'),
-(11, 'test2', 'test2@test.com', NULL, '$2y$10$67CtKH75aF5f60MBxidbO.0blpsk7bd8eThCGrPdOplrFaDMfJbpK', NULL, 'test', 'test', NULL, '2022-09-18 18:58:47', '2022-09-18 18:58:47');
+(11, 'test2', 'test2@test.com', NULL, '$2y$10$67CtKH75aF5f60MBxidbO.0blpsk7bd8eThCGrPdOplrFaDMfJbpK', NULL, 'test', 'test', 'pOb6W22HniRGtxIRIjUkHbhcjCjyth6rYFLlRiZAdY9zPjQzFJZDkrmWrNLw', '2022-09-18 18:58:47', '2022-09-18 18:58:47'),
+(12, 'test3', 'test3@test.com', NULL, '$2y$10$vSlTtkc9Y7DLWLLnPkdiDOX1m73zIRPfkv/6VrueZU036kAp0b4TS', NULL, 'test', 'test', '3YF8zscz9n396JfRc5LIEPvCRfoxPnd5DqkDs45so3Z3AbsXGeMkCcsyZhlM', '2022-09-23 18:08:59', '2022-09-23 18:08:59');
 
 --
 -- Index pour les tables déchargées
@@ -507,7 +492,7 @@ ALTER TABLE `bouteilles`
 -- AUTO_INCREMENT pour la table `celliers`
 --
 ALTER TABLE `celliers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -525,7 +510,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT pour la table `types`
@@ -537,7 +522,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Contraintes pour les tables déchargées
