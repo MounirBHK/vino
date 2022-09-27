@@ -1,6 +1,14 @@
 .selectCellier {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    color: #6a3352;
+    width: 100%;
+}
+
+.selectCellier-content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     color: #6a3352;
     font-weight: bold;

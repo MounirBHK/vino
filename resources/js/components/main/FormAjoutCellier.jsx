@@ -42,7 +42,9 @@ function FormAjoutCellier() {
 
             putNewCellier(newCellier).then((response) => {
                 setCelliers([...celliers, response.data]);
-                navigate(`/dashboard/celliers`);
+                navigate(`/dashboard/celliers`, {
+                    state: { success_message: "Cellier ajouté!" },
+                });
             });
         }
     };
