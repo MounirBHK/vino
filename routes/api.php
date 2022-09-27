@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::put('custom-auth/resetPassword', [CustomAuthController::class, 'resetPassword'])->name('custom-resetPassword');
     Route::delete('deleteBoutCellier/{id_cellier}/{id_bouteille}', [CellierBoutController::class, 'destroy'])->name('destroy-cellier-bouteilles');
     Route::delete('deleteCellier/{id_cellier}', [CellierBoutController::class, 'destroyAll'])->name('destroy-cellier');
+
+    Route::put('modifCellierBout', [CellierBoutController::class, 'update'])->name('modif-bouteilleCellier');
 });
 
 // route pour suppression cellier ett bouteilles de cellier
