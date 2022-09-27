@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : lun. 26 sep. 2022 à 18:42
--- Version du serveur :  5.7.34
--- Version de PHP : 7.4.21
+-- Hôte : localhost
+-- Généré le : mer. 28 sep. 2022 à 01:26
+-- Version du serveur : 10.4.21-MariaDB
+-- Version de PHP : 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `vino_db`
+-- Base de données : `vino_db_final`
 --
 
 -- --------------------------------------------------------
@@ -56,13 +56,15 @@ CREATE TABLE `bouteilles` (
   `url_saq` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `format` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `degre_alcool` smallint(6) DEFAULT NULL,
+  `degre_alcool` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `producteur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `region` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `millesime` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `celliers`
@@ -76,18 +78,6 @@ CREATE TABLE `celliers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `celliers`
---
-
-INSERT INTO `celliers` (`id`, `id_user`, `lib_cellier`, `capacite`, `created_at`, `updated_at`) VALUES
-(12, 9, 'Cellier2', 100, '2022-09-15 22:08:44', '2022-09-15 22:08:44'),
-(13, 9, 'Cellier3', 500, '2022-09-15 22:24:21', '2022-09-15 22:24:21'),
-(14, 9, 'Cellier5', 500, '2022-09-15 22:25:28', '2022-09-15 22:25:28'),
-(15, 9, 'cellier6', 5000, '2022-09-15 22:25:51', '2022-09-15 22:25:51'),
-(17, 12, 'Cellier1', 100, '2022-09-26 18:20:38', '2022-09-26 18:20:38'),
-(23, 11, 'Cellier1', 100, '2022-09-27 00:35:19', '2022-09-27 00:35:19');
 
 -- --------------------------------------------------------
 
@@ -104,25 +94,6 @@ CREATE TABLE `cellier_bouts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `cellier_bouts`
---
-
-INSERT INTO `cellier_bouts` (`id_cellier`, `id_bouteille`, `quantite`, `desc_bout`, `derniere_trans`, `created_at`, `updated_at`) VALUES
-(12, 1035, 5, NULL, '2022-09-16', '2022-09-16 19:28:00', '2022-09-16 19:28:00'),
-(12, 1037, 2, NULL, '2022-09-19', '2022-09-19 23:59:04', '2022-09-19 23:59:04'),
-(12, 1044, 1, NULL, '2022-09-19', '2022-09-19 23:58:09', '2022-09-19 23:58:09'),
-(12, 1045, 1, NULL, '2022-09-19', '2022-09-20 00:00:20', '2022-09-20 00:00:20'),
-(13, 1104, 3, NULL, '2022-09-19', '2022-09-20 00:03:48', '2022-09-20 00:03:48'),
-(14, 1035, 1, NULL, '2022-09-19', '2022-09-19 22:43:27', '2022-09-19 22:43:27'),
-(14, 1036, 1, NULL, '2022-09-19', '2022-09-19 22:44:44', '2022-09-19 22:44:44'),
-(14, 1037, 1, NULL, '2022-09-19', '2022-09-19 22:52:19', '2022-09-19 22:52:19'),
-(15, 1036, 2, NULL, '2022-09-19', '2022-09-19 22:52:44', '2022-09-19 22:52:44'),
-(15, 1041, 1, NULL, '2022-09-19', '2022-09-19 23:03:18', '2022-09-19 23:03:18'),
-(15, 1043, 1, NULL, '2022-09-19', '2022-09-19 22:57:20', '2022-09-19 22:57:20'),
-(23, 1035, 1, NULL, '2022-09-26', '2022-09-27 01:41:08', '2022-09-27 01:41:08'),
-(23, 1045, 1, NULL, '2022-09-26', '2022-09-27 00:51:23', '2022-09-27 00:51:23');
 
 -- --------------------------------------------------------
 
@@ -152,7 +123,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -207,7 +178,7 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -218,7 +189,8 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(35, 'App\\Models\\User', 11, 'auth_token', '2bb9c2a247aeacaa1562dfa4554279200c656b780f4ef1ec5294e59b9a40615d', '[\"*\"]', '2022-09-27 02:34:31', '2022-09-26 21:58:59', '2022-09-27 02:34:31');
+(35, 'App\\Models\\User', 11, 'auth_token', '2bb9c2a247aeacaa1562dfa4554279200c656b780f4ef1ec5294e59b9a40615d', '[\"*\"]', '2022-09-27 02:34:31', '2022-09-26 21:58:59', '2022-09-27 02:34:31'),
+(47, 'App\\Models\\User', 2, 'auth_token', '265d9369c916592a7ca7cc06faffa03d51241660c0385d84e9370bf535a86922', '[\"*\"]', '2022-09-28 03:21:48', '2022-09-28 02:24:34', '2022-09-28 03:21:48');
 
 -- --------------------------------------------------------
 
@@ -267,11 +239,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `temp_password`, `prenom`, `nom`, `remember_token`, `created_at`, `updated_at`) VALUES
-(6, 'Admin', 'admin@admin.com', NULL, '$2y$10$LAchjUWRx02IHMFTzqcwHeIzyBpizFTX.mXT466KgOhUSuGKTsxQO', NULL, 'Admin', 'Admin', 'nsl7tBasf37jtkAyH70Xzw5A9C8uZ9SMjNO8on1mBCtPS97x0FzNas8V5YT2', '2022-09-10 22:47:58', '2022-09-10 22:47:58'),
-(9, 'testssss', 'user1@vino.com', NULL, '$2y$10$AFiNyXfVCcaJkOrXMggxPeqNMLPrrirC2SNVDAHQeJyDS6lsJ4qc.', 'nDa1NGwxUtxtKro2rBdbzHbHtmRLAGERJxIOtzbJfWGijvR6FY', 'test', 'test', 'QUe9hKKkVNwuIFjogFNpfWq7iss6zd4Jg7UHrgP1Fy2Qmzbf4cmdug5kHAA3', '2022-09-15 21:14:21', '2022-09-23 17:05:06'),
-(10, 'test2', 'test@test.com', NULL, '$2y$10$xvFKQTDBzRJdfHPaKWeLdudscIrHvG1q5gHixuIUsZ1BFzXsXXpey', NULL, 'test', 'test', 'ekTbW8jdO0RXUyLNPVYM5I5Y48QiFgQWf6TyNl5VqQFkqD1qtFEjSEwhma5N', '2022-09-18 18:51:46', '2022-09-18 18:51:46'),
-(11, 'test2', 'test2@test.com', NULL, '$2y$10$67CtKH75aF5f60MBxidbO.0blpsk7bd8eThCGrPdOplrFaDMfJbpK', NULL, 'test', 'test', 'pOb6W22HniRGtxIRIjUkHbhcjCjyth6rYFLlRiZAdY9zPjQzFJZDkrmWrNLw', '2022-09-18 18:58:47', '2022-09-18 18:58:47'),
-(12, 'test3', 'test3@test.com', NULL, '$2y$10$vSlTtkc9Y7DLWLLnPkdiDOX1m73zIRPfkv/6VrueZU036kAp0b4TS', NULL, 'test', 'test', '3YF8zscz9n396JfRc5LIEPvCRfoxPnd5DqkDs45so3Z3AbsXGeMkCcsyZhlM', '2022-09-23 18:08:59', '2022-09-23 18:08:59');
+(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$LAchjUWRx02IHMFTzqcwHeIzyBpizFTX.mXT466KgOhUSuGKTsxQO', NULL, 'Admin', 'Admin', 'nsl7tBasf37jtkAyH70Xzw5A9C8uZ9SMjNO8on1mBCtPS97x0FzNas8V5YT2', '2022-09-10 22:47:58', '2022-09-10 22:47:58'),
+(2, 'Mounir', 'mounir.bhk@gmail.com', NULL, '$2y$10$m9BTlKobq43F9aUlHqpYH.7hhPI4F6NBQlrEamPzDjiF3oWXX5QBG', '25Nk2TRAzgORYlgMQjF8Nzy9S2S0O1deMrPNlLJ3A0gYp27h2Q', 'Mounir', 'Mounir', 'v7iFmSM90rJOT7g2k50fvqKj5humUClUDlOYuIc3X29hj5ZTMRU5Ph6MKI6D', '2022-09-27 03:01:50', '2022-09-27 03:36:11');
 
 --
 -- Index pour les tables déchargées
@@ -360,13 +329,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `bouteilles`
 --
 ALTER TABLE `bouteilles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2124;
 
 --
 -- AUTO_INCREMENT pour la table `celliers`
 --
 ALTER TABLE `celliers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -378,13 +347,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pour la table `types`
@@ -396,7 +365,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
