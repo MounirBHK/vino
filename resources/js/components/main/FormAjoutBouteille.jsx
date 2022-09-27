@@ -79,7 +79,10 @@ function FormAjoutBouteille({ idCellierEnCours }) {
             };
             putBoutCell(refBout).then((response) => {
                 navigate(`/dashboard/celliers/${idCell}`, {
-                    state: cellierSelected[0],
+                    state: {
+                        cellier: cellierSelected[0],
+                        success_message: "Bouteille ajoutée avec succès",
+                    },
                 });
             });
         } else alert("Vous n'avez pas sélectionné de cellier...");
@@ -229,7 +232,7 @@ function FormAjoutBouteille({ idCellierEnCours }) {
                     </Button>
                 </DialogActions>
             </Dialog>
-            
+
             <h2>AJOUT DE BOUTEILLES</h2>
 
             <FormControl className="FormAjout">

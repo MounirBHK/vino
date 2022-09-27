@@ -46,6 +46,15 @@
         opacity: 20%;
         font-size: 0.8em;
 
+        & > div:nth-child(1) {
+            width: 75%;
+            text-align: center;
+        }
+
+        & > div:nth-child(2) {
+            width: 25%;
+        }
+
         svg {
             position: relative;
             font-size: 6em;
