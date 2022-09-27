@@ -180,7 +180,7 @@ function CarteUneBouteille({ bouteille, gereQuantite, gereSelectCellier }) {
             </div>
             <ButtonGroup variant="text" className="options">
                 <Button
-                    disabled={true}
+                    disabled={false}
                     onClick={() =>
                         navigate("/dashboard/modifierBouteille", {
                             state: bouteilleReceived,
