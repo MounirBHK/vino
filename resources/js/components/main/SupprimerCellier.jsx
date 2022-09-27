@@ -3,6 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect, useContext } from "react";
 import CelliersContext from "../../context/celliersContext";
+import "./SupprimerCellier.scss";
+import {
+    Button
+} from "@mui/material";
 
 export default function SupprimerCellier({
     idCellierEnCours,
@@ -44,26 +48,29 @@ export default function SupprimerCellier({
     };
 
     return (
-        <>
-            <div>SupprimerCellier</div>
-            <button
+        <React.Fragment>
+            <h2 className="supprime-title">SupprimerCellier</h2>
+
+            <Button
+                className="supprime-btn"
+                variant="contained"
                 onClick={() => {
                     handleSuppCellier(idCellierEnCours);
                 }}
             >
                 Suppression
-            </button>
-
-            <br></br>
-            <br></br>
-
-            <button
+            </Button>
+            
+            <Button
+                className="supprime-btn"
+                variant="contained"
                 onClick={() => {
                     history.back();
                 }}
             >
                 Annuler
-            </button>
-        </>
+            </Button>
+
+        </React.Fragment>
     );
 }

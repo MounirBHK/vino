@@ -67,6 +67,15 @@ export default function SimpleBottomNavigation({
                     }}
                 />
                 <BottomNavigationAction
+                    label="Celliers"
+                    icon={
+                        <FontAwesomeIcon className="navIcon" icon={faDungeon} />
+                    }
+                    onClick={() => {
+                        navigate(`/dashboard/celliers`, {});
+                    }}
+                />
+                <BottomNavigationAction
                     label="Profil"
                     icon={
                         <FontAwesomeIcon
@@ -76,15 +85,6 @@ export default function SimpleBottomNavigation({
                     }
                     onClick={() => {
                         navigate(`/dashboard/profil`, {});
-                    }}
-                />
-                <BottomNavigationAction
-                    label="Celliers"
-                    icon={
-                        <FontAwesomeIcon className="navIcon" icon={faDungeon} />
-                    }
-                    onClick={() => {
-                        navigate(`/dashboard/celliers`, {});
                     }}
                 />
                 <BottomNavigationAction
