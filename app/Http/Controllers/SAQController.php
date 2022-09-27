@@ -28,13 +28,13 @@ class SAQController extends Controller
     function index() {
 		$rejetees = 0;
 		$inserees = 0;
-		$resultat = self::getProduits(24, 1,"rouge");
+		$resultat = self::getProduits(96, 1,"rouge");
 		$rejetees += $resultat['rejetees'];
 		$inserees += $resultat['inserees'];
-		$resultat = self::getProduits(24, 1,"blanc");
+		$resultat = self::getProduits(96, 1,"blanc");
 		$rejetees += $resultat['rejetees'];
 		$inserees += $resultat['inserees'];
-		$resultat = self::getProduits(24, 1,"rose");
+		$resultat = self::getProduits(96, 1,"rose");
 		$rejetees += $resultat['rejetees'];
 		$inserees += $resultat['inserees'];
 
