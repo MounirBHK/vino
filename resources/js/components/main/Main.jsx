@@ -80,6 +80,7 @@ function Main({
                                 element={
                                     <React.Fragment>
                                         <Cellier
+                                            idCellierEnCours={idCellierEnCours}
                                             gereQuantite={gereQuantite}
                                             gereSelectCellier={
                                                 gereSelectCellier
@@ -87,6 +88,7 @@ function Main({
                                             bouteillesCellier={
                                                 bouteillesCellier
                                             }
+                                            setCelliers={setCelliers}
                                         />
                                     </React.Fragment>
                                 }
@@ -101,6 +103,7 @@ function Main({
                                             gereSelectCellier={
                                                 gereSelectCellier
                                             }
+                                            setCelliers={setCelliers}
                                         />
                                     </React.Fragment>
                                 }
@@ -110,6 +113,7 @@ function Main({
                                 element={
                                     <FormModifierBouteille
                                         bouteille={stateBouteille}
+                                        gereSelectCellier={gereSelectCellier}
                                     />
                                 }
                             ></Route>

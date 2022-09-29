@@ -1,5 +1,15 @@
 import { React, useEffect, useState } from "react";
-import { Button, Card, Alert, IconButton } from "@mui/material";
+import {
+    Button,
+    Card,
+    Alert,
+    IconButton,
+    Dialog,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    DialogActions,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -8,12 +18,34 @@ import CarteBouteille from "./CarteBouteille";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Cellier.scss";
 
-function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
+function Cellier({
+    gereQuantite,
+    gereSelectCellier,
+    bouteillesCellier,
+    idCellierEnCours,
+    setCelliers,
+}) {
     const navigate = useNavigate();
     const { state: cellier } = useLocation();
     const [retourActionMsg, setRetourActionMsg] = useState(
         cellier.success_message || null
     );
+    const [openSuppDialog, setOpenSuppDialog] = useState(false);
+    const userLoggedIn = JSON.parse(localStorage.getItem("user")) || null;
+    const hostOriginURL = window.location.origin;
+
+    const deleteCell = async (idCellierEnCours) => {
+        // console.log("appel de la fonction ");
+        return await axios.delete(
+            hostOriginURL + `/api/deleteCellier/${idCellierEnCours}`,
+            {
+                headers: {
+                    Authorization: "Bearer " + userLoggedIn.access_token,
+                },
+            }
+        );
+    };
+
     useEffect(() => {
         gereSelectCellier(cellier.cellier.id);
         if (retourActionMsg)
@@ -29,9 +61,56 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
             setRetourActionMsg(null);
         };
     }, []);
+
+    const handleSuppCellier = (idCellierEnCours) => {
+        // console.log("idCellierEnCours : ",idCellierEnCours);
+        deleteCell(idCellierEnCours).then((response) => {
+            const newCelliers = response.data;
+
+            const user_id = userLoggedIn.user.id;
+            let res = newCelliers.filter(
+                (cellier) => cellier.id_user == user_id
+            );
+            setCelliers([...res]);
+            navigate(`/dashboard/celliers`, {
+                state: { success_message: "Cellier supprimé!" },
+                replace: true,
+            });
+        });
+    };
+
+    const handleCloseDialog = () => {
+        setOpenSuppDialog(false);
+    };
+
     return (
         <div className="listeBouteilles">
             <h2>{cellier.cellier.lib_cellier}</h2>
+            <Dialog open={openSuppDialog}>
+                <DialogContent>
+                    <DialogTitle id="attention">ATTENTION</DialogTitle>
+                    <DialogContentText id="alert-dialog-description">
+                        Voulez vous supprimer ce cellier?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={handleCloseDialog}
+                        autoFocus
+                    >
+                        Annuler
+                    </Button>
+                    <Button
+                        style={{ color: "#6a3352" }}
+                        onClick={() => {
+                            handleSuppCellier(idCellierEnCours);
+                        }}
+                    >
+                        Supprimer
+                    </Button>
+                </DialogActions>
+            </Dialog>
             {retourActionMsg && (
                 <Alert
                     severity="success"
@@ -106,11 +185,7 @@ function Cellier({ gereQuantite, gereSelectCellier, bouteillesCellier }) {
                 </Button>
             )}
 
-            <Button
-                onClick={() =>
-                    navigate(`/dashboard/suppCellier/${cellier.cellier.id}`)
-                }
-            >
+            <Button onClick={() => setOpenSuppDialog(true)}>
                 <Card className="Carte-bouteille">
                     <div className="ajoutBouteille">
                         <div>

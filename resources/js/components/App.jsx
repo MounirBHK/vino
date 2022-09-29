@@ -151,7 +151,6 @@ function App() {
             });
         });
     }
-
     return userLoggedIn ? (
         <Routes>
             <Route

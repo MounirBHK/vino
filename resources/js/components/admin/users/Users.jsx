@@ -6,7 +6,7 @@ function Users() {
     const hostOriginURL = window.location.origin;
     return (
         <List actions={<ListeActionsUsers />}>
-            <Datagrid>
+            <Datagrid bulkActionButtons={false}>
                 <TextField source="id" />
                 <TextField source="name" />
                 <TextField source="email" />
