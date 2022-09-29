@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import CarteBouteille from "./CarteBouteille";
+import "./RetirerBouteillesCellier.scss";
 import {
     Grid,
     TextField,
@@ -99,9 +100,10 @@ export default function RetirerBouteillesCellier({
 
     return (
         <div>
-            <h2>Retirer Bouteilles du Cellier</h2>
-
             <label htmlFor="liste">
+                <h2 className="retirerBouteille-title">
+                    Retirer Bouteilles du Cellier
+                </h2>
                 <Box className="bouteilles">
                     <Dialog
                         className="AjoutBouteilleConfirm-dialog"
