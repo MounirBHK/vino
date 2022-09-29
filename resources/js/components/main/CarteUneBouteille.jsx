@@ -18,6 +18,7 @@ import {
     faSackDollar,
     faTractor,
     faDroplet,
+    faCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -127,56 +128,54 @@ function CarteUneBouteille({ bouteille, gereQuantite, gereSelectCellier }) {
                 <div className="pays icon">
                     <FontAwesomeIcon icon={faEarthAmerica} />
                     <p>
-                        <b>pays</b>
+                        pays
                         <br />
-                        {bouteilleReceived.pays}
+                        <strong>{bouteilleReceived.pays}</strong>
                     </p>
                 </div>
                 <div className="producteur icon">
                     <FontAwesomeIcon icon={faTractor} />
                     <p>
-                        <b>producteur</b> <br />
-                        {bouteilleReceived.producteur}
+                        producteur <br />
+                        <strong>{bouteilleReceived.producteur}</strong>
                     </p>
                 </div>
                 <div className="region icon">
                     <FontAwesomeIcon icon={faMap} />
                     <p>
-                        <b>region</b>
+                        region
                         <br />
-                        {bouteilleReceived.region}
+                        <strong>{bouteilleReceived.region}</strong>
                     </p>
                 </div>
                 <div className="alcool icon">
                     <FontAwesomeIcon icon={faDroplet} />
                     <p>
-                        <b>alcool</b>
+                        alcool
                         <br />
-                        {bouteilleReceived.degre_alcool} %
+                        <strong>{bouteilleReceived.degre_alcool}</strong>
                     </p>
                 </div>
                 <div className="millesime icon">
                     <FontAwesomeIcon icon={faCalendar} />
                     <p>
-                        <b>millesime</b>
+                        millesime
                         <br />
-                        {bouteilleReceived.millesime}
+                        <strong>{bouteilleReceived.millesime}</strong>
                     </p>
                 </div>
                 <div className="prix icon">
                     <FontAwesomeIcon icon={faSackDollar} />
                     <p>
-                        <b>prix</b>
+                        prix
                         <br />
-                        {bouteilleReceived.prix_saq} $
+                        <strong>{bouteilleReceived.prix_saq}$</strong>
                     </p>
                 </div>
             </div>
             <div className="quantite icon">
-                <h3>Qté</h3>
-                <p>
-                    <span>{bouteilleReceived.quantite}</span>
-                </p>
+                    <span>Qté</span>
+                    <strong>{bouteilleReceived.quantite}</strong>
             </div>
             <ButtonGroup variant="text" className="options">
                 <Button
