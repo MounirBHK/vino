@@ -2,14 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
     color: #6a3352 !important;
     border-color: #6a3352 !important;
     background-color: transparent !important;
-    width: 100%;
 
     form {
-        padding-top: 2vh;
+        padding-top: 1.5vh;
     }
 
     label {
@@ -21,6 +19,7 @@
     .selectBar {
         margin-top: 3vh !important;
         padding: 10px 20px;
+        width: 55vw;
         div {
             padding: 0;
         }
@@ -32,8 +31,13 @@
         border-radius: 24px !important;
         color: #6a3352 !important;
         background-color: #6a33520e !important;
+        width: 100%;
+    }
+
+    .MuiGrid-root {
         margin-bottom: 1vh;
     }
+
 
     fieldset,
     fieldset {

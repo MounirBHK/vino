@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import logoJaune from "../../../images/logoJaune.png";
-import { IconButton } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { faCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import "./Entete.scss";
 
-function Entete({ userLoggedIn, gereDeconnexion }) {
+function Entete({ userLoggedIn }) {
     const pageKey = sessionStorage.getItem("initialPageKey") || null;
     const navigate = useNavigate();
     const handleBack = () => {
@@ -23,16 +23,14 @@ function Entete({ userLoggedIn, gereDeconnexion }) {
                     className="back"
                     label="retour"
                     onClick={handleBack}
-                    size="large"
                 >
-                    <span>page précédente</span>
-                    <FontAwesomeIcon icon={faBackward} />
+                    <FontAwesomeIcon icon={faCircleLeft} />
                 </IconButton>
             )}
             <div className="App-header-logo">
-                <Link to={"/dashboard"}>
+                <Button onClick={() => navigate(`/dashboard`, {})}>
                     <img src={logoJaune} alt="logo" />
-                </Link>
+                </Button>
                 <p>Bonjour {userLoggedIn.user.name}</p>
             </div>
         </div>

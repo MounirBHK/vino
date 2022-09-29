@@ -116,7 +116,7 @@ class SAQController extends Controller
 		return $innerHTML;
 	}
 
-	
+
 
 	private function nettoyerEspace($chaine)
 	{
@@ -145,13 +145,13 @@ class SAQController extends Controller
 		self::$_status = curl_getinfo($s, CURLINFO_HTTP_CODE);
 		curl_close($s);
 
-		
+
 		$doc2 = new DOMDocument();
 		$doc2 -> recover = true;
 		$doc2 -> strictErrorChecking = false;
 		@$doc2 -> loadHTML(self::$_webpage);
 		$elements = $doc2 -> getElementsByTagName("strong");
-		
+
 		$details = new stdClass();
 		$details->region=null;
 		$details->degre_alcool="";
@@ -177,18 +177,18 @@ class SAQController extends Controller
 	private function recupereInfo($noeud) {
 
 		$info = new stdClass();
-		
+
 		$info -> img = $noeud -> getElementsByTagName("img") -> item(0) -> getAttribute('src'); //TODO : Nettoyer le lien
         parse_url($info -> img, PHP_URL_PATH);
 		$a_titre = $noeud -> getElementsByTagName("a") -> item(0);
 		$info -> url = $a_titre->getAttribute('href');
 
 
-		// fonction pour récupérer plus de détails ++++++++++++++++++++ 
+		// fonction pour récupérer plus de détails ++++++++++++++++++++
 		// $details = new stdClass();
 
 		$details = self::plusDeDetails($info -> url);
-		
+
 		$info -> region = $details -> region;
 		$info -> degre_alcool = $details->degre_alcool;
 		$info -> producteur = $details-> producteur;
@@ -198,7 +198,7 @@ class SAQController extends Controller
         //var_dump($a_titre);
 		$info -> nom = self::nettoyerEspace(trim($nom));
 		//var_dump($info -> nom);
-		
+
 		$info -> millesime = null;
 		$res = substr($info -> nom, -4);
 		if (is_numeric($res))
