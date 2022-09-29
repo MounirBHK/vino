@@ -154,8 +154,8 @@ class SAQController extends Controller
 		
 		$details = new stdClass();
 		$details->region=null;
-		$details->degre_alcool="";
-		$details->producteur="";
+		$details->degre_alcool=null;
+		$details->producteur=null;
 
 		foreach ($elements as $key => $noeud) {
 			// degre_alcool, producteur, region, millesime
