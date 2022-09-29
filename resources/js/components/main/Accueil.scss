@@ -1,32 +1,52 @@
 .Accueil-content {
     display: flex;
+    align-items: stretch;
     flex-direction: column;
     width: 100%;
-    padding: 10px;
+    margin: 10px;
+}
+
+.Title-accueil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.pAccueil {
+    max-width: 75%;
 }
 
 .Accueil-title {
+    max-width: 80%;
     text-align: center;
     color: #6a3352;
 }
 
 .Accueil-header {
-    padding: 15px 8px 10px 8px;
-
-    & p {
-        padding: 5px;
-
-        &:nth-child(1) {
-            font-size: 1.2em;
-            text-align: center;
-        }
-
-        &:nth-child(2) {
-            margin-top: 5px;
-            opacity: 0.8;
-        }
-    }
+    display: flex;
+    justify-content: center;
+    padding: 1vh;
+    text-align: center;
 }
+
+.backgroundMain {
+    position: absolute;
+    right: -15vw;
+        max-height: 56vh;
+        fill: #c07a71;
+}
+
+    .backgroundA {
+        position: absolute;
+        right: 6vw;
+        max-height: 40vh;
+        fill: #c07a71;
+    }
+
+    circle{
+        opacity: 20%;
+    }
 
 .Carte-cellier {
     position: relative;
@@ -34,6 +54,7 @@
     height: 90px;
     text-align: start;
     width: 100%;
+    margin: 0 10px 0 15px;
 
     .ajoutCellier {
         display: flex;
@@ -42,37 +63,34 @@
         width: 100%;
         height: 100%;
         background-color: #6a3352;
-        color: white;
-        opacity: 20%;
         font-size: 0.8em;
+        opacity: 30%;
 
-        & > div:nth-child(1) {
-            width: 75%;
-            text-align: center;
-        }
-
-        & > div:nth-child(2) {
-            width: 25%;
+        h2 {
+            font-weight: bold;
+            opacity: 100%;
+            color: white;
         }
 
         svg {
             position: relative;
             font-size: 6em;
             opacity: 100%;
+            color: white;
         }
     }
 }
 
 .Accueil-catalogue {
-    margin-top: 20px;
+    width: 100%;
+    margin-top: 1vh;
 
     & > div {
-        justify-content: space-between !important;
+        justify-content: space-evenly !important;
 
         & > button {
             background-color: #c07a71 !important;
             color: #fff !important;
-            opacity: 0.5 !important;
         }
     }
 
@@ -80,12 +98,15 @@
         height: 100% !important;
     }
 
-    .Carte-bouteille {
+    .Carte-bouteille-accueil {
         height: 100%;
+        position: relative;
+        font-family: "Open Sans", sans-serif;
+        width: 100%;
 
         .wrapper {
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
             justify-content: center;
             padding: 20px;
             height: 100%;
@@ -97,27 +118,38 @@
                 justify-content: flex-end;
             }
 
+            img {
+                z-index: 10;
+            }
+
             .carte-img {
+                z-index: 10;
                 & > img {
-                    width: 5.5em;
+                    height: 20vh;
+                    z-index: 10;
                 }
             }
         }
     }
 }
 
-.Carousel-title {
-    font-weight: 200;
+.Caroussel-title {
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  line-height: 1.5em;
+  color: #6A3352;
 }
 
 .Carousel-main {
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    align-items: center;
     padding: 10px;
 
-    & > p {
-        text-align: center;
-        margin-top: 50px;
-        font-size: 1.3em;
+    h4 {
+        font-size: 3em;
+        font-weight: bold;
+        color: #6a3352;
+        z-index: 10;
     }
 }

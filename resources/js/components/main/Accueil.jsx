@@ -20,11 +20,12 @@ function Accueil() {
     const [activeSlideIndex, setActiveSlideIndex] = useState(0);
     return (
         <div className="Accueil-content">
-            <h1 className="Accueil-title">Vino</h1>
+            <div className="Title-accueil">
+                <h1 className="Accueil-title">Bienvenue dans votre espace!</h1>
+            </div>
             {celliers.length === 0 && (
                 <React.Fragment>
                     <div className="Accueil-header">
-                        <p>Bienvenue dans votre espace!</p>{" "}
                         <p>
                             Créez un cellier pour commencer à le remplir de vos
                             bouteilles préférées!
@@ -47,9 +48,8 @@ function Accueil() {
             {celliers.length > 0 && (
                 <React.Fragment>
                     <div className="Accueil-header">
-                        <p>Bienvenue dans votre espace!</p>{" "}
-                        <p>
-                            Commencer à remplir vos celliers avec vos bouteilles
+                        <p className="pAccueil">
+                            Commencez à remplir vos celliers avec vos bouteilles
                             préférées!
                         </p>
                     </div>
@@ -116,41 +116,93 @@ function Accueil() {
                     easing="linear"
                 >
                     <div
+                        className="Carousel-main"
                         style={{
                             width: 300,
                             height: 300,
-                            backgroundImage:
-                                "url(' ../../../images/gallerie-vins.jpg')",
-                            color: "#fff",
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                            backgroundRepeat: "no-repeat",
-                            backgroundColor: "rgba(0, 0, 0, 0.9)",
                         }}
                     >
-                        <div
-                            className="Carousel-main"
-                            style={{
-                                width: 300,
-                                height: 300,
-                                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            }}
+                        <div className="Carte-bouteille-accueil">
+                        <svg
+                            className="backgroundMain"
+                            id="Calque_2"
+                            data-name="Calque 2"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 194.4 269.22"
                         >
-                            <p className="Carousel-title">
-                                Découvrez notre catalogue de vins
-                            </p>
+                            <g id="Calque_1-2" data-name="Calque 1">
+                                <circle
+                                    className="cls-1"
+                                    cx="105.42"
+                                    cy="180.23"
+                                    r="88.99"
+                                />
+                                <circle
+                                    className="cls-1"
+                                    cx="76.29"
+                                    cy="146.52"
+                                    r="24.4"
+                                />
+                                <circle
+                                    className="cls-1"
+                                    cx="47.17"
+                                    cy="68.21"
+                                    r="24.4"
+                                />
+                                <circle
+                                    className="cls-1"
+                                    cx="154.66"
+                                    cy="104.27"
+                                    r="29.02"
+                                />
+                                <circle
+                                    className="cls-1"
+                                    cx="31.97"
+                                    cy="205.04"
+                                    r="31.97"
+                                />
+                                <circle
+                                    className="cls-1"
+                                    cx="138.86"
+                                    cy="214.34"
+                                    r="31.15"
+                                />
+                                <circle
+                                    className="cls-1"
+                                    cx="111.08"
+                                    cy="63.01"
+                                    r="14.56"
+                                />
+                                <circle
+                                    className="cls-1"
+                                    cx="86.13"
+                                    cy="14.56"
+                                    r="14.56"
+                                />
+                            </g>
+                        </svg>
+                        <div className="wrapper">
+                            <h4 className="caroussel-title">
+                                Découvrez
+                                <br /> nos
+                                <br />
+                                délicieux
+                                <br />
+                                vins
+                            </h4>
                         </div>
+                    </div>
                     </div>
                     {bouteillesToDisplay.map((bouteille) => (
                         <div
                             style={{
                                 width: 300,
                                 height: 300,
-                                background: "#fff",
                             }}
                             key={bouteille.id}
                         >
                             <Button
+                                key={bouteille.id}
                                 className="Carousel-btn"
                                 onClick={() => {
                                     navigate(`/dashboard/ajoutBouteille`, {
@@ -158,27 +210,88 @@ function Accueil() {
                                     });
                                 }}
                             >
-                                <Card className="Carte-bouteille">
+                                <Card className="Carte-bouteille-accueil">
+                                    <svg
+                                        className="backgroundA"
+                                        id="Calque_2"
+                                        data-name="Calque 2"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 194.4 269.22"
+                                    >
+                                        <g
+                                            className={bouteille.type}
+                                            id="Calque_1-2"
+                                            data-name="Calque 1"
+                                        >
+                                            <circle
+                                                className="cls-1"
+                                                cx="105.42"
+                                                cy="180.23"
+                                                r="88.99"
+                                            />
+                                            <circle
+                                                className="cls-1"
+                                                cx="76.29"
+                                                cy="146.52"
+                                                r="24.4"
+                                            />
+                                            <circle
+                                                className="cls-1"
+                                                cx="47.17"
+                                                cy="68.21"
+                                                r="24.4"
+                                            />
+                                            <circle
+                                                className="cls-1"
+                                                cx="154.66"
+                                                cy="104.27"
+                                                r="29.02"
+                                            />
+                                            <circle
+                                                className="cls-1"
+                                                cx="31.97"
+                                                cy="205.04"
+                                                r="31.97"
+                                            />
+                                            <circle
+                                                className="cls-1"
+                                                cx="138.86"
+                                                cy="214.34"
+                                                r="31.15"
+                                            />
+                                            <circle
+                                                className="cls-1"
+                                                cx="111.08"
+                                                cy="63.01"
+                                                r="14.56"
+                                            />
+                                            <circle
+                                                className="cls-1"
+                                                cx="86.13"
+                                                cy="14.56"
+                                                r="14.56"
+                                            />
+                                        </g>
+                                    </svg>
                                     <div className="wrapper">
-                                        <div className="info">
-                                            <h3 className="nom">
-                                                {bouteille.nom_bouteille}
-                                            </h3>
-                                            <p className="pays">
-                                                {bouteille.description}
-                                            </p>
-                                        </div>
+                                        <h3 className="nomBout">
+                                            {bouteille.nom_bouteille}
+                                        </h3>
                                         <div className="carte-img">
                                             <img
+                                                className="bouteille"
                                                 srcSet={
-                                                    bouteille.url_img.includes(
-                                                        "pastille_gout"
-                                                    )
+                                                    bouteille.url_img
+                                                        .split("?")[0]
+                                                        .includes(
+                                                            "pastille_gout"
+                                                        )
                                                         ? "https://www.saq.com/media/wysiwyg/placeholder/category/06.png"
                                                         : bouteille.url_img
                                                 }
                                                 alt="bouteille"
                                             />
+                                            <p>{bouteille.description}</p>
                                         </div>
                                     </div>
                                 </Card>
